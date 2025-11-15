@@ -1,7 +1,7 @@
-export default interface ICard {
+export default interface IEvent {
     name: string;
     date: string;
     time: string;
     registration: boolean;
-    price: string | number;
+    price: number;
 }
