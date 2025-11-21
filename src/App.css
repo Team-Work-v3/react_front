@@ -16,8 +16,6 @@
     width: 100%;
     height: 110vh;
     position: relative;
-    display: flex;
-    justify-content: center;
 }
 
 .greeting::before {
@@ -45,8 +43,16 @@
     z-index: -999;
 }
 
+.alignment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
 .wrapper {
     width: var(--width);
+    height: 100%;
 }
 
 .greeting-iteen {
@@ -81,12 +87,12 @@ a {
 
 /* === Основной контейнер верхней панели (заголовок слева, кнопки справа) === */
 .main-head-name {
+    padding-top: 100px;
+}
+
+.main-text-block {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-top: 100px;
 }
 
 /* === Левая часть: большой заголовок "Мероприятия" === */
@@ -130,8 +136,8 @@ a {
     display: flex;
     gap: 12px;
     align-items: center;
-    margin-top: 84px;
-    margin-right: 19px;
+    /* margin-top: 84px;
+    margin-right: 19px; */
 }
 
 /* === Общие стили для кнопок "Фильтр" и "Сортировка" === */
@@ -152,18 +158,15 @@ a {
 
 /* === Секция с карточками мероприятий: сетка 2 колонки === */
 .main-events {
-    display: flex;
-    flex-wrap: wrap;
-    grid-template-columns: repeat(2, 1fr);
-    /* две колонки */
-    gap: 20px;
-    /*отступ между карточками*/
-    max-width: 1200px;
-    margin: 0 auto;
     padding: 20px 0;
-    justify-content: start;
 }
 
+.main-events-container {
+    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+}
 
 /* === Одна карточка мероприятия: горизонтальный флекс с левой и правой частями === */
 .event-item {
@@ -211,7 +214,7 @@ a {
     line-height: 1;
     padding: 4px 10px;
     border: 1px solid #C7C7C7;
-    border-radius: 4px;
+    border-radius: 1px;
     box-sizing: border-box;
 }
 
@@ -282,4 +285,66 @@ a {
     right: 10px;
     color: #FFFFFF;
     font-size: 16px;
+}
+
+.footer {
+    width: 100%;
+    position: relative;
+    margin-top: 100px;
+    height: 350px;
+}
+
+.footer::before {
+    content: "";
+    position: absolute;
+    background-image: url("./footer.png");
+    object-fit: cover;
+    pointer-events: none;
+    z-index: -1000;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.footer-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.footer-top-block {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 30px;
+}
+
+.footer-top-block-text {
+    font-size: 20px;
+}
+
+.footer-icons-block {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.footer-icon{
+    cursor: pointer;
+}
+
+.footer-bottom-block {
+    display: flex;
+    gap: 50px;
+    padding-bottom: 10px;
+}
+
+.footer-bottom-block-text {
+    font-size: 16px;
+    cursor: pointer;
 }
