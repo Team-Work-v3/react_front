@@ -1,16 +1,46 @@
 import type IEvent from "../models/event.interface";
+import { SortingName } from "../models/sorting.enum";
 import Card from "../components/Card";
 import Wrapper from "../components/Wrapper";
 import Footer from "../components/Footer";
+import { useRef } from "react";
+import SortList from "../components/SortList";
 
 export default function MainPage() {
-    const data: IEvent = {
-        name: "123",
-        date: "01.01.2025",
-        time: "01:01",
-        registration: true,
-        price: 100
-    }
+    const sorting = useRef<String>(SortingName.Nearest);
+
+    const events: IEvent[] = [
+        {
+            name: "Мероприятие 1",
+            date: "02.01.2026",
+            time: "09:00",
+            registration: true,
+            price: 0
+        },
+        {
+            name: "Шампупуни от пупуни",
+            date: "19.01.2026",
+            time: "12:10",
+            registration: true,
+            price: 100
+        },
+        {
+            name: "Мероприятие 2",
+            date: "15.12.2025",
+            time: "20:45",
+            registration: false,
+            price: 50
+        },
+        {
+            name: "Мероприятие 3",
+            date: "01.01.2025",
+            time: "15:40",
+            registration: true,
+            price: 150
+        },
+    ];
+
+    console.log(sorting)
 
     return (
         <main className="main">
@@ -49,15 +79,7 @@ export default function MainPage() {
                                     Фильтр
                                 </button>
                             </div>
-                            <button className="main-sorting unbounded-regular">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
-                                    <path d="M3.49992 16L3.49992 1M3.49992 16L0.999918 13.5M3.49992 16L5.99992 13.5M9.33325 3.5L11.8333 1M11.8333 1L14.3333 3.5M11.8333 1L11.8333 16" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                                Сортировка
-                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="7" viewBox="0 0 12 7" fill="none">
-                                    <path d="M1 1L6 6L11 1" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </button>
+                            <SortList />
                         </div>
                     </div>
                 </Wrapper>
@@ -65,7 +87,9 @@ export default function MainPage() {
             <section className="main-events">
                 <Wrapper>
                     <div className="main-events-container">
-                        <Card data={data} />
+                        {events.map((event, index) => (
+                            <Card event={event} key={index} />
+                        ))}
                     </div>
                 </Wrapper>
             </section>
@@ -73,3 +97,6 @@ export default function MainPage() {
         </main >
     );
 }
+
+
+//react-multi-carousel
