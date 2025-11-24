@@ -11,7 +11,7 @@ export default function Card({ event }: { event: IEvent }) {
                     <p className="special unbounded-regular">Мастер-класс</p>
                 </div>
                 <div className="event-left-down">
-                    <h4 className="event-cost unbounded-regular">{event.price} BYN</h4>
+                    <h4 className="event-cost unbounded-regular">{event.price === 0 ? "Бесплатно" : `${event.price} BYN`}</h4>
                     <button className="event-btn unbounded-regular">Записаться</button>
                 </div>
             </div>
