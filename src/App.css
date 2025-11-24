@@ -118,6 +118,7 @@ a {
     font-size: 16px;
     background-color: #fff;
     box-shadow: none;
+    outline: none;
 }
 
 /* === Иконка поиска, позиционируется внутри .search-block слева === */
@@ -128,6 +129,15 @@ a {
     transform: translateY(-50%);
     width: 15px;
     height: 15px;
+}
+
+.clear-search {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    display: none;
 }
 
 
@@ -161,6 +171,7 @@ a {
     justify-content: space-between;
     gap: 10px;
     width: 100%;
+    outline: none;
 }
 
 .sorting-choice {
@@ -182,6 +193,7 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    outline: none;
 }
 
 /* === Секция с карточками мероприятий: сетка 2 колонки === */
@@ -277,6 +289,7 @@ a {
     cursor: pointer;
     line-height: 100%;
     letter-spacing: 0%;
+    outline: none;
 }
 
 /* === Правая колонка карточки: изображение мероприятия === */
