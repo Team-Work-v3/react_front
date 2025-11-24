@@ -3,11 +3,11 @@ import { SortingName } from "../models/sorting.enum";
 import Card from "../components/Card";
 import Wrapper from "../components/Wrapper";
 import Footer from "../components/Footer";
-import { useRef } from "react";
+import { useState } from "react";
 import SortList from "../components/SortList";
 
 export default function MainPage() {
-    const sorting = useRef<String>(SortingName.Nearest);
+    const [sorting, setSorting] = useState<string>(SortingName.Nearest);
 
     const events: IEvent[] = [
         {
@@ -39,8 +39,6 @@ export default function MainPage() {
             price: 150
         },
     ];
-
-    console.log(sorting)
 
     return (
         <main className="main">
@@ -79,7 +77,7 @@ export default function MainPage() {
                                     Фильтр
                                 </button>
                             </div>
-                            <SortList />
+                            <SortList sorting={sorting} setSorting={setSorting}/>
                         </div>
                     </div>
                 </Wrapper>

@@ -141,6 +141,12 @@ a {
 }
 
 /* === Общие стили для кнопок "Фильтр" и "Сортировка" === */
+
+.sorting-conteiner {
+    position: relative;
+    width: calc(100% + 100px);
+}
+
 .main-filter,
 .main-sorting {
     height: 38px;
@@ -154,6 +160,28 @@ a {
     align-items: center;
     justify-content: space-between;
     gap: 10px;
+    width: 100%;
+}
+
+.sorting-choice {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.sorting-choice-button {
+    font-size: 16px;
+    padding: 8px 12px;
+    border: 1px solid #C7C7C7;
+    background-color: #fff;
+    height: 38px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* === Секция с карточками мероприятий: сетка 2 колонки === */
@@ -334,7 +362,7 @@ a {
     gap: 50px;
 }
 
-.footer-icon{
+.footer-icon {
     cursor: pointer;
 }
 
