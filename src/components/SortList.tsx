@@ -6,6 +6,7 @@ export default function SortList({ sorting, setSorting }: { sorting: string, set
     const buttonRef = useRef<HTMLButtonElement | null>(null);
     const arrowRef = useRef<SVGSVGElement | null>(null);
     const conteinerChoiseRef = useRef<HTMLDivElement | null>(null);
+    const containerRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
         if (arrowRef.current && conteinerChoiseRef.current && buttonRef.current) {
@@ -19,27 +20,20 @@ export default function SortList({ sorting, setSorting }: { sorting: string, set
     }, [isOpen]);
 
     const openList = (): void => {
-        if (arrowRef.current && conteinerChoiseRef.current && buttonRef.current) {
-            const currentWidthButton = parseFloat(buttonRef.current.style.width) ||
-                parseFloat(window.getComputedStyle(buttonRef.current).width);
-
-            // buttonRef.current.style.width = (currentWidthButton - .1) + "px";
+        if (arrowRef.current && conteinerChoiseRef.current && buttonRef.current && containerRef.current) {
             buttonRef.current.style.border = "1px solid #C7C7C7";
             arrowRef.current.style.rotate = "180deg";
             conteinerChoiseRef.current.style.display = "flex";
-            return;
+            containerRef.current.style.marginLeft = "0px";
         }
     }
 
     const closeList = (): void => {
-        if (arrowRef.current && conteinerChoiseRef.current && buttonRef.current) {
-            const currentWidthButton = parseFloat(buttonRef.current.style.width) ||
-                parseFloat(window.getComputedStyle(buttonRef.current).width);
-
-            // buttonRef.current.style.width = (currentWidthButton + .1) + "px";
+        if (arrowRef.current && conteinerChoiseRef.current && buttonRef.current && containerRef.current) {
             buttonRef.current.style.border = "none";
             conteinerChoiseRef.current.style.display = "none";
             arrowRef.current.style.rotate = "0deg";
+            containerRef.current.style.marginLeft = "2px";
         }
     }
 
@@ -49,7 +43,7 @@ export default function SortList({ sorting, setSorting }: { sorting: string, set
     }
 
     return (
-        <div className="sorting-conteiner">
+        <div className="sorting-conteiner" ref={containerRef}>
             <button className="main-sorting unbounded-regular" onClick={() => setIsOpen(prev => !prev)} ref={buttonRef}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                     <path d="M3.49992 16L3.49992 1M3.49992 16L0.999918 13.5M3.49992 16L5.99992 13.5M9.33325 3.5L11.8333 1M11.8333 1L14.3333 3.5M11.8333 1L11.8333 16" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

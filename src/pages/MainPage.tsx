@@ -69,14 +69,12 @@ export default function MainPage() {
                             </div>
                         </div>
                         <div className="buttons-block">
-                            <div className="fix-div">
                                 <button className="main-filter unbounded-regular">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                                         <path d="M1 1H14.3333V2.81C14.3332 3.25199 14.1576 3.67585 13.845 3.98833L10.1667 7.66667V13.5L5.16667 15.1667V8.08333L1.43333 3.97667C1.15454 3.66994 1.00004 3.27033 1 2.85583V1Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                     </svg>
                                     Фильтр
                                 </button>
-                            </div>
                             <SortList sorting={sorting} setSorting={setSorting}/>
                         </div>
                     </div>

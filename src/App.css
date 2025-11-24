@@ -144,7 +144,7 @@ a {
 
 .sorting-conteiner {
     position: relative;
-    width: calc(100% + 100px);
+    margin-left: 2px;
 }
 
 .main-filter,
