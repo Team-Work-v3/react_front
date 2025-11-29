@@ -17,7 +17,7 @@ export default function Card({ event }: { event: IEvent }) {
             </div>
             <div className="event-img">
                 <div className="event-img-gradient"></div>
-                <img src="./test.jpg" alt="" srcSet="" className="event-img-img" />
+                <img src="http://62.109.16.129:5000/index/test.jpg" alt="" srcSet="" className="event-img-img" />
                 <span className="event-img-text unbounded-regular">{event.registration === true ? "Идет регистрация" : "Закрыто"}</span>
             </div>
         </article>
