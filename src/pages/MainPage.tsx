@@ -3,12 +3,20 @@ import { SortingName } from "../models/sorting.enum";
 import Card from "../components/Card";
 import Wrapper from "../components/Wrapper";
 import Footer from "../components/Footer";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import SortList from "../components/SortList";
 
 export default function MainPage() {
     const [sorting, setSorting] = useState<string>(SortingName.Nearest);
     const [searchQuery, setSearchQuery] = useState<string>("");
+
+    useEffect(() => {
+        const fetchEvents = async (): Promise<void> => {
+            const events  = await fetch("http://62.109.16.129:5000/api/getEvents");
+            console.log(events.json());
+        }
+        fetchEvents();
+    }, []);
 
     const events: IEvent[] = [
         {
