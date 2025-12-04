@@ -27,5 +27,5 @@ jobs:
               npm install &&
               npm run build &&
               rm -rf /home/TeamWork/www/index/* &&
-              cp -r build/* /home/TeamWork/www/index/
+              cp -r dist/* /home/TeamWork/www/index/
             "
