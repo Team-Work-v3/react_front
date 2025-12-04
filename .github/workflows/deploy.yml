@@ -25,5 +25,7 @@ jobs:
               cd /home/react_front/ &&
               git pull origin main &&
               npm install &&
-              npm run build
+              npm run build &&
+              rm -rf /home/TeamWork/www/index/* &&
+              cp -r build/* /home/TeamWork/www/index/
             "
