@@ -109,7 +109,7 @@ export default function MainPage() {
         <main className="main">
             <section className="greeting">
                 <Wrapper>
-                    <img src="http://62.109.16.129:5000/index/iteen.png" alt="iteen" className="greeting-iteen" />
+                    <img src="./iteen.png" alt="iteen" className="greeting-iteen" />
                     <div className="greeting-texts">
                         <span className="unbounded-bold greeting-heading">Мероприятия<br />от IT-Academy</span>
                         <span className="unbounded-regular greeting-text">список мероприятий</span>
