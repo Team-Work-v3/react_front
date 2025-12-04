@@ -21,4 +21,9 @@ jobs:
           LOGIN: ${{ secrets.LOGIN }} 
         run: |
           sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
-            "$LOGIN" "cd /home/react_front/ && git pull origin main"
+              "$LOGIN" "
+              cd /home/react_front/ &&
+              git pull origin main &&
+              npm install &&
+              npm run build
+            "
