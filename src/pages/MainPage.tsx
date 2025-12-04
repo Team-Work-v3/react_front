@@ -13,7 +13,7 @@ export default function MainPage() {
     useEffect(() => {
         const fetchEvents = async (): Promise<void> => {
             const events  = await fetch("http://62.109.16.129:5000/api/getEvents");
-            console.log(events.json());
+            console.log(await events.json());
         }
         fetchEvents();
     }, []);
@@ -109,7 +109,7 @@ export default function MainPage() {
         <main className="main">
             <section className="greeting">
                 <Wrapper>
-                    <img src="./iteen.png" alt="iteen" className="greeting-iteen" />
+                    <img src="http://62.109.16.129:5000/index/iteen.png" alt="iteen" className="greeting-iteen" />
                     <div className="greeting-texts">
                         <span className="unbounded-bold greeting-heading">Мероприятия<br />от IT-Academy</span>
                         <span className="unbounded-regular greeting-text">список мероприятий</span>
