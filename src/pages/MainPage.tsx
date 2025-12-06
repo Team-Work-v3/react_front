@@ -30,20 +30,16 @@ export default function MainPage() {
     }, []);
 
     const sortAndFilterEvents = useMemo(() => {
-        console.log("1 - Starting useMemo");
-        console.log("events:", events);
-        console.log("Is array?", Array.isArray(events));
-        console.log("Length:", events?.length);
         if (!Array.isArray(events) || events.length === 0) {
             return [];
         }
-        console.log(2);
+
         let eventsCopy = [...events];
 
         eventsCopy = eventsCopy.filter(event =>
             event.name_event.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
         );
-        console.log(3);
+
         switch (sorting) {
             case SortingName.Nearest:
                 return eventsCopy.sort((a, b) => {

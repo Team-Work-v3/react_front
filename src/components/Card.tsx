@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import type IEvent from "../models/event.interface";
 
 export default function Card({ event }: { event: IEvent }) {
@@ -12,7 +13,9 @@ export default function Card({ event }: { event: IEvent }) {
                 </div>
                 <div className="event-left-down">
                     <h4 className="event-cost unbounded-regular">{event.price === 0 ? "Бесплатно" : `${event.price} BYN`}</h4>
-                    <button className="event-btn unbounded-regular">Записаться</button>
+                    <Link to={`/event/${event.id_event}`}>
+                        <button className="event-btn unbounded-regular">Записаться</button>
+                    </Link>
                 </div>
             </div>
             <div className="event-img">
