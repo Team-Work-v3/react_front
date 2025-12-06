@@ -17,6 +17,14 @@ export default function MainPage() {
             const data = await response.json();
             console.log(data);
             setEvents(data);
+
+            const responseEvent = await fetch("http://62.109.16.129:5000/api/getShortenedEvents", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify({ id: 2 })
+            });
+            console.log(await responseEvent.json());
         }
         fetchEvents();
     }, []);
