@@ -1,5 +1,5 @@
 export default interface IEvent {
-    id_event: number;
+    event_id: number;
     image: string;
     name_event: string;
     date: string;
