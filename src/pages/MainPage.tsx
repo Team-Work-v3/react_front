@@ -12,7 +12,14 @@ export default function MainPage() {
 
     useEffect(() => {
         const fetchEvents = async (): Promise<void> => {
-            const events  = await fetch("http://62.109.16.129:5000/api/getEvents");
+            const events  = await fetch("http://62.109.16.129:5000/api/getShortenedEvents");
+            // const event = await fetch("http://62.109.16.129:5000/api/getEvent", {
+            //     method: "POST", 
+            //     credentials: "include",
+            //     body: JSON.stringify({
+            //         id: 
+            //     })
+            // });
             console.log(await events.json());
         }
         fetchEvents();
