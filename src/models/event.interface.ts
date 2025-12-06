@@ -1,7 +1,9 @@
 export default interface IEvent {
-    name: string;
+    id_event: number;
+    image: string;
+    name_event: string;
     date: string;
     time: string;
-    registration: boolean;
+    is_active: number;
     price: number;
 }
