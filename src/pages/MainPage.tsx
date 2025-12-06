@@ -7,43 +7,47 @@ import { useEffect, useMemo, useState } from "react";
 import SortList from "../components/SortList";
 
 export default function MainPage() {
-    const [events, setEvents] = useState<null | IEvent[]>(null);
+    const [events, setEvents] = useState<IEvent[]>([]);
     const [sorting, setSorting] = useState<string>(SortingName.Nearest);
     const [searchQuery, setSearchQuery] = useState<string>("");
 
     useEffect(() => {
         const fetchEvents = async (): Promise<void> => {
-            const events = await fetch("http://62.109.16.129:5000/api/getShortenedEvents");
-            setEvents(await events.json());
+            const response = await fetch("http://62.109.16.129:5000/api/getShortenedEvents");
+            const data = await response.json();
+            console.log(data);
+            setEvents(data);
         }
         fetchEvents();
     }, []);
 
     const sortAndFilterEvents = useMemo(() => {
-        if (events) {
-            let eventsCopy = [...events];
+        if (!Array.isArray(events) || events.length === 0) {
+            return [];
+        }
 
-            eventsCopy = eventsCopy.filter(event =>
-                event.name_event.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
-            );
+        let eventsCopy = [...events];
 
-            switch (sorting) {
-                case SortingName.Nearest:
-                    return eventsCopy.sort((a, b) => {
-                        const dateA = new Date(a.date.split('.').reverse().join('-'));
-                        const dateB = new Date(b.date.split('.').reverse().join('-'));
-                        return dateA.getTime() - dateB.getTime();
-                    });
+        eventsCopy = eventsCopy.filter(event =>
+            event.name_event.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
+        );
 
-                case SortingName.Cheaper:
-                    return eventsCopy.sort((a, b) => a.price - b.price);
+        switch (sorting) {
+            case SortingName.Nearest:
+                return eventsCopy.sort((a, b) => {
+                    const dateA = new Date(a.date.split('.').reverse().join('-'));
+                    const dateB = new Date(b.date.split('.').reverse().join('-'));
+                    return dateA.getTime() - dateB.getTime();
+                });
 
-                case SortingName.Expensive:
-                    return eventsCopy.sort((a, b) => b.price - a.price);
+            case SortingName.Cheaper:
+                return eventsCopy.sort((a, b) => a.price - b.price);
 
-                default:
-                    return eventsCopy;
-            }
+            case SortingName.Expensive:
+                return eventsCopy.sort((a, b) => b.price - a.price);
+
+            default:
+                return eventsCopy;
         }
     }, [sorting, searchQuery, events]);
 
@@ -90,9 +94,12 @@ export default function MainPage() {
             <section className="main-events">
                 <Wrapper>
                     <div className="main-events-container">
-                        {sortAndFilterEvents && sortAndFilterEvents.length !== 0 ? sortAndFilterEvents.map((event, index) => (
-                            <Card event={event} key={index} />)) :
-                            (<p>Мероприятий нема</p>)}
+                        {sortAndFilterEvents.length !== 0 ?
+                            sortAndFilterEvents.map((event, index) => (
+                                <Card event={event} key={index} />
+                            )) :
+                            (<p>Мероприятий нема</p>)
+                        }
                     </div>
                 </Wrapper>
             </section>
