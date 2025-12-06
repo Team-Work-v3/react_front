@@ -2,15 +2,15 @@ import { Link } from "react-router-dom";
 import type IEvent from "../models/event.interface";
 
 export default function Card({ event }: { event: IEvent }) {
-    const date: string = "01-02-2025";
-    console.log(date.split("-").join("."));
+    const date: string = "2025-01-02";
+    console.log(date.split("-").reverse().join("."));
 
     return (
         <article className="event-item">
             <div className="event-left">
                 <div className="event-left-up">
                     <h3 className="event-name unbounded-bold">{event.name_event}</h3>
-                    <p className="special unbounded-regular">{event.date}</p>
+                    <p className="special unbounded-regular">{event.date.split("-").reverse().join(".")}</p>
                     <p className="special unbounded-regular">{event.time}</p>
                     <p className="special unbounded-regular">Мастер-класс</p>
                 </div>
