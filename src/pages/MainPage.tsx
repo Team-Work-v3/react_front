@@ -18,7 +18,7 @@ export default function MainPage() {
             console.log(data);
             setEvents(data);
 
-            const responseEvent = await fetch("http://62.109.16.129:5000/api/getShortenedEvents", {
+            const responseEvent = await fetch("http://62.109.16.129:5000/api/getEvent", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",
@@ -27,7 +27,7 @@ export default function MainPage() {
             console.log(await responseEvent.json());
         }
         fetchEvents();
-    }, []);
+    }, [events]);
 
     const sortAndFilterEvents = useMemo(() => {
         if (!Array.isArray(events) || events.length === 0) {
