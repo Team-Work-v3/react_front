@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import type IEvent from "../models/event.interface";
 
 export default function Card({ event }: { event: IEvent }) {
-    console.log(event.id_event)
+    console.log(event)
     return (
         <article className="event-item">
             <div className="event-left">
