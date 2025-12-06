@@ -18,28 +18,29 @@ export default function MainPage() {
             console.log(data);
             setEvents(data);
 
-            const responseEvent = await fetch("http://62.109.16.129:5000/api/getEvent", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                credentials: "include",
-                body: JSON.stringify({ id: 2 })
-            });
-            console.log(await responseEvent.json());
+            // const responseEvent = await fetch("http://62.109.16.129:5000/api/getEvent", {
+            //     method: "POST",
+            //     headers: { "Content-Type": "application/json" },
+            //     credentials: "include",
+            //     body: JSON.stringify({ id: 2 })
+            // });
+            // console.log(await responseEvent.json());
         }
         fetchEvents();
     }, []);
 
     const sortAndFilterEvents = useMemo(() => {
+        console.log(1);
         if (!Array.isArray(events) || events.length === 0) {
             return [];
         }
-
+        console.log(2);
         let eventsCopy = [...events];
 
         eventsCopy = eventsCopy.filter(event =>
             event.name_event.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
         );
-
+        console.log(3);
         switch (sorting) {
             case SortingName.Nearest:
                 return eventsCopy.sort((a, b) => {
@@ -57,7 +58,7 @@ export default function MainPage() {
             default:
                 return eventsCopy;
         }
-    }, [sorting, searchQuery, events]);
+    }, [events, sorting, searchQuery]);
 
     return (
         <main className="main">
