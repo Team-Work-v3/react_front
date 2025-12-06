@@ -27,7 +27,7 @@ export default function MainPage() {
             console.log(await responseEvent.json());
         }
         fetchEvents();
-    }, [events]);
+    }, []);
 
     const sortAndFilterEvents = useMemo(() => {
         if (!Array.isArray(events) || events.length === 0) {
