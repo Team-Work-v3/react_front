@@ -41,8 +41,10 @@ export default function MainPage() {
         switch (sorting) {
             case SortingName.Nearest:
                 return eventsCopy.sort((a, b) => {
-                    const dateA = new Date(a.date.split('.').reverse().join('-'));
-                    const dateB = new Date(b.date.split('.').reverse().join('-'));
+                    // a.date.split('.').reverse().join('-')
+                    // b.date.split('.').reverse().join('-')
+                    const dateA = new Date(a.date);
+                    const dateB = new Date(b.date);
                     return dateA.getTime() - dateB.getTime();
                 });
 
