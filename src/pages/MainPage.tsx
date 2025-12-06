@@ -30,7 +30,10 @@ export default function MainPage() {
     }, []);
 
     const sortAndFilterEvents = useMemo(() => {
-        console.log(1);
+        console.log("1 - Starting useMemo");
+        console.log("events:", events);
+        console.log("Is array?", Array.isArray(events));
+        console.log("Length:", events?.length);
         if (!Array.isArray(events) || events.length === 0) {
             return [];
         }
