@@ -1,7 +1,27 @@
+import { useEffect, useState } from "react";
+import { useParams } from 'react-router-dom';
 import Footer from "../components/Footer";
 import Wrapper from "../components/Wrapper";
+import type IEvent from "../models/event.interface";
 
 export default function EventPage() {
+    const [event, setEvent] = useState<IEvent>();
+    const { id } = useParams<{ id: string }>();
+    
+    useEffect(() => {
+        const fetchEvents = async (): Promise<void> => {
+            const eventId = parseInt(id!);
+            const response = await fetch("http://62.109.16.129:5000/api/getEvent", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify({ id: eventId })
+            });
+            setEvent(await response.json());
+        }
+        fetchEvents();
+    }, []);
+    console.log(event);
     return (
         <>
             <Wrapper>
