@@ -2,9 +2,6 @@ import { Link } from "react-router-dom";
 import type IEvent from "../models/event.interface";
 
 export default function Card({ event }: { event: IEvent }) {
-    const date: string = "2025-01-02";
-    console.log(date.split("-").reverse().join("."));
-
     return (
         <article className="event-item">
             <div className="event-left">
