@@ -4,7 +4,7 @@ export interface IEventReduced {
     date_event: string;
     time_event: string;
     price_event: number;
-    images_event: string;
+    images_events: string;
     event_category: string;
     is_active: number;
 }

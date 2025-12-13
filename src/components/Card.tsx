@@ -20,7 +20,7 @@ export default function Card({ event }: { event: IEventReduced }) {
             </div>
             <div className="event-img">
                 <div className="event-img-gradient"></div>
-                <img src={`http://62.109.16.129:5000${event.images_event}`} alt="" srcSet="" className="event-img-img" />
+                <img src={`http://62.109.16.129:5000${event.images_events}`} alt="" srcSet="" className="event-img-img" />
                 <span className="event-img-text unbounded-regular">{event.is_active === 1 ? "Идет регистрация" : "Закрыто"}</span>
             </div>
         </article>
