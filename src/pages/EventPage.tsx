@@ -20,6 +20,8 @@ export default function EventPage() {
             });
 
             setEvent(await response.json());
+
+            console.log(response);
         }
         fetchEvents();
     }, []);
