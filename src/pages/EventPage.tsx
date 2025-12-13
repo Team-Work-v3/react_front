@@ -33,12 +33,12 @@ export default function EventPage() {
                     <img id="iteen-img" src="/iteen.png" />
                     <div className="first-block">
                         <div>
-                            <h1 className="text-big" id="text-indentation">Cупер мега про задание</h1>
+                            <h1 className="text-big" id="text-indentation">{event?.name_event}</h1>
                             <div className="block-frome">
-                                <a className="frome text-little">{event?.date.split("-").reverse().join(".")}</a>
-                                <a className="frome">{event?.time}</a>
+                                <a className="frome text-little">{event?.date_event.split("-").reverse().join(".")}</a>
+                                <a className="frome">{event?.time_event}</a>
                             </div>
-                            <p className="text-medium" id="indent">{event?.info}</p>
+                            <p className="text-medium" id="indent">{event?.description_event}</p>
                         </div>
                         <button className="btn text-medium">Записаться</button>
                     </div>

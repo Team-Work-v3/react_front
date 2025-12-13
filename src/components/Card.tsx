@@ -7,12 +7,12 @@ export default function Card({ event }: { event: IEventReduced }) {
             <div className="event-left">
                 <div className="event-left-up">
                     <h3 className="event-name unbounded-bold">{event.name_event}</h3>
-                    <p className="special unbounded-regular">{event.date.split("-").reverse().join(".")}</p>
-                    <p className="special unbounded-regular">{event.time}</p>
+                    <p className="special unbounded-regular">{event.date_event.split("-").reverse().join(".")}</p>
+                    <p className="special unbounded-regular">{event.time_event}</p>
                     <p className="special unbounded-regular">Мастер-класс</p>
                 </div>
                 <div className="event-left-down">
-                    <h4 className="event-cost unbounded-regular">{event.price === 0 ? "Бесплатно" : `${event.price} BYN`}</h4>
+                    <h4 className="event-cost unbounded-regular">{event.price_event === 0 ? "Бесплатно" : `${event.price_event} BYN`}</h4>
                     <Link to={`/event/${event.event_id}`}>
                         <button className="event-btn unbounded-regular">Записаться</button>
                     </Link>
@@ -20,7 +20,7 @@ export default function Card({ event }: { event: IEventReduced }) {
             </div>
             <div className="event-img">
                 <div className="event-img-gradient"></div>
-                <img src="http://62.109.16.129:5000/index/test.jpg" alt="" srcSet="" className="event-img-img" />
+                <img src={`http://62.109.16.129:5000${event.images_event}`} alt="" srcSet="" className="event-img-img" />
                 <span className="event-img-text unbounded-regular">{event.is_active === 1 ? "Идет регистрация" : "Закрыто"}</span>
             </div>
         </article>

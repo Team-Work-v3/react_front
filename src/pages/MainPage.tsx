@@ -36,16 +36,16 @@ export default function MainPage() {
         switch (sorting) {
             case SortingName.Nearest:
                 return eventsCopy.sort((a, b) => {
-                    const dateA = new Date(`${a.date}T${a.time}`);
-                    const dateB = new Date(`${b.date}T${b.time}`);
+                    const dateA = new Date(`${a.date_event}T${a.time_event}`);
+                    const dateB = new Date(`${b.date_event}T${b.time_event}`);
                     return dateA.getTime() - dateB.getTime();
                 });
 
             case SortingName.Cheaper:
-                return eventsCopy.sort((a, b) => a.price - b.price);
+                return eventsCopy.sort((a, b) => a.price_event - b.price_event);
 
             case SortingName.Expensive:
-                return eventsCopy.sort((a, b) => b.price - a.price);
+                return eventsCopy.sort((a, b) => b.price_event - a.price_event);
 
             default:
                 return eventsCopy;
