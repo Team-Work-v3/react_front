@@ -1,4 +1,4 @@
-import type IEvent from "../models/event.interface";
+import type { IEventReduced } from "../models/event.interface";
 import { SortingName } from "../models/sorting.enum";
 import Card from "../components/Card";
 import Wrapper from "../components/Wrapper";
@@ -7,22 +7,17 @@ import { useEffect, useMemo, useState } from "react";
 import SortList from "../components/SortList";
 
 export default function MainPage() {
-    const [events, setEvents] = useState<IEvent[]>([]);
+    const [events, setEvents] = useState<IEventReduced[]>([]);
     const [sorting, setSorting] = useState<string>(SortingName.Nearest);
     const [searchQuery, setSearchQuery] = useState<string>("");
 
     useEffect(() => {
         const fetchEvents = async (): Promise<void> => {
             const response = await fetch("http://62.109.16.129:5000/api/getShortenedEvents");
-            const data = await response.json();
-            setEvents(data.events);
 
-            // const responseEvent = await fetch("http://62.109.16.129:5000/api/getEvent", {
-            //     method: "POST",
-            //     headers: { "Content-Type": "application/json" },
-            //     credentials: "include",
-            //     body: JSON.stringify({ id: 2 })
-            // });
+            const data = await response.json();
+
+            setEvents(data.events);
         }
         fetchEvents();
     }, []);

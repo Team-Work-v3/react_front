@@ -1,4 +1,4 @@
-export default interface IEvent {
+export interface IEventReduced {
     event_id: number;
     image: string;
     name_event: string;
@@ -6,4 +6,11 @@ export default interface IEvent {
     time: string;
     is_active: number;
     price: number;
+    category: string;
+}
+
+export interface IEvent extends IEventReduced {
+    info: string;
+    location: string;
+    max_places: number;
 }

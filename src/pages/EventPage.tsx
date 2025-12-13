@@ -2,25 +2,28 @@ import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import Footer from "../components/Footer";
 import Wrapper from "../components/Wrapper";
-import type IEvent from "../models/event.interface";
+import type { IEvent } from "../models/event.interface";
 
 export default function EventPage() {
     const [event, setEvent] = useState<IEvent>();
     const { id } = useParams<{ id: string }>();
-    
+
     useEffect(() => {
         const fetchEvents = async (): Promise<void> => {
             const eventId = parseInt(id!);
+
             const response = await fetch("http://62.109.16.129:5000/api/getEvent", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",
                 body: JSON.stringify({ id: eventId })
             });
+
             setEvent(await response.json());
         }
         fetchEvents();
     }, []);
+
     console.log(event);
     return (
         <>
@@ -32,15 +35,10 @@ export default function EventPage() {
                         <div>
                             <h1 className="text-big" id="text-indentation">Cупер мега про задание</h1>
                             <div className="block-frome">
-                                <a className="frome text-little">12.10.2025</a>
-                                <a className="frome">18:00</a>
+                                <a className="frome text-little">{event?.date.split("-").reverse().join(".")}</a>
+                                <a className="frome">{event?.time}</a>
                             </div>
-                            <p className="text-medium" id="indent">
-                                Также как внедрение современных методик обеспечивает широкому кругу (специалистов) участие в
-                                формировании позиций, занимаемых участниками в отношении поставленных задач. Являясь всего лишь
-                                частью общей картины, тщательные исследования конкурентов набирают популярность среди определенных
-                                слоев населения, а значит, должны быть своевременно верифицированы.
-                            </p>
+                            <p className="text-medium" id="indent">{event?.info}</p>
                         </div>
                         <button className="btn text-medium">Записаться</button>
                     </div>

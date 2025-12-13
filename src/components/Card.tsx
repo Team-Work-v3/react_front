@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import type IEvent from "../models/event.interface";
+import type { IEventReduced } from "../models/event.interface";
 
-export default function Card({ event }: { event: IEvent }) {
+export default function Card({ event }: { event: IEventReduced }) {
     return (
         <article className="event-item">
             <div className="event-left">
