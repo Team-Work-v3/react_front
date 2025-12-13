@@ -29,9 +29,9 @@ export default function EventPage() {
         <>
             <Wrapper>
                 <div className="first-section">
-                    <img id="big-stork" src="/The_big_stork.png" width="100%" height="620px" />
+                    <img id="big-stork" src="http://62.109.16.129:5000/index/The_big_stork.png" width="100%" height="620px" />
                     <Link to="/">
-                        <img id="iteen-img" src="/iteen.png" />
+                        <img id="http://62.109.16.129:5000/index/iteen-img" src="/iteen.png" />
                     </Link>
                     <div className="first-block">
                         <div>
@@ -98,7 +98,7 @@ export default function EventPage() {
                             </div>
                         </div>
                         <div>
-                            <img src="/The_big_stork.png" width="580px" height="100%" />
+                            <img src="http://62.109.16.129:5000/index/The_big_stork.png" width="580px" height="100%" />
                         </div>
                     </div>
                 </div>
@@ -107,16 +107,16 @@ export default function EventPage() {
                     <div className="gallery">
                         <div className="gallery-content">
                             <div className="gallery-img">
-                                <img src="img/block_in_gallery.png" />
+                                <img src="http://62.109.16.129:5000/index/block_in_gallery.png" />
                             </div>
                             <div className="gallery-img">
-                                <img src="img/block_in_gallery.png" />
+                                <img src="http://62.109.16.129:5000/index/block_in_gallery.png" />
                             </div>
                             <div className="gallery-img">
-                                <img src="img/block_in_gallery.png" />
+                                <img src="http://62.109.16.129:5000/index/block_in_gallery.png" />
                             </div>
                             <div className="gallery-img">
-                                <img src="img/block_in_gallery.png" />
+                                <img src="http://62.109.16.129:5000/index/block_in_gallery.png" />
                             </div>
                         </div>
                         <div className="arrow-button">
