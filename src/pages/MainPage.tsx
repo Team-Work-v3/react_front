@@ -18,6 +18,7 @@ export default function MainPage() {
             const data = await response.json();
 
             setEvents(data.events);
+            console.log(data.events);
         }
         fetchEvents();
     }, []);
