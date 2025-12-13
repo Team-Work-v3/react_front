@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Footer from "../components/Footer";
 import Wrapper from "../components/Wrapper";
 import type { IEvent } from "../models/event.interface";
@@ -30,7 +30,9 @@ export default function EventPage() {
             <Wrapper>
                 <div className="first-section">
                     <img id="big-stork" src="/The_big_stork.png" width="100%" height="620px" />
-                    <img id="iteen-img" src="/iteen.png" />
+                    <Link to="/">
+                        <img id="iteen-img" src="/iteen.png" />
+                    </Link>
                     <div className="first-block">
                         <div>
                             <h1 className="text-big" id="text-indentation">{event?.name_event}</h1>
