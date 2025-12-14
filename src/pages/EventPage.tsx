@@ -111,8 +111,8 @@ export default function EventPage() {
                         </div>
                     </div>
                 </div>
-                <div>
-                    <h1 id="gallery-text" className="text-max-big">Галерея</h1>
+                <div className="gallery-container">
+                    <h1 id="gallery-text" className="text-max-big unbounded-bold">Галерея</h1>
                     <div className="gallery">
                         <div className="gallery-content">
                             <div className="gallery-img">
@@ -129,27 +129,26 @@ export default function EventPage() {
                             </div>
                         </div>
                         <div className="arrow-button">
-                            <button id="button-turn" className="all-button-arrow"><svg width="20" height="20" viewBox="0 0 20 20"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M15.833 9.99967L4.16634 9.99967M15.833 9.99967L12.4997 6.66634M15.833 9.99967L12.4997 13.333"
-                                    stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
+                            <button id="button-turn" className="all-button-arrow">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M15.833 9.99967L4.16634 9.99967M15.833 9.99967L12.4997 6.66634M15.833 9.99967L12.4997 13.333"
+                                        stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
                             </button>
-                            <button className="all-button-arrow"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M15.833 9.99967L4.16634 9.99967M15.833 9.99967L12.4997 6.66634M15.833 9.99967L12.4997 13.333"
-                                    stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg></button>
+                            <button className="all-button-arrow">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M15.833 9.99967L4.16634 9.99967M15.833 9.99967L12.4997 6.66634M15.833 9.99967L12.4997 13.333"
+                                        stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                            </button>
+                            <span className="gallery-more unbounded-regular">Посмотреть ещё</span>
                         </div>
-
-
-
                     </div>
                     <div>
-                        <h1 id="review" className="text-max-big">Отзывы</h1>
-                        <div className="reviews-list">
+                        <h1 id="review" className="text-max-big unbounded-bold">Отзывы</h1>
+                        <div className="reviews-list unbounded-regular">
                             <div className="review-card">
                                 <h3 className="text-little-medium">Анатолий</h3>
                                 <h6 className="text-little">13 апреля, 12:54</h6>

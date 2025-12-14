@@ -629,6 +629,7 @@ label {
     margin-right: 10px;
     width: 16px;
     height: 16px;
+    /* outline: 1px solid black; */
 }
 
 .checkbox-group label {
@@ -657,13 +658,19 @@ label {
 }
 
 .review-card {
-    padding: 18px 20px;
-    border: 1px solid rgba(0, 0, 0, 0.04);
-    min-height: 120px;
+    padding: 20px;
+    /* border: 1px solid rgba(0, 0, 0, 0.04); */
+    background-color: white;
+    /* min-height: 120px; */
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     gap: 5px;
+}
+
+.review-card>p{
+    margin-top: 5px;
 }
 
 .review-card * {
@@ -682,20 +689,24 @@ label {
     width: 100%;
 }
 
-#gallery {
-    padding-top: 100px;
-    padding-bottom: 20px;
+.gallery-container {
+    margin-top: 100px;
+}
+
+.gallery {
+    margin-top: 20px;
 }
 
 .gallery-content {
     display: flex;
-    width: 1180px;
+    justify-content: space-between;
+    width: 100%;
 }
 
-.gallery-img {
+/* .gallery-img {
     border: 1px solid;
     margin: 7px;
-}
+} */
 
 .arrow-button {
     padding-top: 20px;
@@ -703,6 +714,7 @@ label {
     align-items: center;
     justify-content: center;
     gap: 20px;
+    position: relative;
 }
 
 .all-button-arrow {
@@ -715,6 +727,15 @@ label {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+}
+
+.gallery-more {
+    position: absolute;
+    right: 0;
+    font-size: 16px;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 #button-turn {
@@ -726,9 +747,9 @@ label {
     padding-top: 100px;
 }
 
-.review-card {
+/* .review-card {
     padding-top: 5px;
-}
+} */
 
 h3.review-card {
     padding-top: 10px;
