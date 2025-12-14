@@ -22,6 +22,7 @@ export default function Footer() {
                                 <path d="M13.1667 8.16667L21.5 13.1667L13.1667 18.1667V8.16667Z" stroke="black" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         </div>
+                        <span className="unbounded-regular footer-telephone">+375 (44) 555-34-59</span>
                     </div>
                     <div className="footer-bottom-block">
                         <span className="unbounded-regular footer-bottom-block-text">условия обслуживания</span>
