@@ -42,30 +42,30 @@ export default function EventPage() {
                     </Link>
                     <div className="first-block">
                         <div>
-                            <h1 className="text-big" id="text-indentation">{event?.name_event}</h1>
+                            <h1 className="text-big unbounded-regular" id="text-indentation">{event?.name_event}</h1>
                             <div className="block-frome">
-                                <a className="frome text-little">{event?.date_event.split("-").reverse().join(".")}</a>
-                                <a className="frome">{event?.time_event}</a>
+                                <a className="frome text-little unbounded-regular">{event?.date_event.split("-").reverse().join(".")}</a>
+                                <a className="frome unbounded-regular">{event?.time_event}</a>
                             </div>
-                            <p className="text-medium" id="indent">{event?.description_event}</p>
+                            <p className="text-medium unbounded-regular" id="indent">{event?.description_event}</p>
                         </div>
-                        <button className="btn text-medium">Записаться</button>
+                        <button className="btn text-medium unbounded-medium">Записаться</button>
                     </div>
                 </div>
                 <div className="two-column">
                     <div>
                         <div>
-                            <h2 className="text-medium-big">Описание</h2>
-                            <p className="text-medium">{event?.fullDescription_event}</p>
+                            <h2 className="text-medium-big unbounded-regular">Описание</h2>
+                            <p className="text-medium unbounded-regular">{event?.fullDescription_event}</p>
                         </div>
                         <div>
-                            <h2 className="text-medium-big">Организаторы</h2>
-                            <p className="text-medium">{event?.organizers_event}</p>
+                            <h2 className="text-medium-big unbounded-regular">Организаторы</h2>
+                            <p className="text-medium unbounded-regular">{event?.organizers_event}</p>
                         </div>
                     </div>
                     <div>
-                        <h2 className="text-medium-big">Программа</h2>
-                        <p className="text-medium">{event?.program_event}</p>
+                        <h2 className="text-medium-big unbounded-regular">Программа</h2>
+                        <p className="text-medium unbounded-regular">{event?.program_event}</p>
                     </div>
                 </div>
                 <div className="block-form">
@@ -73,33 +73,33 @@ export default function EventPage() {
                         <div className="registrstion-layout">
                             <div className="form-container">
                                 <div className="form-box">
-                                    <h1 className="text-big" id="registration">Регистрация</h1>
+                                    <h1 className="text-big unbounded-semi-bold" id="registration">Регистрация</h1>
                                     <form >
                                         <div className="form-group">
                                             <div>
-                                                <label className="label-indent" htmlFor="name">Имя Фамилия</label>
-                                                <span id="nameError" className="error-message">Заполните это поле</span>
+                                                <label className="label-indent unbounded-light" htmlFor="name">Имя Фамилия</label>
+                                                <span id="nameError" className="error-message unbounded-extra-light">Заполните это поле</span>
                                             </div>
-                                            <input className="registration-frame" type="text" id="name" name="name" maxLength={50} placeholder="Иван Иванов" />
+                                            <input className="registration-frame unbounded-regular" type="text" id="name" name="name" maxLength={50} placeholder="Иван Иванов" />
                                         </div>
                                         <div className="form-group">
-                                            <label className="label-indent" htmlFor="email">Почта:</label><br />
-                                            <input className="registration-frame" type="email" id="email" name="email" maxLength={100} placeholder="ivanov2000@gmail.com" /> <br />
+                                            <label className="label-indent unbounded-light" htmlFor="email">Электронная почта</label><br />
+                                            <input className="registration-frame unbounded-regular" type="email" id="email" name="email" maxLength={100} placeholder="ivanov2000@gmail.com" /> <br />
                                             <span id="emailError" className="error-message"></span>
                                         </div>
 
                                         <div className="form-group">
-                                            <label className="label-indent" htmlFor="phone">Телефон:</label><br />
-                                            <input className="registration-frame" type="tel" id="phone" name="phone" maxLength={20} placeholder="+375 (29) 222-22-22" /><br />
+                                            <label className="label-indent unbounded-light" htmlFor="phone">Номер телефона</label><br />
+                                            <input className="registration-frame unbounded-regular" type="tel" id="phone" name="phone" maxLength={20} placeholder="+375 (29) 222-22-22" /><br />
                                             <span id="phoneError" className="error-message"></span>
                                         </div>
 
                                         <div className="checkbox-group">
                                             <input type="checkbox" id="agree" name="agree" />
-                                            <label htmlFor="agree">Я даю согласие на обработку персональных данных</label><br />
+                                            <label htmlFor="agree" className="unbounded-light">Я даю согласие на обработку персональных данных</label><br />
                                             <span id="agreeError" className="error-message"></span>
                                         </div>
-                                        <button className="btm-buy" type="submit">Купить билет</button>
+                                        <button className="btm-buy unbounded-bold" type="submit">Купить билет</button>
                                     </form>
                                 </div>
                             </div>
