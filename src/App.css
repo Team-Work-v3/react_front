@@ -441,6 +441,21 @@ a {
     gap: 20px;
 }
 
+.description-conteiner {
+    margin-top: 47px;
+    margin-bottom: 100px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 60px;
+    row-gap: 30px;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 .text-max-big {
     font-size: 64px;
 }
@@ -510,9 +525,7 @@ a {
 }
 
 #registration {
-    padding-left: 75px;
     padding-bottom: 40px;
-    padding-top: 40px;
 }
 
 
@@ -521,35 +534,39 @@ a {
     justify-content: center;
     margin: 0 auto;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-
 }
 
 .label-indent {
     display: flex;
     padding: 5px;
-    width: 460px;
+    /* width: 460px; */
 }
 
 .block-form {
     width: 100%;
     height: auto;
+    height: 100%;
 }
 
 .form-container {
-    flex: 0 0 50%;
+    /* flex: 0 0 50%; */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .form-box {
-    width: 100%;
-    max-width: 380px;
+    height: calc(100% - 60px * 2);
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .form-group {
-    margin-bottom: 25px;
-    width: 460PX;
+    /* margin-bottom: 25px; */
+    width: 100%;
 }
 
 .form-group div {
@@ -557,11 +574,22 @@ a {
     justify-content: space-between;
 }
 
+.form-registration {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    height: 100%;
+}
+
 .registration-frame {
-    width: 460px;
-    height: 65px;
-    padding: 6px 10px;
-    border: 1px solid #C7C7C7;
+    width: calc(100% - 25px * 2);
+    height: calc(65px - 6px * 2);
+    padding: 6px 25px;
+    font-size: 20px;
+    /* border: 1px solid #C7C7C7; */
+    background-color: #F2F2F2;
+    border: none;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
@@ -573,12 +601,13 @@ label {
 
 .error-message {
     width: 50%;
-    padding: 5px;
+    /* padding: 5px; */
+    font-size: 15px;
     color: #982520;
     text-align: right;
 }
 
-.form-group>input[type="text"],
+/* .form-group>input[type="text"],
 .form-group>input[type="email"],
 .form-group>input[type="tel"] {
     width: 100%;
@@ -587,14 +616,13 @@ label {
     border-radius: 4px;
     font-size: 16px;
     box-sizing: border-box;
-}
+} */
 
 .checkbox-group {
     display: flex;
     align-items: center;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
     font-size: 14px;
-
 }
 
 .checkbox-group input[type="checkbox"] {
@@ -612,11 +640,12 @@ label {
 .btm-buy {
     width: 460px;
     padding: 16px 20px;
+    height: 65px;
     background-color: #982520;
     color: white;
     border: none;
     border-radius: 4px;
-    font-size: 18px;
+    font-size: 24px;
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
@@ -642,9 +671,15 @@ label {
 }
 
 #form-color {
-    background-color: #FFFFFF;
     display: flex;
     justify-content: space-between;
+    gap: 20px;
+    height: 100%;
+}
+
+.registrstion-layout {
+    background-color: #FFFFFF;
+    width: 100%;
 }
 
 #gallery {
@@ -701,4 +736,9 @@ h3.review-card {
 
 h6.text-little {
     color: #8E8E8E;
+}
+
+.submit-img {
+    object-fit: cover;
+    object-position: center;
 }

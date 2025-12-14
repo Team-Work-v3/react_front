@@ -52,60 +52,62 @@ export default function EventPage() {
                         <button className="btn text-medium unbounded-medium">Записаться</button>
                     </div>
                 </div>
-                <div className="two-column">
-                    <div>
-                        <div>
-                            <h2 className="text-medium-big unbounded-regular">Описание</h2>
-                            <p className="text-medium unbounded-regular">{event?.fullDescription_event}</p>
-                        </div>
-                        <div>
-                            <h2 className="text-medium-big unbounded-regular">Организаторы</h2>
-                            <p className="text-medium unbounded-regular">{event?.organizers_event}</p>
-                        </div>
+                <div className="description-conteiner">
+                    <div className="description">
+                        <h2 className="text-medium-big unbounded-regular">Описание</h2>
+                        <p className="text-medium unbounded-regular">{event?.fullDescription_event}</p>
                     </div>
-                    <div>
+                    <div className="description">
                         <h2 className="text-medium-big unbounded-regular">Программа</h2>
                         <p className="text-medium unbounded-regular">{event?.program_event}</p>
+                    </div>
+                    <div className="description">
+                        <h2 className="text-medium-big unbounded-regular">Организаторы</h2>
+                        <p className="text-medium unbounded-regular">{event?.organizers_event}</p>
                     </div>
                 </div>
                 <div className="block-form">
                     <div id="form-color">
                         <div className="registrstion-layout">
-                            <div className="form-container">
-                                <div className="form-box">
-                                    <h1 className="text-big unbounded-semi-bold" id="registration">Регистрация</h1>
-                                    <form >
-                                        <div className="form-group">
-                                            <div>
-                                                <label className="label-indent unbounded-light" htmlFor="name">Имя Фамилия</label>
-                                                <span id="nameError" className="error-message unbounded-extra-light">Заполните это поле</span>
-                                            </div>
-                                            <input className="registration-frame unbounded-regular" type="text" id="name" name="name" maxLength={50} placeholder="Иван Иванов" />
+                            {/* <div className="form-container"> */}
+                            <div className="form-box">
+                                <h1 className="text-big unbounded-semi-bold" id="registration">Регистрация</h1>
+                                <form className="form-registration">
+                                    <div className="form-group">
+                                        <div>
+                                            <label className="label-indent unbounded-light" htmlFor="name">Имя Фамилия</label>
+                                            {/* <span id="nameError" className="error-message unbounded-extra-light">Заполните это поле</span> */}
                                         </div>
-                                        <div className="form-group">
-                                            <label className="label-indent unbounded-light" htmlFor="email">Электронная почта</label><br />
-                                            <input className="registration-frame unbounded-regular" type="email" id="email" name="email" maxLength={100} placeholder="ivanov2000@gmail.com" /> <br />
+                                        <input className="registration-frame unbounded-regular" type="text" id="name" name="name" maxLength={50} placeholder="Иван Иванов" />
+                                    </div>
+                                    <div className="form-group">
+                                        <div>
+                                            <label className="label-indent unbounded-light" htmlFor="email">Электронная почта</label>
                                             <span id="emailError" className="error-message"></span>
                                         </div>
+                                        <input className="registration-frame unbounded-regular" type="email" id="email" name="email" maxLength={100} placeholder="ivanov2000@gmail.com" />
+                                    </div>
 
-                                        <div className="form-group">
-                                            <label className="label-indent unbounded-light" htmlFor="phone">Номер телефона</label><br />
-                                            <input className="registration-frame unbounded-regular" type="tel" id="phone" name="phone" maxLength={20} placeholder="+375 (29) 222-22-22" /><br />
+                                    <div className="form-group">
+                                        <div>
+                                            <label className="label-indent unbounded-light" htmlFor="phone">Номер телефона</label>
                                             <span id="phoneError" className="error-message"></span>
                                         </div>
+                                        <input className="registration-frame unbounded-regular" type="tel" id="phone" name="phone" maxLength={20} placeholder="+375 (29) 222-22-22" />
+                                    </div>
 
-                                        <div className="checkbox-group">
-                                            <input type="checkbox" id="agree" name="agree" />
-                                            <label htmlFor="agree" className="unbounded-light">Я даю согласие на обработку персональных данных</label><br />
-                                            <span id="agreeError" className="error-message"></span>
-                                        </div>
-                                        <button className="btm-buy unbounded-bold" type="submit">Купить билет</button>
-                                    </form>
-                                </div>
+                                    <div className="checkbox-group">
+                                        <input type="checkbox" id="agree" name="agree" />
+                                        <label htmlFor="agree" className="unbounded-light">Согласен на обработку данных</label>
+                                        {/* <span id="agreeError" className="error-message"></span> */}
+                                    </div>
+                                    <button className="btm-buy unbounded-bold" type="submit">Зарегистрироваться</button>
+                                </form>
                             </div>
+                            {/* </div> */}
                         </div>
                         <div>
-                            <img src="http://62.109.16.129:5000/index/The_big_stork.png" width="580px" height="100%" />
+                            <img src="/registration.png" className="submit-img" width="580px" height="100%" />
                         </div>
                     </div>
                 </div>
