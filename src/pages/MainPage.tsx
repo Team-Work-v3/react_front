@@ -107,7 +107,13 @@ export default function MainPage() {
                             sortAndFilterEvents.map((event, index) => (
                                 <Card event={event} key={index} />
                             )) :
-                            (<p>Мероприятий нема</p>)
+                            (
+                                <div className="event-none">
+                                    <span className="unbounded-bold">Мероприятия не найдены</span>
+                                    <span className="unbounded-regular">Попробуйте очистить поиск</span>
+                                    <button className="unbounded-medium">Очистить</button>
+                                </div>
+                            )
                         }
                     </div>
                 </Wrapper>

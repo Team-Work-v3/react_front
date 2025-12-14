@@ -402,7 +402,30 @@ a {
     margin-top: 20px;
 }
 
+.event-none{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    margin-top: 90px;
+    margin-bottom: 170px;
+}
 
+.event-none>.unbounded-bold{
+    font-size: 30px;
+}
+.event-none>.unbounded-regular{
+    font-size: 20px;
+}
+
+.event-none>button{
+    padding: 12px 30px;
+    border: none;
+    background-color: #E5E5E5;
+    font-size: 20px;
+    cursor: pointer;
+    margin-top: 5px;
+}
 
 /* Event Page */
 
