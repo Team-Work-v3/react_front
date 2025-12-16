@@ -23,8 +23,9 @@ jobs:
           sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
               "$LOGIN" "
               cd /home/react_front/ &&
-              git pull origin main &&
-              npm install &&
+              git fetch origin &&
+              git reset --hard origin/main &&
+              npm ci &&
               npm run build &&
               rm -rf /home/TeamWork/www/index/* &&
               cp -r dist/* /home/TeamWork/www/index/
