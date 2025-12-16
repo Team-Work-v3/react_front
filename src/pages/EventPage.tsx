@@ -107,7 +107,7 @@ export default function EventPage() {
                             {/* </div> */}
                         </div>
                         <div>
-                            <img src="/registration.png" className="submit-img" width="580px" height="100%" />
+                            <img src="http://62.109.16.129:5000/index/registration.png" className="submit-img" width="580px" height="100%" />
                         </div>
                     </div>
                 </div>
