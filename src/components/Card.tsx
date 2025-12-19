@@ -9,9 +9,11 @@ export default function Card({ event }: { event: IEventReduced }) {
                     <Link to={`/event/${event.event_id}`}>
                         <h3 className="event-name unbounded-bold">{event.name_event}</h3>
                     </Link>
-                    <p className="special unbounded-regular">{event.date_event.split("-").reverse().join(".")}</p>
-                    <p className="special unbounded-regular">{event.time_event}</p>
-                    <p className="special unbounded-regular">Мастер-класс</p>
+                    <div>
+                        <p className="special unbounded-regular">{event.date_event.split("-").reverse().join(".")}</p>
+                        <p className="special unbounded-regular">{event.time_event}</p>
+                        <p className="special unbounded-regular">Мастер-класс</p>
+                    </div>
                 </div>
                 <div className="event-left-down">
                     <h4 className="event-cost unbounded-regular">{event.price_event === 0 ? "Бесплатно" : `${event.price_event} BYN`}</h4>
