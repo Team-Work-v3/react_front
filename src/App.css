@@ -212,6 +212,7 @@ a {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;
+    position: relative;
 }
 
 /* === Одна карточка мероприятия: горизонтальный флекс с левой и правой частями === */
@@ -402,23 +403,31 @@ a {
     margin-top: 20px;
 }
 
-.event-none{
+.event-none {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 20px;
+}
+
+.event-none-container {
     margin-top: 90px;
     margin-bottom: 170px;
 }
 
-.event-none>.unbounded-bold{
+.event-none>.unbounded-bold {
     font-size: 30px;
 }
-.event-none>.unbounded-regular{
+
+.event-none>.unbounded-regular {
     font-size: 20px;
 }
 
-.event-none>button{
+.event-none>button {
     padding: 12px 30px;
     border: none;
     background-color: #E5E5E5;
@@ -692,7 +701,7 @@ label {
     gap: 5px;
 }
 
-.review-card>p{
+.review-card>p {
     margin-top: 5px;
 }
 
