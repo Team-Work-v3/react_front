@@ -108,10 +108,12 @@ export default function MainPage() {
                                 <Card event={event} key={index} />
                             )) :
                             (
-                                <div className="event-none">
-                                    <span className="unbounded-bold">Мероприятия не найдены</span>
-                                    <span className="unbounded-regular">Попробуйте очистить поиск</span>
-                                    <button className="unbounded-medium" onClick={() => setSearchQuery("")}>Очистить</button>
+                                <div className="event-none-container">
+                                    <div className="event-none">
+                                        <span className="unbounded-bold">Мероприятия не найдены</span>
+                                        <span className="unbounded-regular">Попробуйте очистить поиск</span>
+                                        <button className="unbounded-medium" onClick={() => setSearchQuery("")}>Очистить</button>
+                                    </div>
                                 </div>
                             )
                         }
