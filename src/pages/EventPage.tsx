@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useParams } from 'react-router-dom';
 import Footer from "../components/Footer";
 import Wrapper from "../components/Wrapper";
@@ -7,7 +7,10 @@ import type { IEvent } from "../models/event.interface";
 export default function EventPage() {
     const [event, setEvent] = useState<IEvent>();
     const { id } = useParams<{ id: string }>();
+
     const location = useLocation();
+
+    const dialogWindowRef = useRef<HTMLDialogElement | null>(null);
 
     useEffect(() => {
         const fetchEvents = async (): Promise<void> => {
@@ -92,7 +95,7 @@ export default function EventPage() {
                             {/* <div className="form-container"> */}
                             <div className="form-box">
                                 <h1 className="text-big inter-semi-bold" id="registration-text">Регистрация</h1>
-                                <form className="form-registration">
+                                <div className="form-registration">
                                     <div className="form-group">
                                         <div>
                                             <label className="label-indent inter-light" htmlFor="name">Имя Фамилия</label>
@@ -121,8 +124,8 @@ export default function EventPage() {
                                         <label htmlFor="agree" className="inter-light">Согласен на обработку данных</label>
                                         {/* <span id="agreeError" className="error-message"></span> */}
                                     </div>
-                                    <button className="btm-buy inter-bold" type="submit">Зарегистрироваться</button>
-                                </form>
+                                    <button className="btm-buy inter-bold" onClick={() => dialogWindowRef.current?.showModal()}>Зарегистрироваться</button>
+                                </div>
                             </div>
                             {/* </div> */}
                         </div>
@@ -195,6 +198,18 @@ export default function EventPage() {
                     </div>
                 </div>
             </Wrapper>
+            <dialog ref={dialogWindowRef} className="dialog-window">
+                <div className="dialog-window-container">
+                    <div className="dialog-window-content">
+                        <img src="http://62.109.16.129:5000/index/registration.png" alt="image" className="dialog-image" />
+                        <span className="unbounded-medium dialog-window-heading">Спасибо за регистрацию</span>
+                        <span className="inter-regular dialog-window-text">Скоро вам придёт сообщение на почту</span>
+                        <Link to="/">
+                            <button className="inter-medium dialog-window-button btn">Всё понятно</button>
+                        </Link>
+                    </div>
+                </div>
+            </dialog>
             <Footer />
         </>
     );
