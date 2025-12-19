@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import Footer from "../components/Footer";
 import Wrapper from "../components/Wrapper";
 import type { IEvent } from "../models/event.interface";
@@ -7,6 +7,7 @@ import type { IEvent } from "../models/event.interface";
 export default function EventPage() {
     const [event, setEvent] = useState<IEvent>();
     const { id } = useParams<{ id: string }>();
+    const location = useLocation();
 
     useEffect(() => {
         const fetchEvents = async (): Promise<void> => {
@@ -23,6 +24,24 @@ export default function EventPage() {
         }
         fetchEvents();
     }, []);
+
+    useEffect(() => {
+        if (location.hash) {
+            const element = document.querySelector(location.hash);
+            if (element) {
+                const offset = 120;
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
+            }
+        } else {
+            window.scrollTo(0, 0);
+        }
+    }, [location]);
 
     return (
         <>
@@ -48,9 +67,9 @@ export default function EventPage() {
                             </div>
                             <p className="text-medium unbounded-regular" id="indent">{event?.description_event}</p>
                         </div>
-                        <a href="#registration">
+                        <Link to="#registration">
                             <button className="btn text-medium unbounded-medium">Записаться</button>
-                        </a>
+                        </Link>
                     </div>
                 </div>
                 <div className="description-conteiner">

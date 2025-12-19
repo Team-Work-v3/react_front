@@ -6,7 +6,7 @@ export default function Card({ event }: { event: IEventReduced }) {
         <article className="event-item">
             <div className="event-left">
                 <div className="event-left-up">
-                    <Link to={`/event/${event.event_id}#`}>
+                    <Link to={`/event/${event.event_id}`}>
                         <h3 className="event-name unbounded-bold">{event.name_event}</h3>
                     </Link>
                     <div>
