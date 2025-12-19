@@ -2,6 +2,14 @@
     --width: calc(1920px - 370px * 2);
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+:target {
+    scroll-margin-top: 130px;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -556,7 +564,7 @@ a {
     margin-bottom: 30px;
 }
 
-#registration {
+#registration-text {
     padding-bottom: 40px;
 }
 
