@@ -24,7 +24,6 @@ export default function EventPage() {
         fetchEvents();
     }, []);
 
-    console.log(event);
     return (
         <>
             <Wrapper>
@@ -49,7 +48,9 @@ export default function EventPage() {
                             </div>
                             <p className="text-medium unbounded-regular" id="indent">{event?.description_event}</p>
                         </div>
-                        <button className="btn text-medium unbounded-medium">Записаться</button>
+                        <a href="#registration">
+                            <button className="btn text-medium unbounded-medium">Записаться</button>
+                        </a>
                     </div>
                 </div>
                 <div className="description-conteiner">
@@ -66,12 +67,12 @@ export default function EventPage() {
                         <p className="text-medium unbounded-regular">{event?.organizers_event}</p>
                     </div>
                 </div>
-                <div className="block-form">
+                <div className="block-form" id="registration">
                     <div id="form-color">
                         <div className="registrstion-layout">
                             {/* <div className="form-container"> */}
                             <div className="form-box">
-                                <h1 className="text-big unbounded-semi-bold" id="registration">Регистрация</h1>
+                                <h1 className="text-big unbounded-semi-bold" id="registration-text">Регистрация</h1>
                                 <form className="form-registration">
                                     <div className="form-group">
                                         <div>

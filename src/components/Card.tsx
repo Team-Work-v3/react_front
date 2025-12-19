@@ -6,14 +6,16 @@ export default function Card({ event }: { event: IEventReduced }) {
         <article className="event-item">
             <div className="event-left">
                 <div className="event-left-up">
-                    <h3 className="event-name unbounded-bold">{event.name_event}</h3>
+                    <Link to={`/event/${event.event_id}`}>
+                        <h3 className="event-name unbounded-bold">{event.name_event}</h3>
+                    </Link>
                     <p className="special unbounded-regular">{event.date_event.split("-").reverse().join(".")}</p>
                     <p className="special unbounded-regular">{event.time_event}</p>
                     <p className="special unbounded-regular">Мастер-класс</p>
                 </div>
                 <div className="event-left-down">
                     <h4 className="event-cost unbounded-regular">{event.price_event === 0 ? "Бесплатно" : `${event.price_event} BYN`}</h4>
-                    <Link to={`/event/${event.event_id}`}>
+                    <Link to={`/event/${event.event_id}#registration`}>
                         <button className="event-btn unbounded-regular">Записаться</button>
                     </Link>
                 </div>
