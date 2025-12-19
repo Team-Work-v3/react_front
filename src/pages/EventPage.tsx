@@ -65,25 +65,25 @@ export default function EventPage() {
                                 <a className="frome text-little unbounded-regular">{event?.date_event.split("-").reverse().join(".")}</a>
                                 <a className="frome unbounded-regular">{event?.time_event}</a>
                             </div>
-                            <p className="text-medium unbounded-regular" id="indent">{event?.description_event}</p>
+                            <p className="text-medium inter-regular" id="indent">{event?.description_event}</p>
                         </div>
                         <Link to="#registration">
-                            <button className="btn text-medium unbounded-medium">Записаться</button>
+                            <button className="btn text-medium inter-medium">Записаться</button>
                         </Link>
                     </div>
                 </div>
                 <div className="description-conteiner">
                     <div className="description">
                         <h2 className="text-medium-big unbounded-regular">Описание</h2>
-                        <p className="text-medium unbounded-regular">{event?.fullDescription_event}</p>
+                        <p className="text-medium inter-regular">{event?.fullDescription_event}</p>
                     </div>
                     <div className="description">
                         <h2 className="text-medium-big unbounded-regular">Программа</h2>
-                        <p className="text-medium unbounded-regular">{event?.program_event}</p>
+                        <p className="text-medium inter-regular">{event?.program_event}</p>
                     </div>
                     <div className="description">
                         <h2 className="text-medium-big unbounded-regular">Организаторы</h2>
-                        <p className="text-medium unbounded-regular">{event?.organizers_event}</p>
+                        <p className="text-medium inter-regular">{event?.organizers_event}</p>
                     </div>
                 </div>
                 <div className="block-form" id="registration">
@@ -91,37 +91,37 @@ export default function EventPage() {
                         <div className="registrstion-layout">
                             {/* <div className="form-container"> */}
                             <div className="form-box">
-                                <h1 className="text-big unbounded-semi-bold" id="registration-text">Регистрация</h1>
+                                <h1 className="text-big inter-semi-bold" id="registration-text">Регистрация</h1>
                                 <form className="form-registration">
                                     <div className="form-group">
                                         <div>
-                                            <label className="label-indent unbounded-light" htmlFor="name">Имя Фамилия</label>
+                                            <label className="label-indent inter-light" htmlFor="name">Имя Фамилия</label>
                                             {/* <span id="nameError" className="error-message unbounded-extra-light">Заполните это поле</span> */}
                                         </div>
-                                        <input className="registration-frame unbounded-regular" type="text" id="name" name="name" maxLength={50} placeholder="Иван Иванов" />
+                                        <input className="registration-frame inter-regular" type="text" id="name" name="name" maxLength={50} placeholder="Иван Иванов" />
                                     </div>
                                     <div className="form-group">
                                         <div>
-                                            <label className="label-indent unbounded-light" htmlFor="email">Электронная почта</label>
+                                            <label className="label-indent inter-light" htmlFor="email">Электронная почта</label>
                                             <span id="emailError" className="error-message"></span>
                                         </div>
-                                        <input className="registration-frame unbounded-regular" type="email" id="email" name="email" maxLength={100} placeholder="ivanov2000@gmail.com" />
+                                        <input className="registration-frame inter-regular" type="email" id="email" name="email" maxLength={100} placeholder="ivanov2000@gmail.com" />
                                     </div>
 
                                     <div className="form-group">
                                         <div>
-                                            <label className="label-indent unbounded-light" htmlFor="phone">Номер телефона</label>
+                                            <label className="label-indent inter-light" htmlFor="phone">Номер телефона</label>
                                             <span id="phoneError" className="error-message"></span>
                                         </div>
-                                        <input className="registration-frame unbounded-regular" type="tel" id="phone" name="phone" maxLength={20} placeholder="+375 (29) 222-22-22" />
+                                        <input className="registration-frame inter-regular" type="tel" id="phone" name="phone" maxLength={20} placeholder="+375 (29) 222-22-22" />
                                     </div>
 
                                     <div className="checkbox-group">
                                         <input type="checkbox" id="agree" name="agree" />
-                                        <label htmlFor="agree" className="unbounded-light">Согласен на обработку данных</label>
+                                        <label htmlFor="agree" className="inter-light">Согласен на обработку данных</label>
                                         {/* <span id="agreeError" className="error-message"></span> */}
                                     </div>
-                                    <button className="btm-buy unbounded-bold" type="submit">Зарегистрироваться</button>
+                                    <button className="btm-buy inter-bold" type="submit">Зарегистрироваться</button>
                                 </form>
                             </div>
                             {/* </div> */}
@@ -163,12 +163,12 @@ export default function EventPage() {
                                         stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                             </button>
-                            <span className="gallery-more unbounded-regular">Посмотреть ещё</span>
+                            <span className="gallery-more inter-regular">Посмотреть ещё</span>
                         </div>
                     </div>
                     <div>
                         <h1 id="review" className="text-max-big unbounded-bold">Отзывы</h1>
-                        <div className="reviews-list unbounded-regular">
+                        <div className="reviews-list inter-regular">
                             <div className="review-card">
                                 <h3 className="text-little-medium">Анатолий</h3>
                                 <h6 className="text-little">13 апреля, 12:54</h6>
