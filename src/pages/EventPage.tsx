@@ -34,7 +34,7 @@ export default function EventPage() {
             const response = await fetch("http://62.109.16.129:5000/temp/getMentors");
             const data = await response.json();
             console.log(data)
-            const links = [...data.links_images[0], ...data.links_images[1], ...data.links_images[2]];
+            const links = data.links_images;
             
             console.log(`links: ${links}`);
 
