@@ -32,8 +32,8 @@ export default function EventPage() {
     useEffect(() => {
         const fetchGallery = async (): Promise<void> => {
             const response = await fetch("http://62.109.16.129:5000/temp/getMentors");
-
-            const data = await response.json();
+            console.log(await response.json())
+            const data = Object.fromEntries(await response.json());
             
             console.log(`data: ${data}`);
 
