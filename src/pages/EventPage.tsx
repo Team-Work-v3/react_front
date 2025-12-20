@@ -34,6 +34,8 @@ export default function EventPage() {
             const response = await fetch("http://62.109.16.129:5000/temp/getMentors");
 
             const data = await response.json();
+            
+            console.log(`data: ${data}`);
 
             let setRandomNumbers: Set<number> = new Set();
 
@@ -43,9 +45,9 @@ export default function EventPage() {
             }
 
             const arrayRandomNumbers: number[] = Array.from(setRandomNumbers);
-
+            console.log(`arrayRandomNumbers: ${arrayRandomNumbers}`)
             const randomData = arrayRandomNumbers.map(index => data[index]);
-
+            console.log(`randomData: ${randomData}`)
             setGallery(randomData);
         }
 
@@ -70,8 +72,6 @@ export default function EventPage() {
         }
     }, [location]);
 
-
-    console.log(gallery);
     return (
         <>
             <Wrapper>
