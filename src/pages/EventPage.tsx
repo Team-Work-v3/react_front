@@ -33,11 +33,8 @@ export default function EventPage() {
         const fetchGallery = async (): Promise<void> => {
             const response = await fetch("http://62.109.16.129:5000/temp/getMentors");
             const data = await response.json();
-            console.log(data)
             const links = data.links_images;
-
-            console.log(`links: ${links}`);
-
+            
             let setRandomNumbers: Set<number> = new Set();
 
             while (setRandomNumbers.size <= 6) {
@@ -45,12 +42,9 @@ export default function EventPage() {
                 setRandomNumbers.add(randomNumber);
             }
 
-            console.log(setRandomNumbers)
-
             const arrayRandomNumbers: number[] = Array.from(setRandomNumbers);
-            console.log(`arrayRandomNumbers: ${arrayRandomNumbers}`)
             const randomData = arrayRandomNumbers.map(index => links[index]);
-            console.log(`randomData: ${randomData}`)
+
             setGallery(randomData);
         }
 
@@ -75,8 +69,6 @@ export default function EventPage() {
         }
     }, [location]);
 
-
-    useEffect(() => { console.log(gallery); }, [gallery])
     return (
         <>
             <Wrapper>
