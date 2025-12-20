@@ -33,7 +33,20 @@ export default function EventPage() {
         const fetchGallery = async (): Promise<void> => {
             const response = await fetch("http://62.109.16.129:5000/temp/getMentors");
 
-            setGallery(await response.json());
+            const data = await response.json();
+
+            let setRandomNumbers: Set<number> = new Set();
+
+            while (setRandomNumbers.size >= 6) {
+                const randomNumber: number = Math.floor(Math.random() * (222 - 0 + 1) + 0);
+                setRandomNumbers.add(randomNumber);
+            }
+
+            const arrayRandomNumbers: number[] = Array.from(setRandomNumbers);
+
+            const randomData = arrayRandomNumbers.map(index => data[index]);
+
+            setGallery(randomData);
         }
 
         fetchGallery();
