@@ -52,7 +52,6 @@ export default function EventPage() {
             const randomData = arrayRandomNumbers.map(index => links[index]);
             console.log(`randomData: ${randomData}`)
             setGallery(randomData);
-            console.log(gallery);
         }
 
         fetchGallery();
