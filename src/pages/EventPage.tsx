@@ -57,6 +57,8 @@ export default function EventPage() {
         }
     }, [location]);
 
+
+    console.log(gallery);
     return (
         <>
             <Wrapper>
