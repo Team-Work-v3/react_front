@@ -7,6 +7,7 @@ import type { IEvent } from "../models/event.interface";
 export default function EventPage() {
     const [event, setEvent] = useState<IEvent>();
     const { id } = useParams<{ id: string }>();
+    const [gallery, setGallery] = useState<string[]>([]);
 
     const location = useLocation();
 
@@ -26,6 +27,16 @@ export default function EventPage() {
             setEvent(await response.json());
         }
         fetchEvents();
+    }, []);
+
+    useEffect(() => {
+        const fetchGallery = async (): Promise<void> => {
+            const response = await fetch("http://62.109.16.129:5000/temp/getMentors");
+
+            setGallery(await response.json());
+        }
+
+        fetchGallery();
     }, []);
 
     useEffect(() => {
