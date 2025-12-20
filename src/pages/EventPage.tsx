@@ -35,7 +35,7 @@ export default function EventPage() {
             const data = await response.json();
             console.log(data)
             const links = data.links_images;
-            
+
             console.log(`links: ${links}`);
 
             let setRandomNumbers: Set<number> = new Set();
@@ -76,6 +76,8 @@ export default function EventPage() {
         }
     }, [location]);
 
+
+    useEffect(() => { console.log(gallery); }, [gallery])
     return (
         <>
             <Wrapper>
