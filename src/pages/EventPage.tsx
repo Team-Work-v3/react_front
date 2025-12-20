@@ -32,10 +32,11 @@ export default function EventPage() {
     useEffect(() => {
         const fetchGallery = async (): Promise<void> => {
             const response = await fetch("http://62.109.16.129:5000/temp/getMentors");
-            console.log(await response.json())
-            const data = Object.fromEntries(await response.json());
+            const data = await response.json();
+
+            const links = [...data.links_images[0], ...data.links_images[1], ...data.links_images[2]];
             
-            console.log(`data: ${data}`);
+            console.log(`links: ${links}`);
 
             let setRandomNumbers: Set<number> = new Set();
 
@@ -46,7 +47,7 @@ export default function EventPage() {
 
             const arrayRandomNumbers: number[] = Array.from(setRandomNumbers);
             console.log(`arrayRandomNumbers: ${arrayRandomNumbers}`)
-            const randomData = arrayRandomNumbers.map(index => data[index]);
+            const randomData = arrayRandomNumbers.map(index => links[index]);
             console.log(`randomData: ${randomData}`)
             setGallery(randomData);
             console.log(gallery);
