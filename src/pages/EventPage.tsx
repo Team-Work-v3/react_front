@@ -45,6 +45,8 @@ export default function EventPage() {
                 setRandomNumbers.add(randomNumber);
             }
 
+            console.log(setRandomNumbers)
+
             const arrayRandomNumbers: number[] = Array.from(setRandomNumbers);
             console.log(`arrayRandomNumbers: ${arrayRandomNumbers}`)
             const randomData = arrayRandomNumbers.map(index => links[index]);
