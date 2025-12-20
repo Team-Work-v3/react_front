@@ -40,7 +40,7 @@ export default function EventPage() {
 
             let setRandomNumbers: Set<number> = new Set();
 
-            while (setRandomNumbers.size >= 6) {
+            while (setRandomNumbers.size <= 6) {
                 const randomNumber: number = Math.floor(Math.random() * (222 - 0 + 1) + 0);
                 setRandomNumbers.add(randomNumber);
             }
