@@ -9,6 +9,7 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import { useScrollLock } from "../hooks/useScrollLock";
 
 export default function EventPage() {
     const [event, setEvent] = useState<IEvent>();
@@ -18,6 +19,8 @@ export default function EventPage() {
     const location = useLocation();
 
     const dialogWindowRef = useRef<HTMLDialogElement | null>(null);
+
+    const { lockScroll, unlockScroll } = useScrollLock();
 
     useEffect(() => {
         const fetchEvents = async (): Promise<void> => {
@@ -153,7 +156,10 @@ export default function EventPage() {
                                         <label htmlFor="agree" className="inter-light">Согласен на обработку данных</label>
                                         {/* <span id="agreeError" className="error-message"></span> */}
                                     </div>
-                                    <button className="btm-buy inter-bold" onClick={() => dialogWindowRef.current?.showModal()}>Зарегистрироваться</button>
+                                    <button className="btm-buy inter-bold" onClick={() => {
+                                        dialogWindowRef.current?.showModal();
+                                        lockScroll();
+                                    }}>Зарегистрироваться</button>
                                 </div>
                             </div>
                             {/* </div> */}
@@ -180,7 +186,7 @@ export default function EventPage() {
                             >
                                 {gallery.map((link, index) => (
                                     <SwiperSlide key={index}>
-                                        <img src={`http://62.109.16.129:5000${link}`} alt="image" className="gallery-img"/>
+                                        <img src={`http://62.109.16.129:5000${link}`} alt="image" className="gallery-img" />
                                     </SwiperSlide>
                                 ))}
                             </Swiper>
@@ -239,7 +245,7 @@ export default function EventPage() {
                         <span className="unbounded-medium dialog-window-heading">Спасибо за регистрацию</span>
                         <span className="inter-regular dialog-window-text">Скоро вам придёт сообщение на почту</span>
                         <Link to="/">
-                            <button className="inter-medium dialog-window-button btn">Всё понятно</button>
+                            <button className="inter-medium dialog-window-button btn" onClick={() => unlockScroll()}>Всё понятно</button>
                         </Link>
                     </div>
                 </div>
