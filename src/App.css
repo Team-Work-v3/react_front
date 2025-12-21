@@ -749,12 +749,12 @@ label {
 
 .gallery-img {
     background-color: transparent;
-    width: 100%;
+    width: 280px;
     height: 498px;
 }
 
 .gallery-img>img {
-    width: 100%;
+    width: 280px;
     height: 498px;
     object-fit: cover;
     object-position: center;
