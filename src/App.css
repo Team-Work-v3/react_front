@@ -254,7 +254,8 @@ a {
 
 /* === Название мероприятия === */
 .event-name {
-    width: 100%;
+    width: 240px;
+    height: auto;
     font-size: 30px;
     line-height: 32px;
     letter-spacing: -0.5px;
