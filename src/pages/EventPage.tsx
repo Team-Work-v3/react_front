@@ -161,9 +161,9 @@ export default function EventPage() {
                     <h1 id="gallery-text" className="text-max-big unbounded-bold">Галерея</h1>
                     <div className="gallery">
                         <div className="gallery-content">
-                            {gallery.map((image, index) => (
+                            {gallery.map((link, index) => (
                                 <div className="gallery-img" key={index}>
-                                    <img src={`http://62.109.16.129:5000${image}`} />
+                                    <img src={`http://62.109.16.129:5000${link}`} />
                                 </div>
                             ))}
                         </div>
