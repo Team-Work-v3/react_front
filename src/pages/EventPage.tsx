@@ -168,10 +168,13 @@ export default function EventPage() {
                     <div className="gallery">
                         <div className="gallery-content">
                             <Swiper
-                                slidesPerView={1}
-                                spaceBetween={30}
+                                slidesPerView={4}
+                                spaceBetween={20}
                                 loop={true}
                                 navigation={true}
+                                pagination={{
+                                    clickable: false,
+                                }}
                                 modules={[Pagination, Navigation]}
                                 className="mySwiper"
                             >
