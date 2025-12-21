@@ -3,6 +3,12 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import Footer from "../components/Footer";
 import Wrapper from "../components/Wrapper";
 import type { IEvent } from "../models/event.interface";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Navigation } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 export default function EventPage() {
     const [event, setEvent] = useState<IEvent>();
@@ -161,11 +167,22 @@ export default function EventPage() {
                     <h1 id="gallery-text" className="text-max-big unbounded-bold">Галерея</h1>
                     <div className="gallery">
                         <div className="gallery-content">
-                            {gallery.map((link, index) => (
-                                <div className="gallery-img" key={index}>
-                                    <img src={`http://62.109.16.129:5000${link}`} />
-                                </div>
-                            ))}
+                            <Swiper
+                                slidesPerView={1}
+                                spaceBetween={30}
+                                loop={true}
+                                navigation={true}
+                                modules={[Pagination, Navigation]}
+                                className="mySwiper"
+                            >
+                                {gallery.map((link, index) => (
+                                    <SwiperSlide key={index}>
+                                        <div className="gallery-img">
+                                            <img src={`http://62.109.16.129:5000${link}`} />
+                                        </div>
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
                         </div>
                         <div className="arrow-button">
                             <button id="button-turn" className="all-button-arrow">
