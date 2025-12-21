@@ -172,9 +172,6 @@ export default function EventPage() {
                                 spaceBetween={20}
                                 loop={true}
                                 navigation={true}
-                                pagination={{
-                                    clickable: false,
-                                }}
                                 modules={[Pagination, Navigation]}
                                 className="mySwiper"
                             >
