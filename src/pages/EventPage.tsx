@@ -34,10 +34,10 @@ export default function EventPage() {
             const response = await fetch("http://62.109.16.129:5000/temp/getMentors");
             const data = await response.json();
             const links = data.links_images;
-            
-            let setRandomNumbers: Set<number> = new Set();
 
-            while (setRandomNumbers.size <= 6) {
+            const setRandomNumbers: Set<number> = new Set();
+
+            while (setRandomNumbers.size < 6) {
                 const randomNumber: number = Math.floor(Math.random() * (222 - 0 + 1) + 0);
                 setRandomNumbers.add(randomNumber);
             }
@@ -161,18 +161,11 @@ export default function EventPage() {
                     <h1 id="gallery-text" className="text-max-big unbounded-bold">Галерея</h1>
                     <div className="gallery">
                         <div className="gallery-content">
-                            <div className="gallery-img">
-                                <img src="http://62.109.16.129:5000/index/block_in_gallery.png" />
-                            </div>
-                            <div className="gallery-img">
-                                <img src="http://62.109.16.129:5000/index/block_in_gallery.png" />
-                            </div>
-                            <div className="gallery-img">
-                                <img src="http://62.109.16.129:5000/index/block_in_gallery.png" />
-                            </div>
-                            <div className="gallery-img">
-                                <img src="http://62.109.16.129:5000/index/block_in_gallery.png" />
-                            </div>
+                            {gallery.map((image, index) => (
+                                <div className="gallery-img" key={index}>
+                                    <img src={`http://62.109.16.129:5000${image}`} />
+                                </div>
+                            ))}
                         </div>
                         <div className="arrow-button">
                             <button id="button-turn" className="all-button-arrow">
