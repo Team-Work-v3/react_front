@@ -4,7 +4,6 @@ import Footer from "../components/Footer";
 import Wrapper from "../components/Wrapper";
 import type { IEvent } from "../models/event.interface";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -171,26 +170,28 @@ export default function EventPage() {
                                 slidesPerView={4}
                                 spaceBetween={20}
                                 loop={true}
-                                navigation={true}
-                                modules={[Pagination, Navigation]}
+                                navigation={{
+                                    nextEl: '.custom-swiper-button-right',
+                                    prevEl: '.custom-swiper-button-left',
+                                }}
                                 className="mySwiper"
                             >
                                 {gallery.map((link, index) => (
                                     <SwiperSlide key={index}>
-                                        <img src={`http://62.109.16.129:5000${link}`} alt="image"/>
+                                        <img src={`http://62.109.16.129:5000${link}`} alt="image" />
                                     </SwiperSlide>
                                 ))}
                             </Swiper>
                         </div>
                         <div className="arrow-button">
-                            <button id="button-turn" className="all-button-arrow">
+                            <button id="button-turn" className="all-button-arrow custom-swiper-button-left">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M15.833 9.99967L4.16634 9.99967M15.833 9.99967L12.4997 6.66634M15.833 9.99967L12.4997 13.333"
                                         stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                             </button>
-                            <button className="all-button-arrow">
+                            <button className="all-button-arrow custom-swiper-button-right">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M15.833 9.99967L4.16634 9.99967M15.833 9.99967L12.4997 6.66634M15.833 9.99967L12.4997 13.333"
