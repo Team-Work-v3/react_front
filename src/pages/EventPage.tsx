@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import Wrapper from "../components/Wrapper";
 import type { IEvent } from "../models/event.interface";
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -174,6 +175,7 @@ export default function EventPage() {
                                     nextEl: '.custom-swiper-button-right',
                                     prevEl: '.custom-swiper-button-left',
                                 }}
+                                modules={[Navigation]}
                                 className="mySwiper"
                             >
                                 {gallery.map((link, index) => (
