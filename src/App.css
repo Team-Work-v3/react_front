@@ -747,10 +747,10 @@ label {
     background-color: transparent;
 }
 
-.gallery-img{
+.gallery-img {
     width: 280px;
     height: 498px;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
 }
 
