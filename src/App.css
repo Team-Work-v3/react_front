@@ -263,7 +263,11 @@ a {
     padding: 0;
     text-transform: lowercase;
     color: black;
+    overflow: hidden;
     text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 /* === Небольшие "плашки" — дата, время, статус === */
