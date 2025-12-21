@@ -180,7 +180,7 @@ export default function EventPage() {
                             >
                                 {gallery.map((link, index) => (
                                     <SwiperSlide key={index}>
-                                        <img src={`http://62.109.16.129:5000${link}`} alt="image" />
+                                        <img src={`http://62.109.16.129:5000${link}`} alt="image" className="gallery-img"/>
                                     </SwiperSlide>
                                 ))}
                             </Swiper>

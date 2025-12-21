@@ -747,13 +747,7 @@ label {
     background-color: transparent;
 }
 
-.gallery-img {
-    background-color: transparent;
-    width: 280px;
-    height: 498px;
-}
-
-.gallery-img>img {
+.gallery-img{
     width: 280px;
     height: 498px;
     object-fit: cover;
