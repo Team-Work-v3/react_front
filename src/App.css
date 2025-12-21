@@ -262,6 +262,7 @@ a {
     padding: 0;
     text-transform: lowercase;
     color: black;
+    text-overflow: ellipsis;
 }
 
 /* === Небольшие "плашки" — дата, время, статус === */
