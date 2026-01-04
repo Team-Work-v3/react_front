@@ -130,14 +130,14 @@ export default function EventPage() {
                                 <div className="form-registration">
                                     <div className="form-group">
                                         <div>
-                                            <label className="label-indent inter-light" htmlFor="name">Имя Фамилия</label>
+                                            <label className="label-indent inter-light" htmlFor="name"><span className="label-indent-red">*</span>Имя Фамилия</label>
                                             {/* <span id="nameError" className="error-message unbounded-extra-light">Заполните это поле</span> */}
                                         </div>
                                         <input className="registration-frame inter-regular" type="text" id="name" name="name" maxLength={50} placeholder="Иван Иванов" />
                                     </div>
                                     <div className="form-group">
                                         <div>
-                                            <label className="label-indent inter-light" htmlFor="email">Электронная почта</label>
+                                            <label className="label-indent inter-light" htmlFor="email"><span className="label-indent-red">*</span>Электронная почта</label>
                                             <span id="emailError" className="error-message"></span>
                                         </div>
                                         <input className="registration-frame inter-regular" type="email" id="email" name="email" maxLength={100} placeholder="ivanov2000@gmail.com" />
@@ -145,7 +145,7 @@ export default function EventPage() {
 
                                     <div className="form-group">
                                         <div>
-                                            <label className="label-indent inter-light" htmlFor="phone">Номер телефона</label>
+                                            <label className="label-indent inter-light" htmlFor="phone"><span className="label-indent-red">*</span>Номер телефона</label>
                                             <span id="phoneError" className="error-message"></span>
                                         </div>
                                         <input className="registration-frame inter-regular" type="tel" id="phone" name="phone" maxLength={20} placeholder="+375 (29) 222-22-22" />
@@ -209,34 +209,37 @@ export default function EventPage() {
                             <span className="gallery-more inter-regular">Посмотреть ещё</span>
                         </div>
                     </div>
-                    <div>
-                        <h1 id="review" className="text-max-big unbounded-bold">Отзывы</h1>
-                        <div className="reviews-list inter-regular">
-                            <div className="review-card">
-                                <h3 className="text-little-medium">Анатолий</h3>
-                                <h6 className="text-little">13 апреля, 12:54</h6>
-                                <p className="text-little">
-                                    Также как внедрение современных методик обеспечивает широкому кругу (специалистов) участие в
-                                    формировании позиций, занимаемых участниками в отношении поставленных задач. Являясь всего лишь
-                                    частью общей картины, тщательные исследования конкурентов набирают популярность среди
-                                    определенных слоев населения, а значит, должны быть своевременно верифицированы. Являясь всего
-                                    лишь частью общей картины, тщательные исследования
-                                </p>
-                            </div>
-                            <div className="review-card">
-                                <h3 className="text-little-medium">Анатолий</h3>
-                                <h6 className="text-little">13 апреля, 12:54</h6>
-                                <p className="text-little">
-                                    Также как внедрение современных методик обеспечивает широкому кругу (специалистов) участие в
-                                    формировании позиций, занимаемых участниками в отношении поставленных задач. Являясь всего лишь
-                                    частью общей картины, тщательные исследования конкурентов набирают популярность среди
-                                    определенных слоев населения, а значит, должны быть своевременно верифицированы. Являясь всего
-                                    лишь частью общей картины, тщательные исследования
-                                </p>
-                            </div>
+                </div>
+                <div className="feedback-container">
+                    <h1 id="review" className="text-max-big unbounded-bold">Отзывы</h1>
+                    <div className="reviews-list inter-regular">
+                        <div className="review-card">
+                            <h3 className="text-little-medium">Анатолий</h3>
+                            <h6 className="text-little">13 апреля, 12:54</h6>
+                            <p className="text-little">
+                                Также как внедрение современных методик обеспечивает широкому кругу (специалистов) участие в
+                                формировании позиций, занимаемых участниками в отношении поставленных задач. Являясь всего лишь
+                                частью общей картины, тщательные исследования конкурентов набирают популярность среди
+                                определенных слоев населения, а значит, должны быть своевременно верифицированы. Являясь всего
+                                лишь частью общей картины, тщательные исследования
+                            </p>
+                        </div>
+                        <div className="review-card">
+                            <h3 className="text-little-medium">Анатолий</h3>
+                            <h6 className="text-little">13 апреля, 12:54</h6>
+                            <p className="text-little">
+                                Также как внедрение современных методик обеспечивает широкому кругу (специалистов) участие в
+                                формировании позиций, занимаемых участниками в отношении поставленных задач. Являясь всего лишь
+                                частью общей картины, тщательные исследования конкурентов набирают популярность среди
+                                определенных слоев населения, а значит, должны быть своевременно верифицированы. Являясь всего
+                                лишь частью общей картины, тщательные исследования
+                            </p>
                         </div>
                     </div>
                 </div>
+                <Link to="/">
+                    <span className="to-home-button inter-light">На главную</span>
+                </Link>
             </Wrapper>
             <dialog ref={dialogWindowRef} className="dialog-window">
                 <div className="dialog-window-container">

@@ -585,8 +585,14 @@ a {
 
 .label-indent {
     display: flex;
-    padding: 5px;
+    padding: 5px 0px;
     /* width: 460px; */
+}
+
+.label-indent-red{
+    color: #982520;
+    font-size: 15px;
+    margin-right: 2px;
 }
 
 .block-form {
@@ -794,6 +800,10 @@ label {
     transform: rotate(180deg);
 }
 
+.feedback-container{
+    padding-bottom: 45px;
+}
+
 #review {
     padding-bottom: 20px;
     padding-top: 100px;
@@ -861,4 +871,12 @@ h6.text-little {
     height: 280px;
     object-fit: cover;
     object-position: center;
+}
+
+.to-home-button{
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 15px;
+    user-select: none;
+    color: black;
 }
