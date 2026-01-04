@@ -237,9 +237,7 @@ export default function EventPage() {
                         </div>
                     </div>
                 </div>
-                <Link to="/">
-                    <span className="to-home-button inter-light">На главную</span>
-                </Link>
+                <a href="/" className="to-home-button inter-light">На главную</a>
             </Wrapper>
             <dialog ref={dialogWindowRef} className="dialog-window">
                 <div className="dialog-window-container">
@@ -247,12 +245,10 @@ export default function EventPage() {
                         <img src="http://62.109.16.129:5000/index/registration.png" alt="image" className="dialog-image" />
                         <span className="unbounded-medium dialog-window-heading">Спасибо за регистрацию</span>
                         <span className="inter-regular dialog-window-text">Скоро вам придёт сообщение на почту</span>
-                        <Link to="/">
-                            <button className="inter-medium dialog-window-button btn" onClick={() => unlockScroll()}>Всё понятно</button>
-                        </Link>
+                        <button className="inter-medium dialog-window-button btn" onClick={() => { unlockScroll(); window.location.href = "/"; }}>Всё понятно</button>
                     </div>
                 </div>
-            </dialog>
+            </dialog >
             <Footer />
         </>
     );
