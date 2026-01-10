@@ -299,7 +299,9 @@ export default function EventPage() {
                                                 }
 
                                                 review.fullname.current?.classList.remove("error");
-                                                buttonSubmitReviewRef.current?.classList.remove("error");
+                                                if (!Object.values(errorReview).includes(true)) {
+                                                    buttonSubmitReviewRef.current?.classList.remove("error")
+                                                };
                                                 if (errorSpans.fullname.current) {
                                                     errorSpans.fullname.current.textContent = "";
                                                 }
@@ -336,7 +338,9 @@ export default function EventPage() {
                                                 }
 
                                                 review.email.current?.classList.remove("error");
-                                                buttonSubmitReviewRef.current?.classList.remove("error");
+                                                if (!Object.values(errorReview).includes(true)) {
+                                                    buttonSubmitReviewRef.current?.classList.remove("error")
+                                                };
                                                 if (errorSpans.email.current) {
                                                     errorSpans.email.current.textContent = "";
                                                 }
@@ -375,8 +379,9 @@ export default function EventPage() {
                                                 }
 
                                                 review.phone.current?.classList.remove("error");
-                                                buttonSubmitReviewRef.current?.classList.remove("error");
-
+                                                if (!Object.values(errorReview).includes(true)) {
+                                                    buttonSubmitReviewRef.current?.classList.remove("error")
+                                                };
                                                 if (errorSpans.phone.current) {
                                                     errorSpans.phone.current.textContent = "";
                                                 }
@@ -390,9 +395,7 @@ export default function EventPage() {
                                         <label htmlFor="agree" className="inter-light">Согласен на обработку данных</label>
                                     </div>
                                     <button className="btm-buy inter-bold" ref={buttonSubmitReviewRef} onClick={async () => {
-                                        const errorKeys: boolean[] = Object.values(errorReview);
-
-                                        if (errorKeys.includes(true)) return;
+                                        if (Object.values(errorReview).includes(true)) return;
 
                                         if (await sendReview()) {
                                             dialogWindowRef.current?.showModal();
