@@ -15,16 +15,24 @@ export default function EventPage() {
     const [event, setEvent] = useState<IEvent>();
     const { id } = useParams<{ id: string }>();
     const [gallery, setGallery] = useState<string[]>([]);
+
     const review = {
-        fullName: useRef<HTMLInputElement | null>(null),
+        fullname: useRef<HTMLInputElement | null>(null),
         email: useRef<HTMLInputElement | null>(null),
         phone: useRef<HTMLInputElement | null>(null),
         agreement: useRef<HTMLInputElement | null>(null)
     };
 
+    const [errorReview, setErrorReview] = useState({
+        fullname: true,
+        email: true,
+        phone: true
+    });
+
     const location = useLocation();
 
     const dialogWindowRef = useRef<HTMLDialogElement | null>(null);
+    const buttonSubmitReviewRef = useRef<HTMLButtonElement | null>(null);
 
     const { lockScroll, unlockScroll } = useScrollLock();
 
@@ -83,15 +91,27 @@ export default function EventPage() {
         }
     }, [location]);
 
-    const sendReview = async (): Promise<void> => {
-        console.log(review)
+    const checkFullnameReview = (): void => {
+        const fullname = /^(?!.*[!@#$%^&*()_+=|<>?{}\[\]~`])(?=.*\s.*\S)[A-Za-zА-Яа-яЁё\s'-]{3,50}$/;
+    }
+
+    const checkemaiEReview = (): void => {
+        const email = /^(?!.*[!#$%&*+/=?^`{|}~])(?!.*['"])[a-zA-Z0-9._%+-]{1-64}@[a-zA-Z0-9.-]{1,255}\.[a-zA-Z]{2,}$/;
+    }
+
+    const checkPhoneReview = (): void => {
+        const phone = /^[\+]?[0-9\s\-\(\)]{10,25}$/;
+    }
+
+
+    const sendReview = async (): Promise<boolean> => {
         const response = await fetch("http://62.109.16.129:5000/api/regUser", {
             method: "POST",
             credentials: "include",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 id_event: id,
-                full_name: review.fullName.current?.value,
+                full_name: review.fullname.current?.value,
                 email: review.email.current?.value,
                 phone_number: review.phone.current?.value,
                 agreement: review.agreement.current?.checked ? 1 : 0
@@ -99,7 +119,9 @@ export default function EventPage() {
         });
 
         const data = await response.json();
-        console.log(data);
+
+        if (data.message === "success") return true;
+        return false;
     }
 
     return (
@@ -157,7 +179,7 @@ export default function EventPage() {
                                             <label className="label-indent inter-light" htmlFor="name"><span className="label-indent-red">*</span>Имя Фамилия</label>
                                             {/* <span id="nameError" className="error-message unbounded-extra-light">Заполните это поле</span> */}
                                         </div>
-                                        <input className="registration-frame inter-regular" type="text" id="name" name="name" maxLength={50} placeholder="Иван Иванов" ref={review.fullName} />
+                                        <input className="registration-frame inter-regular" type="text" id="name" name="name" placeholder="Иван Иванов" ref={review.fullname} />
                                     </div>
                                     <div className="form-group">
                                         <div>
@@ -180,10 +202,19 @@ export default function EventPage() {
                                         <label htmlFor="agree" className="inter-light">Согласен на обработку данных</label>
                                         {/* <span id="agreeError" className="error-message"></span> */}
                                     </div>
-                                    <button className="btm-buy inter-bold" onClick={() => {
-                                        sendReview();
-                                        dialogWindowRef.current?.showModal();
-                                        lockScroll();
+                                    <button className="btm-buy inter-bold" ref={buttonSubmitReviewRef} onClick={async () => {
+                                        const errorKeys: boolean[] = Object.values(errorReview);
+                                        if(errorKeys.includes(true)){
+                                            buttonSubmitReviewRef.current?.disabled;
+                                            return;
+                                        }
+
+                                        if (await sendReview()) {
+                                            dialogWindowRef.current?.showModal();
+                                            lockScroll();
+                                            return;
+                                        }
+
                                     }}>Зарегистрироваться</button>
                                 </div>
                             </div>
