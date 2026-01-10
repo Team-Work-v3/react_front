@@ -16,9 +16,23 @@ export default function EventPage() {
     const { id } = useParams<{ id: string }>();
     const [gallery, setGallery] = useState<string[]>([]);
 
+    const review = {
+        fullname: useRef<HTMLInputElement | null>(null),
+        email: useRef<HTMLInputElement | null>(null),
+        phone: useRef<HTMLInputElement | null>(null),
+        agreement: useRef<HTMLInputElement | null>(null)
+    };
+
+    const [errorReview, setErrorReview] = useState({
+        fullname: true,
+        email: true,
+        phone: true
+    });
+
     const location = useLocation();
 
     const dialogWindowRef = useRef<HTMLDialogElement | null>(null);
+    const buttonSubmitReviewRef = useRef<HTMLButtonElement | null>(null);
 
     const { lockScroll, unlockScroll } = useScrollLock();
 
@@ -56,7 +70,6 @@ export default function EventPage() {
 
             setGallery(randomData);
         }
-
         fetchGallery();
     }, []);
 
@@ -77,6 +90,39 @@ export default function EventPage() {
             window.scrollTo(0, 0);
         }
     }, [location]);
+
+    const checkFullnameReview = (): void => {
+        const fullname = /^(?!.*[!@#$%^&*()_+=|<>?{}\[\]~`])(?=.*\s.*\S)[A-Za-zА-Яа-яЁё\s'-]{3,50}$/;
+    }
+
+    const checkemaiEReview = (): void => {
+        const email = /^(?!.*[!#$%&*+/=?^`{|}~])(?!.*['"])[a-zA-Z0-9._%+-]{1-64}@[a-zA-Z0-9.-]{1,255}\.[a-zA-Z]{2,}$/;
+    }
+
+    const checkPhoneReview = (): void => {
+        const phone = /^[\+]?[0-9\s\-\(\)]{10,25}$/;
+    }
+
+
+    const sendReview = async (): Promise<boolean> => {
+        const response = await fetch("http://62.109.16.129:5000/api/regUser", {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                id_event: id,
+                full_name: review.fullname.current?.value,
+                email: review.email.current?.value,
+                phone_number: review.phone.current?.value,
+                agreement: review.agreement.current?.checked ? 1 : 0
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.message === "success") return true;
+        return false;
+    }
 
     return (
         <>
@@ -133,14 +179,14 @@ export default function EventPage() {
                                             <label className="label-indent inter-light" htmlFor="name"><span className="label-indent-red">*</span>Имя Фамилия</label>
                                             {/* <span id="nameError" className="error-message unbounded-extra-light">Заполните это поле</span> */}
                                         </div>
-                                        <input className="registration-frame inter-regular" type="text" id="name" name="name" maxLength={50} placeholder="Иван Иванов" />
+                                        <input className="registration-frame inter-regular" type="text" id="name" name="name" placeholder="Иван Иванов" ref={review.fullname} />
                                     </div>
                                     <div className="form-group">
                                         <div>
                                             <label className="label-indent inter-light" htmlFor="email"><span className="label-indent-red">*</span>Электронная почта</label>
                                             <span id="emailError" className="error-message"></span>
                                         </div>
-                                        <input className="registration-frame inter-regular" type="email" id="email" name="email" maxLength={100} placeholder="ivanov2000@gmail.com" />
+                                        <input className="registration-frame inter-regular" type="email" id="email" name="email" maxLength={100} placeholder="ivanov2000@gmail.com" ref={review.email} />
                                     </div>
 
                                     <div className="form-group">
@@ -148,17 +194,27 @@ export default function EventPage() {
                                             <label className="label-indent inter-light" htmlFor="phone"><span className="label-indent-red">*</span>Номер телефона</label>
                                             <span id="phoneError" className="error-message"></span>
                                         </div>
-                                        <input className="registration-frame inter-regular" type="tel" id="phone" name="phone" maxLength={20} placeholder="+375 (29) 222-22-22" />
+                                        <input className="registration-frame inter-regular" type="tel" id="phone" name="phone" maxLength={20} placeholder="+375 (29) 222-22-22" ref={review.phone} />
                                     </div>
 
                                     <div className="checkbox-group">
-                                        <input type="checkbox" id="agree" name="agree" />
+                                        <input type="checkbox" id="agree" name="agree" value="true" ref={review.agreement} />
                                         <label htmlFor="agree" className="inter-light">Согласен на обработку данных</label>
                                         {/* <span id="agreeError" className="error-message"></span> */}
                                     </div>
-                                    <button className="btm-buy inter-bold" onClick={() => {
-                                        dialogWindowRef.current?.showModal();
-                                        lockScroll();
+                                    <button className="btm-buy inter-bold" ref={buttonSubmitReviewRef} onClick={async () => {
+                                        const errorKeys: boolean[] = Object.values(errorReview);
+                                        if(errorKeys.includes(true)){
+                                            buttonSubmitReviewRef.current?.disabled;
+                                            return;
+                                        }
+
+                                        if (await sendReview()) {
+                                            dialogWindowRef.current?.showModal();
+                                            lockScroll();
+                                            return;
+                                        }
+
                                     }}>Зарегистрироваться</button>
                                 </div>
                             </div>
