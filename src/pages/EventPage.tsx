@@ -299,9 +299,11 @@ export default function EventPage() {
                                                 }
 
                                                 review.fullname.current?.classList.remove("error");
-                                                if (!Object.values(errorReview).includes(true)) {
-                                                    buttonSubmitReviewRef.current?.classList.remove("error")
-                                                };
+                                                if (Object.values(errorReview).includes(true)) {
+                                                    buttonSubmitReviewRef.current?.classList.add("error");
+                                                } else {
+                                                    buttonSubmitReviewRef.current?.classList.remove("error");
+                                                }
                                                 if (errorSpans.fullname.current) {
                                                     errorSpans.fullname.current.textContent = "";
                                                 }
@@ -338,9 +340,11 @@ export default function EventPage() {
                                                 }
 
                                                 review.email.current?.classList.remove("error");
-                                                if (!Object.values(errorReview).includes(true)) {
-                                                    buttonSubmitReviewRef.current?.classList.remove("error")
-                                                };
+                                                if (Object.values(errorReview).includes(true)) {
+                                                    buttonSubmitReviewRef.current?.classList.add("error");
+                                                } else {
+                                                    buttonSubmitReviewRef.current?.classList.remove("error");
+                                                }
                                                 if (errorSpans.email.current) {
                                                     errorSpans.email.current.textContent = "";
                                                 }
@@ -379,9 +383,11 @@ export default function EventPage() {
                                                 }
 
                                                 review.phone.current?.classList.remove("error");
-                                                if (!Object.values(errorReview).includes(true)) {
-                                                    buttonSubmitReviewRef.current?.classList.remove("error")
-                                                };
+                                                if (Object.values(errorReview).includes(true)) {
+                                                    buttonSubmitReviewRef.current?.classList.add("error");
+                                                } else {
+                                                    buttonSubmitReviewRef.current?.classList.remove("error");
+                                                }
                                                 if (errorSpans.phone.current) {
                                                     errorSpans.phone.current.textContent = "";
                                                 }
