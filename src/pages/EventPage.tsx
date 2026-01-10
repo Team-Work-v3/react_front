@@ -10,6 +10,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { useScrollLock } from "../hooks/useScrollLock";
+import type { ValidationResult } from "../models/validation-result.interface";
 
 export default function EventPage() {
     const [event, setEvent] = useState<IEvent>();
@@ -23,11 +24,17 @@ export default function EventPage() {
         agreement: useRef<HTMLInputElement | null>(null)
     };
 
-    const [errorReview, setErrorReview] = useState({
+    const errorReview = {
         fullname: true,
         email: true,
         phone: true
-    });
+    };
+
+    const errorSpans = {
+        fullname: useRef<HTMLSpanElement | null>(null),
+        email: useRef<HTMLSpanElement | null>(null),
+        phone: useRef<HTMLSpanElement | null>(null)
+    }
 
     const location = useLocation();
 
@@ -91,17 +98,105 @@ export default function EventPage() {
         }
     }, [location]);
 
-    const checkFullnameReview = (): void => {
-        const fullname = /^(?!.*[!@#$%^&*()_+=|<>?{}\[\]~`])(?=.*\s.*\S)[A-Za-zА-Яа-яЁё\s'-]{3,50}$/;
-    }
+    const validateFullname = (value: string | undefined): ValidationResult => {
+        if (typeof value === "undefined") {
+            return { valid: false, error: "Поле обязательно для заполнения" };
+        }
 
-    const checkemaiEReview = (): void => {
-        const email = /^(?!.*[!#$%&*+/=?^`{|}~])(?!.*['"])[a-zA-Z0-9._%+-]{1-64}@[a-zA-Z0-9.-]{1,255}\.[a-zA-Z]{2,}$/;
-    }
+        const v = value.trim();
 
-    const checkPhoneReview = (): void => {
-        const phone = /^[\+]?[0-9\s\-\(\)]{10,25}$/;
-    }
+        if (!v) {
+            return { valid: false, error: "Поле обязательно для заполнения" };
+        }
+
+        if (v.length < 5) {
+            return { valid: false, error: "Слишком короткое имя" };
+        }
+
+        if (v.length > 60) {
+            return { valid: false, error: "Слишком длинное имя" };
+        }
+
+        if (/[^A-Za-zА-Яа-яЁё\s'-]/.test(v)) {
+            return { valid: false, error: "Допустимы только буквы, пробел, дефис и апостроф" };
+        }
+
+        if (!v.includes(" ")) {
+            return { valid: false, error: "Введите минимум имя и фамилию" };
+        }
+
+        if (/\s{2,}/.test(v)) {
+            return { valid: false, error: "Лишние пробелы" };
+        }
+
+        const parts = v.split(/\s+/);
+
+        if (parts.some(p => p.length < 2)) {
+            return { valid: false, error: "Каждое слово должно быть минимум из двух букв" };
+        }
+
+        return { valid: true };
+    };
+
+    const validateEmail = (value: string | undefined): ValidationResult => {
+        if (typeof value === "undefined") {
+            return { valid: false, error: "Поле обязательно для заполнения" };
+        }
+
+        const v = value.trim();
+
+        if (!v) {
+            return { valid: false, error: "Email обязателен" };
+        }
+
+        if (!v.includes("@")) {
+            return { valid: false, error: "Отсутствует символ @" };
+        }
+
+        if (/\.{2,}/.test(v)) {
+            return { valid: false, error: "Недопустимые двойные точки" };
+        }
+
+        const emailRegex = /^(?=.{1,254}$)(?=.{1,64}@)([A-Za-z0-9._%+-]+)@((?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z]{2,24})$/;
+
+        if (!emailRegex.test(v)) {
+            return { valid: false, error: "Некорректный формат email" };
+        }
+
+        return { valid: true };
+    };
+
+    const validatePhone = (value: string | undefined): ValidationResult => {
+        if (typeof value === "undefined") {
+            return { valid: false, error: "Поле обязательно для заполнения" };
+        }
+
+        const v = value.trim();
+
+        if (!v) {
+            return { valid: false, error: "Телефон обязателен" };
+        }
+
+        if (!/^[+\d]+$/.test(v)) {
+            return { valid: false, error: "Телефон должен содержать только цифры и опционально +" };
+        }
+
+        const digits = v.startsWith("+") ? v.slice(1) : v;
+
+        if (!/^\d+$/.test(digits)) {
+            return { valid: false, error: "После + должны быть только цифры" };
+        }
+
+        if (digits.length < 10) {
+            return { valid: false, error: "Слишком мало цифр в номере" };
+        }
+
+        if (digits.length > 15) {
+            return { valid: false, error: "Слишком много цифр в номере" };
+        }
+
+        return { valid: true };
+    };
 
 
     const sendReview = async (): Promise<boolean> => {
@@ -177,37 +272,127 @@ export default function EventPage() {
                                     <div className="form-group">
                                         <div>
                                             <label className="label-indent inter-light" htmlFor="name"><span className="label-indent-red">*</span>Имя Фамилия</label>
-                                            {/* <span id="nameError" className="error-message unbounded-extra-light">Заполните это поле</span> */}
+                                            <span id="nameError" className="error-message inter-extra-light" ref={errorSpans.fullname}></span>
                                         </div>
-                                        <input className="registration-frame inter-regular" type="text" id="name" name="name" placeholder="Иван Иванов" ref={review.fullname} />
+                                        <input
+                                            className="registration-frame inter-regular"
+                                            type="text"
+                                            id="name"
+                                            name="name"
+                                            placeholder="Иван Иванов"
+                                            ref={review.fullname}
+                                            onFocus={() => {
+                                                review.fullname.current?.classList.remove("error");
+                                            }}
+                                            onBlur={() => {
+                                                const { valid, error } = validateFullname(review.fullname.current?.value);
+
+                                                errorReview.fullname = valid;
+
+                                                if (!valid) {
+                                                    review.fullname.current?.classList.add("error");
+                                                    buttonSubmitReviewRef.current?.classList.add("error");
+                                                    if (errorSpans.fullname.current) {
+                                                        errorSpans.fullname.current.textContent = error || "";
+                                                    }
+                                                    return;
+                                                }
+
+                                                review.fullname.current?.classList.remove("error");
+                                                buttonSubmitReviewRef.current?.classList.remove("error");
+                                                if (errorSpans.fullname.current) {
+                                                    errorSpans.fullname.current.textContent = "";
+                                                }
+                                            }}
+                                        />
                                     </div>
                                     <div className="form-group">
                                         <div>
                                             <label className="label-indent inter-light" htmlFor="email"><span className="label-indent-red">*</span>Электронная почта</label>
-                                            <span id="emailError" className="error-message"></span>
+                                            <span id="emailError" className="error-message inter-extra-light" ref={errorSpans.email}></span>
                                         </div>
-                                        <input className="registration-frame inter-regular" type="email" id="email" name="email" maxLength={100} placeholder="ivanov2000@gmail.com" ref={review.email} />
+                                        <input
+                                            className="registration-frame inter-regular"
+                                            type="email"
+                                            id="email"
+                                            name="email"
+                                            maxLength={100} placeholder="ivanov2000@gmail.com"
+                                            ref={review.email}
+                                            onFocus={() => {
+                                                review.email.current?.classList.remove("error");
+                                            }}
+                                            onBlur={() => {
+                                                const { valid, error } = validateEmail(review.email.current?.value);
+
+                                                errorReview.email = valid;
+
+                                                if (!valid) {
+                                                    review.email.current?.classList.add("error");
+                                                    buttonSubmitReviewRef.current?.classList.add("error");
+                                                    if (errorSpans.email.current) {
+                                                        errorSpans.email.current.textContent = error || "";
+                                                    }
+                                                    return;
+                                                }
+
+                                                review.email.current?.classList.remove("error");
+                                                buttonSubmitReviewRef.current?.classList.remove("error");
+                                                if (errorSpans.email.current) {
+                                                    errorSpans.email.current.textContent = "";
+                                                }
+                                            }}
+                                        />
                                     </div>
 
                                     <div className="form-group">
                                         <div>
                                             <label className="label-indent inter-light" htmlFor="phone"><span className="label-indent-red">*</span>Номер телефона</label>
-                                            <span id="phoneError" className="error-message"></span>
+                                            <span id="phoneError" className="error-message inter-extra-light" ref={errorSpans.phone}></span>
                                         </div>
-                                        <input className="registration-frame inter-regular" type="tel" id="phone" name="phone" maxLength={20} placeholder="+375 (29) 222-22-22" ref={review.phone} />
+                                        <input
+                                            className="registration-frame inter-regular"
+                                            type="tel"
+                                            id="phone"
+                                            name="phone"
+                                            maxLength={20}
+                                            placeholder="+375 (29) 222-22-22"
+                                            ref={review.phone}
+                                            onFocus={() => {
+                                                review.phone.current?.classList.remove("error");
+                                            }}
+                                            onBlur={() => {
+                                                const { valid, error } = validatePhone(review.phone.current?.value);
+
+                                                errorReview.phone = valid;
+
+                                                if (!valid) {
+                                                    review.phone.current?.classList.add("error");
+                                                    buttonSubmitReviewRef.current?.classList.add("error");
+                                                    if (errorSpans.phone.current) {
+                                                        errorSpans.phone.current.textContent = error || "";
+                                                    }
+                                                    return;
+                                                }
+
+                                                review.phone.current?.classList.remove("error");
+                                                buttonSubmitReviewRef.current?.classList.remove("error");
+
+                                                if (errorSpans.phone.current) {
+                                                    errorSpans.phone.current.textContent = "";
+                                                }
+                                            }
+                                            }
+                                        />
                                     </div>
 
                                     <div className="checkbox-group">
                                         <input type="checkbox" id="agree" name="agree" value="true" ref={review.agreement} />
                                         <label htmlFor="agree" className="inter-light">Согласен на обработку данных</label>
-                                        {/* <span id="agreeError" className="error-message"></span> */}
                                     </div>
                                     <button className="btm-buy inter-bold" ref={buttonSubmitReviewRef} onClick={async () => {
                                         const errorKeys: boolean[] = Object.values(errorReview);
-                                        if(errorKeys.includes(true)){
-                                            buttonSubmitReviewRef.current?.disabled;
-                                            return;
-                                        }
+
+                                        if (errorKeys.includes(true)) return;
 
                                         if (await sendReview()) {
                                             dialogWindowRef.current?.showModal();

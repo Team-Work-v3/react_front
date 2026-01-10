@@ -589,7 +589,7 @@ a {
     /* width: 460px; */
 }
 
-.label-indent-red{
+.label-indent-red {
     color: #982520;
     font-size: 15px;
     margin-right: 2px;
@@ -644,6 +644,10 @@ a {
     background-color: #F2F2F2;
     border: none;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+
+    &.error {
+        border: 1px solid #982520;
+    }
 }
 
 label {
@@ -701,7 +705,11 @@ label {
     border-radius: 4px;
     font-size: 24px;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    /* transition: background-color 0.2s ease; */
+
+    &.error {
+        background-color: #8E8E8E;
+    }
 }
 
 .reviews-list {
@@ -800,7 +808,7 @@ label {
     transform: rotate(180deg);
 }
 
-.feedback-container{
+.feedback-container {
     padding-bottom: 45px;
 }
 
@@ -873,7 +881,7 @@ h6.text-little {
     object-position: center;
 }
 
-.to-home-button{
+.to-home-button {
     cursor: pointer;
     text-decoration: underline;
     font-size: 15px;
