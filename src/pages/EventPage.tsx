@@ -181,9 +181,9 @@ export default function EventPage() {
                                         {/* <span id="agreeError" className="error-message"></span> */}
                                     </div>
                                     <button className="btm-buy inter-bold" onClick={() => {
-                                        // dialogWindowRef.current?.showModal();
-                                        // lockScroll();
-                                        sendReview()
+                                        sendReview();
+                                        dialogWindowRef.current?.showModal();
+                                        lockScroll();
                                     }}>Зарегистрироваться</button>
                                 </div>
                             </div>
