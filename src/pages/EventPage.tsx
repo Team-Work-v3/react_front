@@ -15,6 +15,12 @@ export default function EventPage() {
     const [event, setEvent] = useState<IEvent>();
     const { id } = useParams<{ id: string }>();
     const [gallery, setGallery] = useState<string[]>([]);
+    const review = {
+        fullName: useRef<HTMLInputElement | null>(null),
+        email: useRef<HTMLInputElement | null>(null),
+        phone: useRef<HTMLInputElement | null>(null),
+        agreement: useRef<HTMLInputElement | null>(null)
+    };
 
     const location = useLocation();
 
@@ -56,7 +62,6 @@ export default function EventPage() {
 
             setGallery(randomData);
         }
-
         fetchGallery();
     }, []);
 
@@ -77,6 +82,25 @@ export default function EventPage() {
             window.scrollTo(0, 0);
         }
     }, [location]);
+
+    const sendReview = async (): Promise<void> => {
+        console.log(review)
+        const response = await fetch("http://62.109.16.129:5000/api/regUser", {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                id_event: id,
+                full_name: review.fullName.current?.value,
+                email: review.email.current?.value,
+                phone_number: review.phone.current?.value,
+                agreement: review.agreement.current?.checked ? 1 : 0
+            })
+        });
+
+        const data = await response.json();
+        console.log(data);
+    }
 
     return (
         <>
@@ -133,14 +157,14 @@ export default function EventPage() {
                                             <label className="label-indent inter-light" htmlFor="name"><span className="label-indent-red">*</span>Имя Фамилия</label>
                                             {/* <span id="nameError" className="error-message unbounded-extra-light">Заполните это поле</span> */}
                                         </div>
-                                        <input className="registration-frame inter-regular" type="text" id="name" name="name" maxLength={50} placeholder="Иван Иванов" />
+                                        <input className="registration-frame inter-regular" type="text" id="name" name="name" maxLength={50} placeholder="Иван Иванов" ref={review.fullName} />
                                     </div>
                                     <div className="form-group">
                                         <div>
                                             <label className="label-indent inter-light" htmlFor="email"><span className="label-indent-red">*</span>Электронная почта</label>
                                             <span id="emailError" className="error-message"></span>
                                         </div>
-                                        <input className="registration-frame inter-regular" type="email" id="email" name="email" maxLength={100} placeholder="ivanov2000@gmail.com" />
+                                        <input className="registration-frame inter-regular" type="email" id="email" name="email" maxLength={100} placeholder="ivanov2000@gmail.com" ref={review.email} />
                                     </div>
 
                                     <div className="form-group">
@@ -148,17 +172,18 @@ export default function EventPage() {
                                             <label className="label-indent inter-light" htmlFor="phone"><span className="label-indent-red">*</span>Номер телефона</label>
                                             <span id="phoneError" className="error-message"></span>
                                         </div>
-                                        <input className="registration-frame inter-regular" type="tel" id="phone" name="phone" maxLength={20} placeholder="+375 (29) 222-22-22" />
+                                        <input className="registration-frame inter-regular" type="tel" id="phone" name="phone" maxLength={20} placeholder="+375 (29) 222-22-22" ref={review.phone} />
                                     </div>
 
                                     <div className="checkbox-group">
-                                        <input type="checkbox" id="agree" name="agree" />
+                                        <input type="checkbox" id="agree" name="agree" value="true" ref={review.agreement} />
                                         <label htmlFor="agree" className="inter-light">Согласен на обработку данных</label>
                                         {/* <span id="agreeError" className="error-message"></span> */}
                                     </div>
                                     <button className="btm-buy inter-bold" onClick={() => {
-                                        dialogWindowRef.current?.showModal();
-                                        lockScroll();
+                                        // dialogWindowRef.current?.showModal();
+                                        // lockScroll();
+                                        sendReview()
                                     }}>Зарегистрироваться</button>
                                 </div>
                             </div>
