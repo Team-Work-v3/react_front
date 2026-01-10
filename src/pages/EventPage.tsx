@@ -24,11 +24,11 @@ export default function EventPage() {
         agreement: useRef<HTMLInputElement | null>(null)
     };
 
-    const errorReview = {
+    const [validationErrors, setValidationErrors] = useState({
         fullname: true,
         email: true,
         phone: true
-    };
+    });
 
     const errorSpans = {
         fullname: useRef<HTMLSpanElement | null>(null),
@@ -42,6 +42,17 @@ export default function EventPage() {
     const buttonSubmitReviewRef = useRef<HTMLButtonElement | null>(null);
 
     const { lockScroll, unlockScroll } = useScrollLock();
+
+    const updateValidationStatus = (field: keyof typeof validationErrors, isValid: boolean) => {
+        setValidationErrors(prev => ({
+            ...prev,
+            [field]: isValid
+        }));
+    };
+
+    const isFormValid = () => {
+        return Object.values(validationErrors).every(error => error === true);
+    };
 
     useEffect(() => {
         const fetchEvents = async (): Promise<void> => {
@@ -287,11 +298,10 @@ export default function EventPage() {
                                             onBlur={() => {
                                                 const { valid, error } = validateFullname(review.fullname.current?.value);
 
-                                                errorReview.fullname = valid;
+                                                updateValidationStatus("fullname", valid);
 
                                                 if (!valid) {
                                                     review.fullname.current?.classList.add("error");
-                                                    buttonSubmitReviewRef.current?.classList.add("error");
                                                     if (errorSpans.fullname.current) {
                                                         errorSpans.fullname.current.textContent = error || "";
                                                     }
@@ -299,11 +309,6 @@ export default function EventPage() {
                                                 }
 
                                                 review.fullname.current?.classList.remove("error");
-                                                if (Object.values(errorReview).includes(true)) {
-                                                    buttonSubmitReviewRef.current?.classList.add("error");
-                                                } else {
-                                                    buttonSubmitReviewRef.current?.classList.remove("error");
-                                                }
                                                 if (errorSpans.fullname.current) {
                                                     errorSpans.fullname.current.textContent = "";
                                                 }
@@ -328,11 +333,10 @@ export default function EventPage() {
                                             onBlur={() => {
                                                 const { valid, error } = validateEmail(review.email.current?.value);
 
-                                                errorReview.email = valid;
+                                                updateValidationStatus("email", valid);
 
                                                 if (!valid) {
                                                     review.email.current?.classList.add("error");
-                                                    buttonSubmitReviewRef.current?.classList.add("error");
                                                     if (errorSpans.email.current) {
                                                         errorSpans.email.current.textContent = error || "";
                                                     }
@@ -340,11 +344,6 @@ export default function EventPage() {
                                                 }
 
                                                 review.email.current?.classList.remove("error");
-                                                if (Object.values(errorReview).includes(true)) {
-                                                    buttonSubmitReviewRef.current?.classList.add("error");
-                                                } else {
-                                                    buttonSubmitReviewRef.current?.classList.remove("error");
-                                                }
                                                 if (errorSpans.email.current) {
                                                     errorSpans.email.current.textContent = "";
                                                 }
@@ -371,11 +370,10 @@ export default function EventPage() {
                                             onBlur={() => {
                                                 const { valid, error } = validatePhone(review.phone.current?.value);
 
-                                                errorReview.phone = valid;
+                                                updateValidationStatus("phone", valid);
 
                                                 if (!valid) {
                                                     review.phone.current?.classList.add("error");
-                                                    buttonSubmitReviewRef.current?.classList.add("error");
                                                     if (errorSpans.phone.current) {
                                                         errorSpans.phone.current.textContent = error || "";
                                                     }
@@ -383,11 +381,6 @@ export default function EventPage() {
                                                 }
 
                                                 review.phone.current?.classList.remove("error");
-                                                if (Object.values(errorReview).includes(true)) {
-                                                    buttonSubmitReviewRef.current?.classList.add("error");
-                                                } else {
-                                                    buttonSubmitReviewRef.current?.classList.remove("error");
-                                                }
                                                 if (errorSpans.phone.current) {
                                                     errorSpans.phone.current.textContent = "";
                                                 }
@@ -400,8 +393,8 @@ export default function EventPage() {
                                         <input type="checkbox" id="agree" name="agree" value="true" ref={review.agreement} />
                                         <label htmlFor="agree" className="inter-light">Согласен на обработку данных</label>
                                     </div>
-                                    <button className="btm-buy inter-bold" ref={buttonSubmitReviewRef} onClick={async () => {
-                                        if (Object.values(errorReview).includes(true)) return;
+                                    <button className={`btm-buy inter-bold ${!isFormValid() ? 'error' : ''}`} ref={buttonSubmitReviewRef} onClick={async () => {
+                                        if (!isFormValid()) return;
 
                                         if (await sendReview()) {
                                             dialogWindowRef.current?.showModal();
