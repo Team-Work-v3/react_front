@@ -30,11 +30,10 @@ export default function MainPage() {
         }
 
         let eventsCopy = [...events];
-        console.log("1 ", eventsCopy);
+        
         eventsCopy = eventsCopy.filter(event =>
             event.name_event.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
         );
-        console.log("2 ", eventsCopy);
 
         switch (sorting) {
             case SortingName.Nearest:

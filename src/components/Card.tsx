@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import type { IEventReduced } from "../models/event.interface";
 
 export default function Card({ event }: { event: IEventReduced }) {
+    console.log(event)
     return (
         <article className="event-item">
             <div className="event-left">
