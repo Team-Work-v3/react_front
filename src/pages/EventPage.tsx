@@ -250,13 +250,17 @@ export default function EventPage() {
                             <h1 className="text-big unbounded-regular" id="text-indentation">{event?.name_event}</h1>
                             <div className="block-frome">
                                 <a className="frome text-little unbounded-regular">{event?.date_event.split("-").reverse().join(".")}</a>
-                                <a className="frome unbounded-regular">{event?.time_event}</a>
+                                <a className="frome text-little unbounded-regular">{event?.time_event}</a>
+                                <a className="frome text-little unbounded-regular">{event?.event_category}</a>
                             </div>
                             <p className="text-medium inter-regular" id="indent">{event?.description_event}</p>
                         </div>
-                        <Link to="#registration">
-                            <button className="btn text-medium inter-medium">Записаться</button>
-                        </Link>
+                        <nav>
+                            <span className="unbounded-regular text-medium">{event?.price_event}руб</span>
+                            <Link to="#registration">
+                                <button className="btn text-medium inter-medium">Записаться</button>
+                            </Link>
+                        </nav>
                     </div>
                 </div>
                 <div className="description-conteiner">

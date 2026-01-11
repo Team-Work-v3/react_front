@@ -5,6 +5,9 @@ import Wrapper from "../components/Wrapper";
 import Footer from "../components/Footer";
 import { useEffect, useMemo, useRef, useState } from "react";
 import SortList from "../components/SortList";
+import { useScrollLock } from "../hooks/useScrollLock";
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
 
 export default function MainPage() {
     const [events, setEvents] = useState<IEventReduced[]>([]);
@@ -12,6 +15,10 @@ export default function MainPage() {
     const [searchQuery, setSearchQuery] = useState<string>("");
 
     const dialogWindowFilterRef = useRef<HTMLDialogElement | null>(null);
+
+    const { lockScroll, unlockScroll } = useScrollLock();
+
+    const [value, setValue] = useState<number[]>([20, 37]);
 
     useEffect(() => {
         const fetchEvents = async (): Promise<void> => {
@@ -30,7 +37,7 @@ export default function MainPage() {
         }
 
         let eventsCopy = [...events];
-        
+
         eventsCopy = eventsCopy.filter(event =>
             event.name_event.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
         );
@@ -53,6 +60,10 @@ export default function MainPage() {
                 return eventsCopy;
         }
     }, [events, sorting, searchQuery]);
+
+    const handleChange = (event: Event, newValue: number[]) => {
+        setValue(newValue);
+    };
 
     return (
         <main className="main">
@@ -91,7 +102,7 @@ export default function MainPage() {
                             </div>
                         </div>
                         <div className="buttons-block">
-                            <button className="main-filter unbounded-regular" onClick={() => dialogWindowFilterRef.current?.showModal()}>
+                            <button className="main-filter unbounded-regular" onClick={() => { dialogWindowFilterRef.current?.showModal(); lockScroll(); }}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                                     <path d="M1 1H14.3333V2.81C14.3332 3.25199 14.1576 3.67585 13.845 3.98833L10.1667 7.66667V13.5L5.16667 15.1667V8.08333L1.43333 3.97667C1.15454 3.66994 1.00004 3.27033 1 2.85583V1Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
@@ -122,10 +133,24 @@ export default function MainPage() {
                     </div>
                 </Wrapper>
             </section>
-            <dialog className="dialog-window" ref={dialogWindowFilterRef}>
+            <dialog className="dialog-window-filter" ref={dialogWindowFilterRef}>
                 <div className="dialog-window-filter-conteiner">
                     <div className="dialog-window-filter-content">
-
+                        <span>Фильтры</span>
+                        <span>Цена</span>
+                        <Box sx={{ width: 264 }}>
+                            <Slider
+                                getAriaLabel={() => 'Temperature range'}
+                                value={value}
+                                onChange={handleChange}
+                                valueLabelDisplay="auto"
+                            />
+                        </Box>
+                        <span>Бесплатно</span>
+                        <span>Дата</span>
+                        <span>Категории</span>
+                        <button onClick={() => { dialogWindowFilterRef.current?.close(); unlockScroll(); }}>Показать</button>
+                        <button onClick={() => { dialogWindowFilterRef.current?.close(); unlockScroll(); }}>Отвенить</button>
                     </div>
                 </div>
             </dialog>
