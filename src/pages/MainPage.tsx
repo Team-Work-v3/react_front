@@ -3,13 +3,14 @@ import { SortingName } from "../models/sorting.enum";
 import Card from "../components/Card";
 import Wrapper from "../components/Wrapper";
 import Footer from "../components/Footer";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import SortList from "../components/SortList";
 
 export default function MainPage() {
     const [events, setEvents] = useState<IEventReduced[]>([]);
     const [sorting, setSorting] = useState<string>(SortingName.Nearest);
     const [searchQuery, setSearchQuery] = useState<string>("");
+    const dialogWindowFilterRef = useRef<HTMLDialogElement | null>(null);
 
     useEffect(() => {
         const fetchEvents = async (): Promise<void> => {
@@ -89,7 +90,7 @@ export default function MainPage() {
                             </div>
                         </div>
                         <div className="buttons-block">
-                            <button className="main-filter unbounded-regular">
+                            <button className="main-filter unbounded-regular" onClick={() => dialogWindowFilterRef.current?.showModal()}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                                     <path d="M1 1H14.3333V2.81C14.3332 3.25199 14.1576 3.67585 13.845 3.98833L10.1667 7.66667V13.5L5.16667 15.1667V8.08333L1.43333 3.97667C1.15454 3.66994 1.00004 3.27033 1 2.85583V1Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
@@ -120,6 +121,13 @@ export default function MainPage() {
                     </div>
                 </Wrapper>
             </section>
+            <dialog className="dialog-window" ref={dialogWindowFilterRef}>
+                <div className="dialog-window-filter-conteiner">
+                    <div className="dialog-window-filter-content">
+
+                    </div>
+                </div>
+            </dialog>
             <Footer />
         </main >
     );

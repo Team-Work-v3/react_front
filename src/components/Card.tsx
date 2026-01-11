@@ -12,7 +12,7 @@ export default function Card({ event }: { event: IEventReduced }) {
                     <div>
                         <p className="special unbounded-regular">{event.date_event.split("-").reverse().join(".")}</p>
                         <p className="special unbounded-regular">{event.time_event}</p>
-                        <p className="special unbounded-regular">Мастер-класс</p>
+                        <p className="special unbounded-regular">{event.event_category}</p>
                     </div>
                 </div>
                 <div className="event-left-down">
