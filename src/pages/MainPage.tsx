@@ -63,6 +63,7 @@ export default function MainPage() {
 
     const handleChange = (event: Event, newValue: number[]) => {
         setValue(newValue);
+        void event;
     };
 
     return (
