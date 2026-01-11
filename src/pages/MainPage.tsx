@@ -10,6 +10,7 @@ export default function MainPage() {
     const [events, setEvents] = useState<IEventReduced[]>([]);
     const [sorting, setSorting] = useState<string>(SortingName.Nearest);
     const [searchQuery, setSearchQuery] = useState<string>("");
+
     const dialogWindowFilterRef = useRef<HTMLDialogElement | null>(null);
 
     useEffect(() => {
@@ -29,10 +30,11 @@ export default function MainPage() {
         }
 
         let eventsCopy = [...events];
-
+        console.log("1 ", eventsCopy);
         eventsCopy = eventsCopy.filter(event =>
             event.name_event.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
         );
+        console.log("2 ", eventsCopy);
 
         switch (sorting) {
             case SortingName.Nearest:
