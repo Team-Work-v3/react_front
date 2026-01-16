@@ -13,6 +13,8 @@ import { useScrollLock } from "../hooks/useScrollLock";
 import type { ValidationResult } from "../models/validation-result.interface";
 
 export default function EventPage() {
+    // const mail_api_key = import.meta.env.VITE_MAIL_API_KEY || "";
+
     const [event, setEvent] = useState<IEvent>();
     const { id } = useParams<{ id: string }>();
     const [gallery, setGallery] = useState<string[]>([]);
@@ -40,6 +42,7 @@ export default function EventPage() {
 
     const dialogWindowRef = useRef<HTMLDialogElement | null>(null);
     const buttonSubmitReviewRef = useRef<HTMLButtonElement | null>(null);
+    const formRegistrationRef = useRef<HTMLFormElement | null>(null);
 
     const { lockScroll, unlockScroll } = useScrollLock();
 
@@ -209,7 +212,6 @@ export default function EventPage() {
         return { valid: true };
     };
 
-
     const sendReview = async (): Promise<boolean> => {
         const response = await fetch("http://62.109.16.129:5000/api/regUser", {
             method: "POST",
@@ -229,6 +231,24 @@ export default function EventPage() {
         if (data.message === "success") return true;
         return false;
     }
+
+    const sendMail = async (event: HTMLFormElement) => {
+        event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+        formData.append("access_key", "34a03d0d-4573-4096-b24c-c56a65f4a0f8");
+
+        const response = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+        if (data.success) {
+            console.log("The form has been submitted")
+        } else {
+            console.error("An error has occurred. The form has not been submitted");
+        }
+    };
 
     return (
         <>
@@ -283,7 +303,7 @@ export default function EventPage() {
                             {/* <div className="form-container"> */}
                             <div className="form-box">
                                 <h1 className="text-big inter-semi-bold" id="registration-text">Регистрация</h1>
-                                <div className="form-registration">
+                                <form className="form-registration" ref={formRegistrationRef}>
                                     <div className="form-group">
                                         <div>
                                             <label className="label-indent inter-light" htmlFor="name"><span className="label-indent-red">*</span>Имя Фамилия</label>
@@ -364,7 +384,7 @@ export default function EventPage() {
                                             className="registration-frame inter-regular"
                                             type="tel"
                                             id="phone"
-                                            name="phone"
+                                            // name="phone"
                                             maxLength={20}
                                             placeholder="+375 (29) 222-22-22"
                                             ref={review.phone}
@@ -394,20 +414,27 @@ export default function EventPage() {
                                     </div>
 
                                     <div className="checkbox-group">
-                                        <input type="checkbox" id="agree" name="agree" value="true" ref={review.agreement} />
+                                        {/* name="agree" */}
+                                        <input type="checkbox" id="agree" value="true" ref={review.agreement} />
                                         <label htmlFor="agree" className="inter-light">Согласен на обработку данных</label>
                                     </div>
-                                    <button className={`btm-buy inter-bold ${!isFormValid() ? 'error' : ''}`} ref={buttonSubmitReviewRef} onClick={async () => {
-                                        if (!isFormValid()) return;
+                                    <textarea hidden value={`Здравствуйте ${review.fullname.current?.value}, вы записались на мероприятие «${event?.name_event}». Дата мероприятия: ${event?.date_event}. Время проведения: ${event?.time_event}`} name="message"></textarea>
+                                    <input type="hidden" name="access_key" value="34a03d0d-4573-4096-b24c-c56a65f4a0f8"></input>
+                                    <button type="button" className={`btm-buy inter-bold ${!isFormValid() ? 'error' : ''}`} ref={buttonSubmitReviewRef}
+                                        onClick={async () => {
+                                            if (!isFormValid()) return;
 
-                                        if (await sendReview()) {
-                                            dialogWindowRef.current?.showModal();
-                                            lockScroll();
-                                            return;
-                                        }
+                                            if (await sendReview()) {
+                                                dialogWindowRef.current?.showModal();
+                                                if (formRegistrationRef.current !== null) {
+                                                    sendMail(formRegistrationRef.current);
+                                                }
+                                                lockScroll();
+                                                return;
+                                            }
 
-                                    }}>Зарегистрироваться</button>
-                                </div>
+                                        }}>Зарегистрироваться</button>
+                                </form>
                             </div>
                             {/* </div> */}
                         </div>
@@ -492,7 +519,11 @@ export default function EventPage() {
                         <img src="http://62.109.16.129:5000/index/registration.png" alt="image" className="dialog-image" />
                         <span className="unbounded-medium dialog-window-heading">Спасибо за регистрацию</span>
                         <span className="inter-regular dialog-window-text">Скоро вам придёт сообщение на почту</span>
-                        <button className="inter-medium dialog-window-button btn" onClick={() => { unlockScroll(); window.location.href = "/"; }}>Всё понятно</button>
+                        <button className="inter-medium dialog-window-button btn"
+                            onClick={() => {
+                                unlockScroll();
+                                window.location.href = "/";
+                            }}>Всё понятно</button>
                     </div>
                 </div>
             </dialog >
