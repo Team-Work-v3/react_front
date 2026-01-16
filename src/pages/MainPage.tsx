@@ -69,10 +69,6 @@ export default function MainPage() {
         setCategory(next);
     }, [events]);
 
-    useEffect(() => {
-        console.log(category);
-    }, [category]);
-
     // const handleChange = (event: Event, newValue: number[]) => {
     //     setValue(newValue);
     //     void event;
@@ -196,10 +192,12 @@ export default function MainPage() {
                         <div className="dialog-window-filter-conteiner-for">
                             <span className="unbounded-regular dialog-window-filter-subtext">Категории</span>
                             <div className="dialog-window-filter-conteiner-for spans unbounded-regular">
-                                <span className="special">sdf</span>
-                                <span className="special">sdf</span>
-                                <span className="special">sdf</span>
-                                <span className="special">sdf</span>
+                                {Array.from(category).map((value, index) => (
+                                    <label className="dialog-window-filter-checkbox-category active" key={index}>
+                                        <input type="checkbox" className="dialog-window-filter-checkbox-category-input" />
+                                        {value}
+                                    </label>
+                                ))}
                             </div>
                         </div>
                         <div className="dialog-window-filter-conteiner-buttons">

@@ -1057,3 +1057,23 @@ h6.text-little {
     -webkit-appearance: none;
     -moz-appearance: textfield;
 }
+
+
+.dialog-window-filter-checkbox-category {
+    border: 2px solid #d9d9d9;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    user-select: none;
+    color: #00000036;
+    transition: all 0.2s ease;
+
+    &.active {
+        border-color: #00000036;
+        color: #000;
+    }
+}
+
+.dialog-window-filter-checkbox-category input {
+    display: none;
+}
