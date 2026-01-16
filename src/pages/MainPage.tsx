@@ -25,12 +25,12 @@ export default function MainPage() {
 
     const [draftFilters, setDraftFilters] = useState<Filters>({
         isFree: false,
-        categories: new Set(category),
+        categories: new Set(),
     });
 
     const [appliedFilters, setAppliedFilters] = useState<Filters>({
         isFree: false,
-        categories: new Set(category),
+        categories: new Set(),
     });
 
     const handleApplyFilters = () => {
@@ -72,6 +72,15 @@ export default function MainPage() {
         }
         fetchEvents();
     }, []);
+
+    useEffect(() => {
+        const next = new Set<string>();
+        events.forEach(event => next.add(event.event_category));
+        setCategory(next);
+
+        setDraftFilters(prev => ({ ...prev, categories: next }));
+        setAppliedFilters(prev => ({ ...prev, categories: next }));
+    }, [events]);
 
     const sortAndFilterEvents = useMemo(() => {
         if (!Array.isArray(events) || events.length === 0) {
@@ -148,12 +157,6 @@ export default function MainPage() {
                 return eventsCopy;
         }
     }, [events, appliedFilters, sorting, searchQuery]);
-
-    useEffect(() => {
-        const next = new Set<string>();
-        events.forEach(event => next.add(event.event_category));
-        setCategory(next);
-    }, [events]);
 
     // const handleChange = (event: Event, newValue: number[]) => {
     //     setValue(newValue);
@@ -367,10 +370,9 @@ export default function MainPage() {
                                             type="checkbox"
                                             className="dialog-window-filter-checkbox-category-input"
                                             value={value}
-                                            onClick={() => {
-                                                const next = new Set(
-                                                    draftFilters.categories
-                                                );
+                                            checked={draftFilters.categories.has(value)}
+                                            onChange={() => {
+                                                const next = new Set(draftFilters.categories);
 
                                                 if (next.has(value)) {
                                                     next.delete(value);
