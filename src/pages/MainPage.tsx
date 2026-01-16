@@ -223,7 +223,7 @@ export default function MainPage() {
                                     <div className="event-none">
                                         <span className="unbounded-bold">Мероприятия не найдены</span>
                                         <span className="unbounded-regular">Попробуйте очистить поиск</span>
-                                        <button className="unbounded-medium" onClick={() => setSearchQuery("")}>Очистить</button>
+                                        <button className="unbounded-medium" onClick={() => { setSearchQuery(""); clearFilters(); }}>Очистить</button>
                                     </div>
                                 </div>
                             )
