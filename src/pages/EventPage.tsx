@@ -14,7 +14,8 @@ import type { ValidationResult } from "../models/validation-result.interface";
 
 export default function EventPage() {
     // const mail_api_key = import.meta.env.VITE_MAIL_API_KEY || "";
-
+    const mail_api_key = "34a03d0d-4573-4096-b24c-c56a65f4a0f8";
+    
     const [event, setEvent] = useState<IEvent>();
     const { id } = useParams<{ id: string }>();
     const [gallery, setGallery] = useState<string[]>([]);
@@ -233,9 +234,8 @@ export default function EventPage() {
     }
 
     const sendMail = async (event: HTMLFormElement) => {
-        event.preventDefault();
-        const formData = new FormData(event.currentTarget);
-        formData.append("access_key", "34a03d0d-4573-4096-b24c-c56a65f4a0f8");
+        const formData = new FormData(event);
+        formData.append("access_key", mail_api_key);
 
         const response = await fetch("https://api.web3forms.com/submit", {
             method: "POST",
@@ -243,6 +243,7 @@ export default function EventPage() {
         });
 
         const data = await response.json();
+        
         if (data.success) {
             console.log("The form has been submitted")
         } else {
