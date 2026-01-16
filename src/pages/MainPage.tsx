@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import { useEffect, useMemo, useRef, useState } from "react";
 import SortList from "../components/SortList";
 import { useScrollLock } from "../hooks/useScrollLock";
+import type { Filters } from "../models/filters.interface";
 // import Box from '@mui/material/Box';
 // import Slider from '@mui/material/Slider';
 
@@ -21,6 +22,11 @@ export default function MainPage() {
     const { lockScroll, unlockScroll } = useScrollLock();
 
     // const [value, setValue] = useState<number[]>([20, 37]);
+
+    const [filters, setFilters] = useState<Filters>({
+        isFree: false,
+        categories: new Set(),
+    });
 
     useEffect(() => {
         const fetchEvents = async (): Promise<void> => {
@@ -44,6 +50,44 @@ export default function MainPage() {
             event.name_event.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
         );
 
+        eventsCopy = eventsCopy.filter(event =>
+            filters.isFree ? event.price_event === 0 : true
+        );
+
+        eventsCopy = eventsCopy.filter(e =>
+            filters.priceFrom !== undefined
+                ? e.price_event >= filters.priceFrom
+                : true
+        );
+
+        eventsCopy = eventsCopy.filter(e =>
+            filters.priceTo !== undefined
+                ? e.price_event <= filters.priceTo
+                : true
+        );
+
+        eventsCopy = eventsCopy.filter(e =>
+            filters.dateFrom ? e.date_event >= filters.dateFrom : true
+        );
+
+        eventsCopy = eventsCopy.filter(e =>
+            filters.dateTo ? e.date_event <= filters.dateTo : true
+        );
+
+        eventsCopy = eventsCopy.filter(e =>
+            filters.timeFrom ? e.time_event >= filters.timeFrom : true
+        );
+
+        eventsCopy = eventsCopy.filter(e =>
+            filters.timeTo ? e.time_event <= filters.timeTo : true
+        );
+
+        eventsCopy = eventsCopy.filter(e =>
+            filters.categories.size > 0
+                ? filters.categories.has(e.event_category)
+                : true
+        );
+
         switch (sorting) {
             case SortingName.Nearest:
                 return eventsCopy.sort((a, b) => {
@@ -61,7 +105,7 @@ export default function MainPage() {
             default:
                 return eventsCopy;
         }
-    }, [events, sorting, searchQuery]);
+    }, [events, filters, sorting, searchQuery]);
 
     useEffect(() => {
         const next = new Set<string>();
@@ -151,8 +195,36 @@ export default function MainPage() {
                             <div className="dialog-window-filter-conteiner-grid">
                                 <span className="unbounded-light dialog-window-filter-minitext">от</span>
                                 <span className="unbounded-light dialog-window-filter-minitext">до</span>
-                                <input type="number" className="unbounded-regular dialog-window-filter-input" placeholder="0" />
-                                <input type="number" className="unbounded-regular dialog-window-filter-input" placeholder="100" />
+                                <input
+                                    type="number"
+                                    className="unbounded-regular dialog-window-filter-input"
+                                    placeholder="0"
+                                    disabled={filters.isFree}
+                                    value={filters.priceFrom ?? ""}
+                                    onChange={e =>
+                                        setFilters({
+                                            ...filters,
+                                            priceFrom: e.target.value
+                                                ? Number(e.target.value)
+                                                : undefined,
+                                        })
+                                    }
+                                />
+                                <input
+                                    type="number"
+                                    className="unbounded-regular dialog-window-filter-input"
+                                    placeholder="100"
+                                    disabled={filters.isFree}
+                                    value={filters.priceTo ?? ""}
+                                    onChange={e =>
+                                        setFilters({
+                                            ...filters,
+                                            priceTo: e.target.value
+                                                ? Number(e.target.value)
+                                                : undefined,
+                                        })
+                                    }
+                                />
                             </div>
                         </div>
                         {/* <Box sx={{ width: 264 }}>
@@ -166,7 +238,19 @@ export default function MainPage() {
                         <div className="dialog-window-filter-conteiner-for row">
                             <span className="unbounded-regular dialog-window-filter-subtext">Бесплатно</span>
                             <label className="dialog-window-filter-checkbox-free">
-                                <input type="checkbox" className="dialog-window-filter-checkbox-input" />
+                                <input
+                                    type="checkbox"
+                                    className="dialog-window-filter-checkbox-input"
+                                    checked={filters.isFree}
+                                    onChange={e =>
+                                        setFilters({
+                                            ...filters,
+                                            isFree: e.target.checked,
+                                            priceFrom: undefined,
+                                            priceTo: undefined,
+                                        })
+                                    }
+                                />
                                 <span className="dialog-window-filter-checkbox-slider" />
                             </label>
                         </div>
@@ -175,8 +259,28 @@ export default function MainPage() {
                             <div className="dialog-window-filter-conteiner-grid">
                                 <span className="unbounded-light dialog-window-filter-minitext">от</span>
                                 <span className="unbounded-light dialog-window-filter-minitext">до</span>
-                                <input type="date" className="unbounded-regular dialog-window-filter-input" />
-                                <input type="date" className="unbounded-regular dialog-window-filter-input" />
+                                <input
+                                    type="date"
+                                    className="unbounded-regular dialog-window-filter-input"
+                                    value={filters.dateFrom ?? ""}
+                                    onChange={e =>
+                                        setFilters({
+                                            ...filters,
+                                            dateFrom: e.target.value || undefined,
+                                        })
+                                    }
+                                />
+                                <input
+                                    type="date"
+                                    className="unbounded-regular dialog-window-filter-input"
+                                    value={filters.dateTo ?? ""}
+                                    onChange={e =>
+                                        setFilters({
+                                            ...filters,
+                                            dateTo: e.target.value || undefined,
+                                        })
+                                    }
+                                />
                             </div>
                         </div>
 
@@ -185,16 +289,53 @@ export default function MainPage() {
                             <div className="dialog-window-filter-conteiner-grid">
                                 <span className="unbounded-light dialog-window-filter-minitext">с</span>
                                 <span className="unbounded-light dialog-window-filter-minitext">по</span>
-                                <input type="time" className="unbounded-regular dialog-window-filter-input" />
-                                <input type="time" className="unbounded-regular dialog-window-filter-input" />
+                                <input
+                                    type="time"
+                                    className="unbounded-regular dialog-window-filter-input"
+                                    value={filters.timeFrom ?? ""}
+                                    onChange={e =>
+                                        setFilters({
+                                            ...filters,
+                                            timeFrom: e.target.value || undefined,
+                                        })
+                                    }
+                                />
+                                <input type="time"
+                                    className="unbounded-regular dialog-window-filter-input"
+                                    value={filters.timeTo ?? ""}
+                                    onChange={e =>
+                                        setFilters({
+                                            ...filters,
+                                            timeTo: e.target.value || undefined,
+                                        })
+                                    }
+                                />
                             </div>
                         </div>
                         <div className="dialog-window-filter-conteiner-for">
                             <span className="unbounded-regular dialog-window-filter-subtext">Категории</span>
                             <div className="dialog-window-filter-conteiner-for spans unbounded-regular">
                                 {Array.from(category).map((value, index) => (
-                                    <label className="dialog-window-filter-checkbox-category active" key={index}>
-                                        <input type="checkbox" className="dialog-window-filter-checkbox-category-input" />
+                                    <label className={`dialog-window-filter-checkbox-category ${filters.categories.has(value) ? "active" : ""}`} key={index}>
+                                        <input
+                                            type="checkbox"
+                                            className="dialog-window-filter-checkbox-category-input"
+                                            value={value}
+                                            onClick={() => {
+                                                const next = new Set(filters.categories);
+
+                                                if (next.has(value)) {
+                                                    next.delete(value);
+                                                } else {
+                                                    next.add(value);
+                                                }
+
+                                                setFilters({
+                                                    ...filters,
+                                                    categories: next,
+                                                });
+                                            }}
+                                        />
                                         {value}
                                     </label>
                                 ))}
@@ -202,7 +343,7 @@ export default function MainPage() {
                         </div>
                         <div className="dialog-window-filter-conteiner-buttons">
                             <button className="inter-medium dialog-window-filter-button red" onClick={() => { dialogWindowFilterRef.current?.close(); unlockScroll(); }}>Показать</button>
-                            <button className="inter-medium dialog-window-filter-button white" onClick={() => { dialogWindowFilterRef.current?.close(); unlockScroll(); }}>Отвенить</button>
+                            <button className="inter-medium dialog-window-filter-button white" onClick={() => { dialogWindowFilterRef.current?.close(); unlockScroll(); }}>Отменить</button>
                         </div>
                     </div>
                 </div>
@@ -211,6 +352,3 @@ export default function MainPage() {
         </main >
     );
 }
-
-
-//react-multi-carousel
