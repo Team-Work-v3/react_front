@@ -15,7 +15,7 @@ import type { ValidationResult } from "../models/validation-result.interface";
 export default function EventPage() {
     // const mail_api_key = import.meta.env.VITE_MAIL_API_KEY || "";
     const mail_api_key = "34a03d0d-4573-4096-b24c-c56a65f4a0f8";
-    
+
     const [event, setEvent] = useState<IEvent>();
     const { id } = useParams<{ id: string }>();
     const [gallery, setGallery] = useState<string[]>([]);
@@ -44,6 +44,7 @@ export default function EventPage() {
     const dialogWindowRef = useRef<HTMLDialogElement | null>(null);
     const buttonSubmitReviewRef = useRef<HTMLButtonElement | null>(null);
     const formRegistrationRef = useRef<HTMLFormElement | null>(null);
+    const textareaMessageRef = useRef<HTMLTextAreaElement | null>(null);
 
     const { lockScroll, unlockScroll } = useScrollLock();
 
@@ -243,7 +244,6 @@ export default function EventPage() {
         });
 
         const data = await response.json();
-        
         if (data.success) {
             console.log("The form has been submitted")
         } else {
@@ -419,17 +419,19 @@ export default function EventPage() {
                                         <input type="checkbox" id="agree" value="true" ref={review.agreement} />
                                         <label htmlFor="agree" className="inter-light">Согласен на обработку данных</label>
                                     </div>
-                                    <textarea hidden value={`Здравствуйте ${review.fullname.current?.value}, вы записались на мероприятие «${event?.name_event}». Дата мероприятия: ${event?.date_event}. Время проведения: ${event?.time_event}`} name="message"></textarea>
-                                    <input type="hidden" name="access_key" value="34a03d0d-4573-4096-b24c-c56a65f4a0f8"></input>
+                                    <textarea ref={textareaMessageRef} hidden name="message"></textarea>
                                     <button type="button" className={`btm-buy inter-bold ${!isFormValid() ? 'error' : ''}`} ref={buttonSubmitReviewRef}
                                         onClick={async () => {
+                                            if (textareaMessageRef.current !== null) {
+                                                textareaMessageRef.current.value = `Здравствуйте ${review.fullname.current?.value}, вы записались на мероприятие «${event?.name_event}». Дата мероприятия: ${event?.date_event}. Время проведения: ${event?.time_event}`;
+                                            }
+                                            if (formRegistrationRef.current !== null) {
+                                                sendMail(formRegistrationRef.current);
+                                            }
                                             if (!isFormValid()) return;
 
                                             if (await sendReview()) {
                                                 dialogWindowRef.current?.showModal();
-                                                if (formRegistrationRef.current !== null) {
-                                                    sendMail(formRegistrationRef.current);
-                                                }
                                                 lockScroll();
                                                 return;
                                             }
