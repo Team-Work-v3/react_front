@@ -6,19 +6,21 @@ import Footer from "../components/Footer";
 import { useEffect, useMemo, useRef, useState } from "react";
 import SortList from "../components/SortList";
 import { useScrollLock } from "../hooks/useScrollLock";
-import Box from '@mui/material/Box';
-import Slider from '@mui/material/Slider';
+// import Box from '@mui/material/Box';
+// import Slider from '@mui/material/Slider';
 
 export default function MainPage() {
     const [events, setEvents] = useState<IEventReduced[]>([]);
     const [sorting, setSorting] = useState<string>(SortingName.Nearest);
     const [searchQuery, setSearchQuery] = useState<string>("");
 
+    const [category, setCategory] = useState<Set<string>>(new Set());
+
     const dialogWindowFilterRef = useRef<HTMLDialogElement | null>(null);
 
     const { lockScroll, unlockScroll } = useScrollLock();
 
-    const [value, setValue] = useState<number[]>([20, 37]);
+    // const [value, setValue] = useState<number[]>([20, 37]);
 
     useEffect(() => {
         const fetchEvents = async (): Promise<void> => {
@@ -61,10 +63,20 @@ export default function MainPage() {
         }
     }, [events, sorting, searchQuery]);
 
-    const handleChange = (event: Event, newValue: number[]) => {
-        setValue(newValue);
-        void event;
-    };
+    useEffect(() => {
+        const next = new Set<string>();
+        events.forEach(event => next.add(event.event_category));
+        setCategory(next);
+    }, [events]);
+
+    useEffect(() => {
+        console.log(category);
+    }, [category]);
+
+    // const handleChange = (event: Event, newValue: number[]) => {
+    //     setValue(newValue);
+    //     void event;
+    // };
 
     return (
         <main className="main">
@@ -137,21 +149,63 @@ export default function MainPage() {
             <dialog className="dialog-window-filter" ref={dialogWindowFilterRef}>
                 <div className="dialog-window-filter-conteiner">
                     <div className="dialog-window-filter-content">
-                        <span>Фильтры</span>
-                        <span>Цена</span>
-                        <Box sx={{ width: 264 }}>
+                        <span className="unbounded-bold dialog-window-filter-main-text">Фильтры</span>
+                        <div className="dialog-window-filter-conteiner-for">
+                            <span className="unbounded-regular dialog-window-filter-subtext">Цена</span>
+                            <div className="dialog-window-filter-conteiner-grid">
+                                <span className="unbounded-light dialog-window-filter-minitext">от</span>
+                                <span className="unbounded-light dialog-window-filter-minitext">до</span>
+                                <input type="number" className="unbounded-regular dialog-window-filter-input" placeholder="0" />
+                                <input type="number" className="unbounded-regular dialog-window-filter-input" placeholder="100" />
+                            </div>
+                        </div>
+                        {/* <Box sx={{ width: 264 }}>
                             <Slider
                                 getAriaLabel={() => 'Temperature range'}
                                 value={value}
                                 onChange={handleChange}
                                 valueLabelDisplay="auto"
                             />
-                        </Box>
-                        <span>Бесплатно</span>
-                        <span>Дата</span>
-                        <span>Категории</span>
-                        <button onClick={() => { dialogWindowFilterRef.current?.close(); unlockScroll(); }}>Показать</button>
-                        <button onClick={() => { dialogWindowFilterRef.current?.close(); unlockScroll(); }}>Отвенить</button>
+                        </Box> */}
+                        <div className="dialog-window-filter-conteiner-for row">
+                            <span className="unbounded-regular dialog-window-filter-subtext">Бесплатно</span>
+                            <label className="dialog-window-filter-checkbox-free">
+                                <input type="checkbox" className="dialog-window-filter-checkbox-input" />
+                                <span className="dialog-window-filter-checkbox-slider" />
+                            </label>
+                        </div>
+                        <div className="dialog-window-filter-conteiner-for">
+                            <span className="unbounded-regular dialog-window-filter-subtext">Дата</span>
+                            <div className="dialog-window-filter-conteiner-grid">
+                                <span className="unbounded-light dialog-window-filter-minitext">от</span>
+                                <span className="unbounded-light dialog-window-filter-minitext">до</span>
+                                <input type="date" className="unbounded-regular dialog-window-filter-input" />
+                                <input type="date" className="unbounded-regular dialog-window-filter-input" />
+                            </div>
+                        </div>
+
+                        <div className="dialog-window-filter-conteiner-for">
+                            <span className="unbounded-regular dialog-window-filter-subtext">Время</span>
+                            <div className="dialog-window-filter-conteiner-grid">
+                                <span className="unbounded-light dialog-window-filter-minitext">с</span>
+                                <span className="unbounded-light dialog-window-filter-minitext">по</span>
+                                <input type="time" className="unbounded-regular dialog-window-filter-input" />
+                                <input type="time" className="unbounded-regular dialog-window-filter-input" />
+                            </div>
+                        </div>
+                        <div className="dialog-window-filter-conteiner-for">
+                            <span className="unbounded-regular dialog-window-filter-subtext">Категории</span>
+                            <div className="dialog-window-filter-conteiner-for spans unbounded-regular">
+                                <span className="special">sdf</span>
+                                <span className="special">sdf</span>
+                                <span className="special">sdf</span>
+                                <span className="special">sdf</span>
+                            </div>
+                        </div>
+                        <div className="dialog-window-filter-conteiner-buttons">
+                            <button className="inter-medium dialog-window-filter-button red" onClick={() => { dialogWindowFilterRef.current?.close(); unlockScroll(); }}>Показать</button>
+                            <button className="inter-medium dialog-window-filter-button white" onClick={() => { dialogWindowFilterRef.current?.close(); unlockScroll(); }}>Отвенить</button>
+                        </div>
                     </div>
                 </div>
             </dialog>
