@@ -25,12 +25,12 @@ export default function MainPage() {
 
     const [draftFilters, setDraftFilters] = useState<Filters>({
         isFree: false,
-        categories: new Set(),
+        categories: new Set(category),
     });
 
     const [appliedFilters, setAppliedFilters] = useState<Filters>({
         isFree: false,
-        categories: new Set(),
+        categories: new Set(category),
     });
 
     const handleApplyFilters = () => {
@@ -127,7 +127,7 @@ export default function MainPage() {
         eventsCopy = eventsCopy.filter(event =>
             appliedFilters.categories.size > 0
                 ? appliedFilters.categories.has(event.event_category)
-                : true
+                : false
         );
 
         switch (sorting) {
