@@ -46,7 +46,7 @@ export default function MainPage() {
     const clearFilters = () => {
         const emptyFilters: Filters = {
             isFree: false,
-            categories: new Set(),
+            categories: new Set(category),
             priceFrom: undefined,
             priceTo: undefined,
             dateFrom: undefined,
