@@ -23,10 +23,44 @@ export default function MainPage() {
 
     // const [value, setValue] = useState<number[]>([20, 37]);
 
-    const [filters, setFilters] = useState<Filters>({
+    const [draftFilters, setDraftFilters] = useState<Filters>({
         isFree: false,
         categories: new Set(),
     });
+
+    const [appliedFilters, setAppliedFilters] = useState<Filters>({
+        isFree: false,
+        categories: new Set(),
+    });
+
+    const handleApplyFilters = () => {
+        setAppliedFilters({
+            ...draftFilters,
+            categories: new Set(draftFilters.categories),
+        });
+
+        dialogWindowFilterRef.current?.close();
+        unlockScroll();
+    };
+
+    const clearFilters = () => {
+        const emptyFilters: Filters = {
+            isFree: false,
+            categories: new Set(),
+            priceFrom: undefined,
+            priceTo: undefined,
+            dateFrom: undefined,
+            dateTo: undefined,
+            timeFrom: undefined,
+            timeTo: undefined,
+        };
+
+        setDraftFilters(emptyFilters);
+        setAppliedFilters(emptyFilters);
+
+        dialogWindowFilterRef.current?.close();
+        unlockScroll();
+    };
 
     useEffect(() => {
         const fetchEvents = async (): Promise<void> => {
@@ -51,40 +85,48 @@ export default function MainPage() {
         );
 
         eventsCopy = eventsCopy.filter(event =>
-            filters.isFree ? event.price_event === 0 : true
+            appliedFilters.isFree ? event.price_event === 0 : true
         );
 
-        eventsCopy = eventsCopy.filter(e =>
-            filters.priceFrom !== undefined
-                ? e.price_event >= filters.priceFrom
+        eventsCopy = eventsCopy.filter(event =>
+            appliedFilters.priceFrom !== undefined
+                ? event.price_event >= appliedFilters.priceFrom
                 : true
         );
 
-        eventsCopy = eventsCopy.filter(e =>
-            filters.priceTo !== undefined
-                ? e.price_event <= filters.priceTo
+        eventsCopy = eventsCopy.filter(event =>
+            appliedFilters.priceTo !== undefined
+                ? event.price_event <= appliedFilters.priceTo
                 : true
         );
 
-        eventsCopy = eventsCopy.filter(e =>
-            filters.dateFrom ? e.date_event >= filters.dateFrom : true
+        eventsCopy = eventsCopy.filter(event =>
+            appliedFilters.dateFrom
+                ? event.date_event >= appliedFilters.dateFrom
+                : true
         );
 
-        eventsCopy = eventsCopy.filter(e =>
-            filters.dateTo ? e.date_event <= filters.dateTo : true
+        eventsCopy = eventsCopy.filter(event =>
+            appliedFilters.dateTo
+                ? event.date_event <= appliedFilters.dateTo
+                : true
         );
 
-        eventsCopy = eventsCopy.filter(e =>
-            filters.timeFrom ? e.time_event >= filters.timeFrom : true
+        eventsCopy = eventsCopy.filter(event =>
+            appliedFilters.timeFrom
+                ? event.time_event >= appliedFilters.timeFrom
+                : true
         );
 
-        eventsCopy = eventsCopy.filter(e =>
-            filters.timeTo ? e.time_event <= filters.timeTo : true
+        eventsCopy = eventsCopy.filter(event =>
+            appliedFilters.timeTo
+                ? event.time_event <= appliedFilters.timeTo
+                : true
         );
 
-        eventsCopy = eventsCopy.filter(e =>
-            filters.categories.size > 0
-                ? filters.categories.has(e.event_category)
+        eventsCopy = eventsCopy.filter(event =>
+            appliedFilters.categories.size > 0
+                ? appliedFilters.categories.has(event.event_category)
                 : true
         );
 
@@ -105,7 +147,7 @@ export default function MainPage() {
             default:
                 return eventsCopy;
         }
-    }, [events, filters, sorting, searchQuery]);
+    }, [events, appliedFilters, sorting, searchQuery]);
 
     useEffect(() => {
         const next = new Set<string>();
@@ -199,11 +241,11 @@ export default function MainPage() {
                                     type="number"
                                     className="unbounded-regular dialog-window-filter-input"
                                     placeholder="0"
-                                    disabled={filters.isFree}
-                                    value={filters.priceFrom ?? ""}
+                                    disabled={draftFilters.isFree}
+                                    value={draftFilters.priceFrom ?? ""}
                                     onChange={e =>
-                                        setFilters({
-                                            ...filters,
+                                        setDraftFilters({
+                                            ...draftFilters,
                                             priceFrom: e.target.value
                                                 ? Number(e.target.value)
                                                 : undefined,
@@ -214,11 +256,11 @@ export default function MainPage() {
                                     type="number"
                                     className="unbounded-regular dialog-window-filter-input"
                                     placeholder="100"
-                                    disabled={filters.isFree}
-                                    value={filters.priceTo ?? ""}
+                                    disabled={draftFilters.isFree}
+                                    value={draftFilters.priceTo ?? ""}
                                     onChange={e =>
-                                        setFilters({
-                                            ...filters,
+                                        setDraftFilters({
+                                            ...draftFilters,
                                             priceTo: e.target.value
                                                 ? Number(e.target.value)
                                                 : undefined,
@@ -241,10 +283,10 @@ export default function MainPage() {
                                 <input
                                     type="checkbox"
                                     className="dialog-window-filter-checkbox-input"
-                                    checked={filters.isFree}
+                                    checked={draftFilters.isFree}
                                     onChange={e =>
-                                        setFilters({
-                                            ...filters,
+                                        setDraftFilters({
+                                            ...draftFilters,
                                             isFree: e.target.checked,
                                             priceFrom: undefined,
                                             priceTo: undefined,
@@ -262,22 +304,24 @@ export default function MainPage() {
                                 <input
                                     type="date"
                                     className="unbounded-regular dialog-window-filter-input"
-                                    value={filters.dateFrom ?? ""}
+                                    value={draftFilters.dateFrom ?? ""}
                                     onChange={e =>
-                                        setFilters({
-                                            ...filters,
-                                            dateFrom: e.target.value || undefined,
+                                        setDraftFilters({
+                                            ...draftFilters,
+                                            dateFrom:
+                                                e.target.value || undefined,
                                         })
                                     }
                                 />
                                 <input
                                     type="date"
                                     className="unbounded-regular dialog-window-filter-input"
-                                    value={filters.dateTo ?? ""}
+                                    value={draftFilters.dateTo ?? ""}
                                     onChange={e =>
-                                        setFilters({
-                                            ...filters,
-                                            dateTo: e.target.value || undefined,
+                                        setDraftFilters({
+                                            ...draftFilters,
+                                            dateTo:
+                                                e.target.value || undefined,
                                         })
                                     }
                                 />
@@ -292,21 +336,23 @@ export default function MainPage() {
                                 <input
                                     type="time"
                                     className="unbounded-regular dialog-window-filter-input"
-                                    value={filters.timeFrom ?? ""}
+                                    value={draftFilters.timeFrom ?? ""}
                                     onChange={e =>
-                                        setFilters({
-                                            ...filters,
-                                            timeFrom: e.target.value || undefined,
+                                        setDraftFilters({
+                                            ...draftFilters,
+                                            timeFrom:
+                                                e.target.value || undefined,
                                         })
                                     }
                                 />
                                 <input type="time"
                                     className="unbounded-regular dialog-window-filter-input"
-                                    value={filters.timeTo ?? ""}
+                                    value={draftFilters.timeTo ?? ""}
                                     onChange={e =>
-                                        setFilters({
-                                            ...filters,
-                                            timeTo: e.target.value || undefined,
+                                        setDraftFilters({
+                                            ...draftFilters,
+                                            timeTo:
+                                                e.target.value || undefined,
                                         })
                                     }
                                 />
@@ -316,13 +362,15 @@ export default function MainPage() {
                             <span className="unbounded-regular dialog-window-filter-subtext">Категории</span>
                             <div className="dialog-window-filter-conteiner-for spans unbounded-regular">
                                 {Array.from(category).map((value, index) => (
-                                    <label className={`dialog-window-filter-checkbox-category ${filters.categories.has(value) ? "active" : ""}`} key={index}>
+                                    <label className={`dialog-window-filter-checkbox-category ${draftFilters.categories.has(value) ? "active" : ""}`} key={index}>
                                         <input
                                             type="checkbox"
                                             className="dialog-window-filter-checkbox-category-input"
                                             value={value}
                                             onClick={() => {
-                                                const next = new Set(filters.categories);
+                                                const next = new Set(
+                                                    draftFilters.categories
+                                                );
 
                                                 if (next.has(value)) {
                                                     next.delete(value);
@@ -330,8 +378,8 @@ export default function MainPage() {
                                                     next.add(value);
                                                 }
 
-                                                setFilters({
-                                                    ...filters,
+                                                setDraftFilters({
+                                                    ...draftFilters,
                                                     categories: next,
                                                 });
                                             }}
@@ -342,8 +390,8 @@ export default function MainPage() {
                             </div>
                         </div>
                         <div className="dialog-window-filter-conteiner-buttons">
-                            <button className="inter-medium dialog-window-filter-button red" onClick={() => { dialogWindowFilterRef.current?.close(); unlockScroll(); }}>Показать</button>
-                            <button className="inter-medium dialog-window-filter-button white" onClick={() => { dialogWindowFilterRef.current?.close(); unlockScroll(); }}>Отменить</button>
+                            <button className="inter-medium dialog-window-filter-button red" onClick={handleApplyFilters}>Показать</button>
+                            <button className="inter-medium dialog-window-filter-button white" onClick={clearFilters}>Очистить</button>
                         </div>
                     </div>
                 </div>
