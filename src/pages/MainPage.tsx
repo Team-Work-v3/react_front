@@ -213,6 +213,10 @@ export default function MainPage() {
             </section>
             <section className="main-events">
                 <Wrapper>
+                    <div className="unbounded-semi-bold type-of-events-container">
+                        <span className="type-of-events-button active">Предстоящие</span>
+                        <span className="type-of-events-button">Прошедшие</span>
+                    </div>
                     <div className="main-events-container">
                         {sortAndFilterEvents.length !== 0 ?
                             sortAndFilterEvents.map((event, index) => (
