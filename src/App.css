@@ -209,10 +209,14 @@ a {
 
 .main-events-container {
     gap: 20px;
-    display: grid;
+    display: none;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;
     position: relative;
+
+    &.active {
+        display: grid;
+    }
 }
 
 /* === Одна карточка мероприятия: горизонтальный флекс с левой и правой частями === */
@@ -1095,12 +1099,12 @@ h6.text-little {
     }
 }
 
-.type-of-event-content{
+.type-of-event-content {
     display: block;
     width: 100%;
     height: auto;
 
-    &.active{
+    &.active {
         display: none;
     }
 }
