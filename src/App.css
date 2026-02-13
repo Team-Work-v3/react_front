@@ -1094,3 +1094,13 @@ h6.text-little {
         color: #E08234;
     }
 }
+
+.type-of-event-content{
+    display: block;
+    width: 100%;
+    height: auto;
+
+    &.active{
+        display: none;
+    }
+}

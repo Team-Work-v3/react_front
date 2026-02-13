@@ -33,6 +33,31 @@ export default function MainPage() {
         categories: new Set(),
     });
 
+    // const [typeEvents, setTypeEvents] = useState<"present" | "past">("present");
+
+    const typeOfEvents = {
+        pastButton: useRef<HTMLSpanElement | null>(null),
+        presentButton: useRef<HTMLSpanElement | null>(null),
+        pastContainer: useRef<HTMLDivElement | null>(null),
+        presentContainer: useRef<HTMLDivElement | null>(null)
+    };
+
+    const openTypeEventPresent = ()=>{
+        typeOfEvents.pastButton.current?.classList.remove("active");
+        typeOfEvents.presentButton.current?.classList.add("active");
+
+        typeOfEvents.pastContainer.current?.classList.remove("active");
+        typeOfEvents.presentContainer.current?.classList.add("active");
+    }
+
+    const openTypeEventPast = ()=>{
+        typeOfEvents.presentButton.current?.classList.remove("active");
+        typeOfEvents.pastButton.current?.classList.add("active");
+
+        typeOfEvents.presentContainer.current?.classList.remove("active");
+        typeOfEvents.pastContainer.current?.classList.add("active");
+    }
+
     const handleApplyFilters = () => {
         setAppliedFilters({
             ...draftFilters,
@@ -214,24 +239,29 @@ export default function MainPage() {
             <section className="main-events">
                 <Wrapper>
                     <div className="unbounded-semi-bold type-of-events-container">
-                        <span className="type-of-events-button active">Предстоящие</span>
-                        <span className="type-of-events-button">Прошедшие</span>
+                        <span className="type-of-events-button active" ref={typeOfEvents.presentButton} onClick={openTypeEventPresent}>Предстоящие</span>
+                        <span className="type-of-events-button" ref={typeOfEvents.pastButton} onClick={openTypeEventPast}>Прошедшие</span>
                     </div>
                     <div className="main-events-container">
-                        {sortAndFilterEvents.length !== 0 ?
-                            sortAndFilterEvents.map((event, index) => (
-                                <Card event={event} key={index} />
-                            )) :
-                            (
-                                <div className="event-none-container">
-                                    <div className="event-none">
-                                        <span className="unbounded-bold">Мероприятия не найдены</span>
-                                        <span className="unbounded-regular">Попробуйте очистить поиск</span>
-                                        <button className="unbounded-medium" onClick={() => { setSearchQuery(""); clearFilters(); }}>Очистить</button>
+                        <div className="type-of-event-content" ref={typeOfEvents.presentContainer}>
+                            {sortAndFilterEvents.length !== 0 ?
+                                sortAndFilterEvents.map((event, index) => (
+                                    <Card event={event} key={index} />
+                                )) :
+                                (
+                                    <div className="event-none-container">
+                                        <div className="event-none">
+                                            <span className="unbounded-bold">Мероприятия не найдены</span>
+                                            <span className="unbounded-regular">Попробуйте очистить поиск</span>
+                                            <button className="unbounded-medium" onClick={() => { setSearchQuery(""); clearFilters(); }}>Очистить</button>
+                                        </div>
                                     </div>
-                                </div>
-                            )
-                        }
+                                )
+                            }
+                        </div>
+                        <div className="type-of-event-content" ref={typeOfEvents.pastContainer} >
+                            {/* Данные с сервера */}
+                        </div>
                     </div>
                 </Wrapper>
             </section>
