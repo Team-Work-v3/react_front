@@ -242,7 +242,7 @@ export default function MainPage() {
                         <span className="type-of-events-button active" ref={typeOfEvents.presentButton} onClick={openTypeEventPresent}>Предстоящие</span>
                         <span className="type-of-events-button" ref={typeOfEvents.pastButton} onClick={openTypeEventPast}>Прошедшие</span>
                     </div>
-                    <div className="main-events-container">
+                    <div className="type-of-event-content">
                         <div className="type-of-event-content" ref={typeOfEvents.presentContainer}>
                             {sortAndFilterEvents.length !== 0 ?
                                 sortAndFilterEvents.map((event, index) => (
