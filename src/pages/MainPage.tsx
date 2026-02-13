@@ -243,7 +243,7 @@ export default function MainPage() {
                         <span className="type-of-events-button" ref={typeOfEvents.pastButton} onClick={openTypeEventPast}>Прошедшие</span>
                     </div>
                     <div className="type-of-event-content">
-                        <div className="type-of-event-content" ref={typeOfEvents.presentContainer}>
+                        <div className="main-events-container" ref={typeOfEvents.presentContainer}>
                             {sortAndFilterEvents.length !== 0 ?
                                 sortAndFilterEvents.map((event, index) => (
                                     <Card event={event} key={index} />
@@ -259,7 +259,7 @@ export default function MainPage() {
                                 )
                             }
                         </div>
-                        <div className="type-of-event-content" ref={typeOfEvents.pastContainer} >
+                        <div className="main-events-container" ref={typeOfEvents.pastContainer} >
                             {/* Данные с сервера */}
                         </div>
                     </div>
