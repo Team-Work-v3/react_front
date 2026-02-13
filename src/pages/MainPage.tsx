@@ -89,6 +89,7 @@ export default function MainPage() {
 
     const closeDialogWindowFilter = () => {
         dialogWindowFilterRef.current?.close();
+        unlockScroll();
     }
 
     useEffect(() => {
