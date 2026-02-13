@@ -113,6 +113,7 @@ export default function MainPage() {
     }, [events]);
 
     const sortAndFilterEvents = useMemo(() => {
+        // фильтр нужен еще и для прошедших мероприятий, или нет. не знаю
         if (!Array.isArray(events) || events.length === 0) {
             return [];
         }
