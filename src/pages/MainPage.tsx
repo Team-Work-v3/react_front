@@ -42,7 +42,7 @@ export default function MainPage() {
         presentContainer: useRef<HTMLDivElement | null>(null)
     };
 
-    const openTypeEventPresent = ()=>{
+    const openTypeEventPresent = () => {
         typeOfEvents.pastButton.current?.classList.remove("active");
         typeOfEvents.presentButton.current?.classList.add("active");
 
@@ -50,7 +50,7 @@ export default function MainPage() {
         typeOfEvents.presentContainer.current?.classList.add("active");
     }
 
-    const openTypeEventPast = ()=>{
+    const openTypeEventPast = () => {
         typeOfEvents.presentButton.current?.classList.remove("active");
         typeOfEvents.pastButton.current?.classList.add("active");
 
@@ -86,6 +86,10 @@ export default function MainPage() {
         dialogWindowFilterRef.current?.close();
         unlockScroll();
     };
+
+    const closeDialogWindowFilter = () => {
+        dialogWindowFilterRef.current?.close();
+    }
 
     useEffect(() => {
         const fetchEvents = async (): Promise<void> => {
@@ -266,7 +270,11 @@ export default function MainPage() {
                 </Wrapper>
             </section>
             <dialog className="dialog-window-filter" ref={dialogWindowFilterRef}>
-                <div className="dialog-window-filter-conteiner">
+                <div className="dialog-window-filter-conteiner" onClick={(e) => {
+                    if (e.target === document.querySelector(".dialog-window-filter-conteiner")) {
+                        closeDialogWindowFilter();
+                    }
+                }}>
                     <div className="dialog-window-filter-content">
                         <span className="unbounded-bold dialog-window-filter-main-text">Фильтры</span>
                         <div className="dialog-window-filter-conteiner-for">
