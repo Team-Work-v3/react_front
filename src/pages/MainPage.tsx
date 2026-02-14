@@ -17,6 +17,7 @@ export default function MainPage() {
     const [searchQuery, setSearchQuery] = useState<string>("");
 
     const [category, setCategory] = useState<Set<string>>(new Set());
+    const [categories, setCategories] = useState<[]>([]);
 
     const dialogWindowFilterRef = useRef<HTMLDialogElement | null>(null);
 
@@ -103,6 +104,13 @@ export default function MainPage() {
 
             setEventsBack(dataBack.events);
             setEvents(data.events);
+
+            const categories = await fetch("http://62.109.16.129:5000/api/getCategory");
+
+            const dataCategories = await categories.json();
+            setCategories(dataCategories.category);
+            console.log("1", dataCategories);
+            console.log(categories);
         }
         fetchEvents();
     }, []);
