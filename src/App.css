@@ -223,9 +223,9 @@ a {
 .event-item {
     display: flex;
     justify-content: space-between;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: stretch;
-    width: 580px;
+    width: 380px;
     background: #fff;
     padding: 20px;
     box-sizing: border-box;
