@@ -12,6 +12,7 @@ import type { Filters } from "../models/filters.interface";
 
 export default function MainPage() {
     const [events, setEvents] = useState<IEventReduced[]>([]);
+    const [eventsBack, setEventsBack] = useState<IEventReduced[]>([]);
     const [sorting, setSorting] = useState<string>(SortingName.Nearest);
     const [searchQuery, setSearchQuery] = useState<string>("");
 
@@ -100,7 +101,7 @@ export default function MainPage() {
             const data = await response.json();
             const dataBack = await responseBack.json();
 
-            console.log(await dataBack);
+            setEventsBack(dataBack.events);
             setEvents(data.events);
         }
         fetchEvents();
@@ -269,7 +270,20 @@ export default function MainPage() {
                             }
                         </div>
                         <div className="main-events-container" ref={typeOfEvents.pastContainer} >
-                            {/* Данные с сервера */}
+                            {eventsBack.length !== 0 ?
+                                eventsBack.map((event, index) => (
+                                    <Card event={event} key={index} />
+                                )) :
+                                (
+                                    <div className="event-none-container">
+                                        <div className="event-none">
+                                            <span className="unbounded-bold">Мероприятия не найдены</span>
+                                            <span className="unbounded-regular">Попробуйте очистить поиск</span>
+                                            <button className="unbounded-medium" onClick={() => { setSearchQuery(""); clearFilters(); }}>Очистить</button>
+                                        </div>
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
                 </Wrapper>
