@@ -97,9 +97,10 @@ export default function MainPage() {
             const response = await fetch("http://62.109.16.129:5000/api/getShortenedEvents");
             const responseBack = await fetch("http://62.109.16.129:5000/api/getShortenedEvents?state=back");
 
-            console.log(responseBack);
             const data = await response.json();
+            const dataBack = await responseBack.json();
 
+            console.log(await dataBack);
             setEvents(data.events);
         }
         fetchEvents();
