@@ -95,7 +95,9 @@ export default function MainPage() {
     useEffect(() => {
         const fetchEvents = async (): Promise<void> => {
             const response = await fetch("http://62.109.16.129:5000/api/getShortenedEvents");
+            const responseBack = await fetch("http://62.109.16.129:5000/api/getShortenedEvents?state=back");
 
+            console.log(responseBack);
             const data = await response.json();
 
             setEvents(data.events);
