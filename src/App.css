@@ -222,9 +222,9 @@ a {
 /* === Одна карточка мероприятия: горизонтальный флекс с левой и правой частями === */
 .event-item {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-direction: column-reverse;
-    align-items: stretch;
+    align-items: flex-start;
     width: 380px;
     background: #fff;
     padding: 20px;
@@ -261,7 +261,7 @@ a {
 .event-name {
     width: 240px;
     height: auto;
-    font-size: 30px;
+    font-size: 24px;
     line-height: 32px;
     letter-spacing: -0.5px;
     margin: 0 0 8px 0;
