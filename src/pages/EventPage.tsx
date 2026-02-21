@@ -24,6 +24,7 @@ export default function EventPage() {
         fullname: useRef<HTMLInputElement | null>(null),
         email: useRef<HTMLInputElement | null>(null),
         phone: useRef<HTMLInputElement | null>(null),
+        count: useRef<HTMLInputElement | null>(null),
         agreement: useRef<HTMLInputElement | null>(null)
     };
 
@@ -36,7 +37,8 @@ export default function EventPage() {
     const errorSpans = {
         fullname: useRef<HTMLSpanElement | null>(null),
         email: useRef<HTMLSpanElement | null>(null),
-        phone: useRef<HTMLSpanElement | null>(null)
+        phone: useRef<HTMLSpanElement | null>(null),
+        count: useRef<HTMLSpanElement | null>(null)
     }
 
     const location = useLocation();
@@ -241,7 +243,8 @@ export default function EventPage() {
                 full_name: review.fullname.current?.value,
                 email: review.email.current?.value,
                 phone_number: review.phone.current?.value,
-                ticket_amount: 1,
+                ticket_amount: review.count.current?.value,
+                // ticket_amount: 1,
                 agreement: review.agreement.current?.checked ? 1 : 0
             })
         });
