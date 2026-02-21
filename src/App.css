@@ -446,6 +446,9 @@ a {
 .event-none>.unbounded-regular {
     font-size: 20px;
 }
+.border-red{
+    border:#982520;
+}
 
 .event-none>button {
     padding: 12px 30px;

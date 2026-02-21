@@ -15,8 +15,8 @@ export default function Card({ event }: { event: IEventReduced }) {
   </p>
   <p className="special unbounded-regular">{event.time_event}</p>
   <p className="special unbounded-regular">{event.event_category}</p>
-  <p className="special unbounded-regular">
-    Осталось мест: {event.places_left}
+  <p className="special unbounded-regular border-red">
+    Осталось мест: 8
   </p>
 </div>
                 </div>
