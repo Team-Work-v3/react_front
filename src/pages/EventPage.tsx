@@ -397,7 +397,7 @@ export default function EventPage() {
 
                                     <div className="form-group">
                                         <div>
-                                            <label className="label-indent inter-light" htmlFor="phone"><span className="label-indent-red">*</span>Номер телефона</label>
+                                            <label className="label-indent inter-light" htmlFor="phone"><span className="label-indent-red">*</span>Номер телефонаfffff</label>
                                             <span id="phoneError" className="error-message inter-extra-light" ref={errorSpans.phone}></span>
                                         </div>
                                         <input
