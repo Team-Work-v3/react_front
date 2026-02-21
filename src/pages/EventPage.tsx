@@ -31,7 +31,8 @@ export default function EventPage() {
     const [validationErrors, setValidationErrors] = useState({
         fullname: true,
         email: true,
-        phone: true
+        phone: true, 
+        count: true
     });
 
     const errorSpans = {
