@@ -21,7 +21,7 @@ export default function Card({ event }: { event: IEventReduced }) {
 </div>
                 </div>
                 <div className="event-left-down">
-                    <h4 className="event-cost unbounded-regular">{event.price_event === 0 ? "Бесплатно" : `${event.price_event}руб`}</h4>
+                    <h4 className="event-cost unbounded-regular">{event.price_event === 0 ? "Бесплатно" : `${event.price_event} руб`}</h4>
                     <Link to={`/event/${event.event_id}#registration`}>
                         <button className="event-btn unbounded-regular">Записаться</button>
                     </Link>
