@@ -18,6 +18,7 @@ export default function MainPage() {
 
     const [category, setCategory] = useState<Set<string>>(new Set());
     const [categories, setCategories] = useState<[]>([]);
+    console.log(categories);
 
     const dialogWindowFilterRef = useRef<HTMLDialogElement | null>(null);
 
