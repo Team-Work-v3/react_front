@@ -10,7 +10,7 @@ export default function Card({ event }: { event: IEventReduced }) {
                         <h3 className="event-name unbounded-bold">{event.name_event}</h3>
                     </Link>
                     <div>
-                        <p className="special unbounded-regular">{event.date_event.split("-").reverse().join(".")}</p>
+                        <p className="special unbounded-regular">{event.date_event}</p>
                         <p className="special unbounded-regular">{event.time_event}</p>
                         <p className="special unbounded-regular">{event.event_category}</p>
                     </div>
