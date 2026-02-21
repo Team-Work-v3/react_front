@@ -213,6 +213,23 @@ export default function EventPage() {
 
         return { valid: true };
     };
+    const validateCount = (value: string | undefined): ValidationResult => {
+        if (typeof value === "undefined") {
+            return { valid: false, error: "Поле обязательно для заполнения" };
+        }
+
+        const v = value.trim();
+
+        if (!v) {
+            return { valid: false, error: "Количество мест обязателено" };
+        }
+
+        if (!/^[\d]+$/.test(v)) {
+            return { valid: false, error: "Количество должено содержать только цифры" };
+        }
+
+        return { valid: true };
+    };
 
     const sendReview = async (): Promise<boolean> => {
         const response = await fetch("http://62.109.16.129:5000/api/regUser", {
@@ -416,6 +433,44 @@ export default function EventPage() {
                                         />
                                     </div>
 
+                                    <div className="form-group">
+                                        <div>
+                                            <label className="label-indent inter-light" htmlFor="count"><span className="label-indent-red">*</span>Количество мест</label>
+                                            <span id="countError" className="error-message inter-extra-light" ref={errorSpans.count}></span>
+                                        </div>
+                                        <input
+                                            className="registration-frame inter-regular"
+                                            type="number"
+                                            id="count"
+                                            // name="phone"
+                                            maxLength={20}
+                                            placeholder="1"
+                                            value = "1"
+                                            ref={review.count}
+                                            onFocus={() => {
+                                                review.count.current?.classList.remove("error");
+                                            }}
+                                            onBlur={() => {
+                                                const { valid, error } = validateCount(review.count.current?.value);
+
+                                                updateValidationStatus("count", valid);
+
+                                                if (!valid) {
+                                                    review.count.current?.classList.add("error");
+                                                    if (errorSpans.count.current) {
+                                                        errorSpans.count.current.textContent = error || "";
+                                                    }
+                                                    return;
+                                                }
+
+                                                review.count.current?.classList.remove("error");
+                                                if (errorSpans.count.current) {
+                                                    errorSpans.count.current.textContent = "";
+                                                }
+                                            }
+                                            }
+                                        />
+                                    </div>
                                     <div className="checkbox-group">
                                         {/* name="agree" */}
                                         <input type="checkbox" id="agree" value="true" ref={review.agreement} />
