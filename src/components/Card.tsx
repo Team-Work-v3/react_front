@@ -9,11 +9,13 @@ export default function Card({ event }: { event: IEventReduced }) {
                     <Link to={`/event/${event.event_id}`}>
                         <h3 className="event-name unbounded-bold">{event.name_event}</h3>
                     </Link>
-                    <div>
-                        <p className="special unbounded-regular">{event.date_event}</p>
-                        <p className="special unbounded-regular">{event.time_event}</p>
-                        <p className="special unbounded-regular">{event.event_category}</p>
-                    </div>
+                  <div>
+  <p className="special unbounded-regular">
+    {new Date(event.date_event).toLocaleDateString("ru-RU")}
+  </p>
+  <p className="special unbounded-regular">{event.time_event}</p>
+  <p className="special unbounded-regular">{event.event_category}</p>
+</div>
                 </div>
                 <div className="event-left-down">
                     <h4 className="event-cost unbounded-regular">{event.price_event === 0 ? "Бесплатно" : `${event.price_event}руб`}</h4>

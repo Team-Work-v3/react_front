@@ -321,6 +321,7 @@ a {
 /* === Правая колонка карточки: изображение мероприятия === */
 .event-img {
     width: 350px;
+    height: 250px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
