@@ -1102,8 +1102,8 @@ h6.text-little {
     cursor: pointer;
 
     &.active {
-        text-decoration: underline;
-        color: #E08234;
+        border-bottom: 4px solid #982520;
+        color: #982520;
     }
 }
 

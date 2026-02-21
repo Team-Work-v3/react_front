@@ -401,7 +401,7 @@ export default function EventPage() {
 
                                     <div className="form-group">
                                         <div>
-                                            <label className="label-indent inter-light" htmlFor="phone"><span className="label-indent-red">*</span>Номер телефонаfffff</label>
+                                            <label className="label-indent inter-light" htmlFor="phone"><span className="label-indent-red">*</span>Номер телефона</label>
                                             <span id="phoneError" className="error-message inter-extra-light" ref={errorSpans.phone}></span>
                                         </div>
                                         <input
@@ -449,6 +449,7 @@ export default function EventPage() {
                                             // name="phone"
                                             maxLength={20}
                                             placeholder="1"
+                                            min-value = "1"
                                             ref={review.count}
                                             onFocus={() => {
                                                 review.count.current?.classList.remove("error");
