@@ -267,11 +267,11 @@ a {
     margin: 0 0 8px 0;
     padding: 0;
     color: black;
-    overflow: hidden;
+    /* overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+    -webkit-box-orient: vertical; */
 }
 
 /* === Небольшие "плашки" — дата, время, статус === */
