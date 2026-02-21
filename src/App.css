@@ -224,8 +224,8 @@ a {
     display: flex;
     justify-content: flex-end;
     flex-direction: column-reverse;
-    align-items: flex-end;
-    width: 380px;
+    /* align-items: flex-end; */
+    /* width: 380px; */
     background: #fff;
     padding: 20px;
     box-sizing: border-box;
