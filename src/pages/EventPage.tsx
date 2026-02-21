@@ -224,6 +224,7 @@ export default function EventPage() {
                 full_name: review.fullname.current?.value,
                 email: review.email.current?.value,
                 phone_number: review.phone.current?.value,
+                ticket_amount: 1,
                 agreement: review.agreement.current?.checked ? 1 : 0
             })
         });

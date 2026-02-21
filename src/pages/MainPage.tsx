@@ -110,8 +110,8 @@ export default function MainPage() {
 
             const dataCategories = await categories.json();
             setCategories(dataCategories.category);
-            console.log("1", dataCategories);
-            console.log(categories);
+           console.log("1", dataCategories);
+           console.log(categories);
         }
         fetchEvents();
     }, []);
