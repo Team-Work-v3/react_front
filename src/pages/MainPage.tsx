@@ -50,6 +50,7 @@ export default function MainPage() {
 
         typeOfEvents.pastContainer.current?.classList.remove("active");
         typeOfEvents.presentContainer.current?.classList.add("active");
+        clearFilters();
     }
 
     const openTypeEventPast = () => {
@@ -58,6 +59,7 @@ export default function MainPage() {
 
         typeOfEvents.presentContainer.current?.classList.remove("active");
         typeOfEvents.pastContainer.current?.classList.add("active");
+        clearFilters();
     }
 
     const handleApplyFilters = () => {
@@ -263,7 +265,7 @@ export default function MainPage() {
                         <div className="main-events-container active" ref={typeOfEvents.presentContainer}>
                             {sortAndFilterEvents.length !== 0 ?
                                 sortAndFilterEvents.map((event, index) => (
-                                    <Card event={event} key={index} categories={categories}/>
+                                    <Card event={event} key={index} categories={categories} />
                                 )) :
                                 (
                                     <div className="event-none-container">
@@ -279,7 +281,7 @@ export default function MainPage() {
                         <div className="main-events-container" ref={typeOfEvents.pastContainer} >
                             {eventsBack.length !== 0 ?
                                 eventsBack.map((event, index) => (
-                                    <Card event={event} key={index} categories={categories}/>
+                                    <Card event={event} key={index} categories={categories} />
                                 )) :
                                 (
                                     <div className="event-none-container">
