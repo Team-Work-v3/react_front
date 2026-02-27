@@ -108,9 +108,8 @@ export default function MainPage() {
             const categories = await fetch("http://62.109.16.129:5000/api/getCategory");
 
             const dataCategories = await categories.json();
+            console.log(dataCategories);
             setCategories(dataCategories.category);
-            console.log("1", dataCategories);
-            console.log(categories);
         }
         fetchEvents();
     }, []);

@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 import type { IEventReduced } from "../models/event.interface";
 
 export default function Card({ event, categories }: { event: IEventReduced, categories: [] }) {
-    document.addEventListener("DOMContentLoaded", () => console.log(categories));
+    // document.addEventListener("DOMContentLoaded", () => console.log(categories));
     return (
         <article className="event-item">
+            {categories}
             <div className="event-left">
                 <div className="event-left-up">
                     <Link to={`/event/${event.event_id}`}>
