@@ -51,6 +51,7 @@ export default function MainPage() {
         typeOfEvents.pastContainer.current?.classList.remove("active");
         typeOfEvents.presentContainer.current?.classList.add("active");
         clearFilters();
+        setSearchQuery("");
     }
 
     const openTypeEventPast = () => {
@@ -60,6 +61,7 @@ export default function MainPage() {
         typeOfEvents.presentContainer.current?.classList.remove("active");
         typeOfEvents.pastContainer.current?.classList.add("active");
         clearFilters();
+        setSearchQuery("");
     }
 
     const handleApplyFilters = () => {
