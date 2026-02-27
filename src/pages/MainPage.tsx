@@ -127,16 +127,13 @@ export default function MainPage() {
         setAppliedFilters(prev => ({ ...prev, categories: next }));
     }, [events]);
 
-    const sortAndFilterEvents = useMemo(() => {
-        // фильтр нужен еще и для прошедших мероприятий, или нет. не знаю
-        if (!Array.isArray(events) || events.length === 0) {
-            return [];
-        }
+    const filterAndSort = (list: IEventReduced[]) => {
+        if (!Array.isArray(list) || list.length === 0) return [];
 
-        let eventsCopy = [...events];
+        let eventsCopy = [...list];
 
         eventsCopy = eventsCopy.filter(event =>
-            event.name_event.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
+            event.name_event.toLowerCase().includes(searchQuery.toLowerCase())
         );
 
         eventsCopy = eventsCopy.filter(event =>
@@ -156,27 +153,19 @@ export default function MainPage() {
         );
 
         eventsCopy = eventsCopy.filter(event =>
-            appliedFilters.dateFrom
-                ? event.date_event >= appliedFilters.dateFrom
-                : true
+            appliedFilters.dateFrom ? event.date_event >= appliedFilters.dateFrom : true
         );
 
         eventsCopy = eventsCopy.filter(event =>
-            appliedFilters.dateTo
-                ? event.date_event <= appliedFilters.dateTo
-                : true
+            appliedFilters.dateTo ? event.date_event <= appliedFilters.dateTo : true
         );
 
         eventsCopy = eventsCopy.filter(event =>
-            appliedFilters.timeFrom
-                ? event.time_event >= appliedFilters.timeFrom
-                : true
+            appliedFilters.timeFrom ? event.time_event >= appliedFilters.timeFrom : true
         );
 
         eventsCopy = eventsCopy.filter(event =>
-            appliedFilters.timeTo
-                ? event.time_event <= appliedFilters.timeTo
-                : true
+            appliedFilters.timeTo ? event.time_event <= appliedFilters.timeTo : true
         );
 
         eventsCopy = eventsCopy.filter(event =>
@@ -202,7 +191,17 @@ export default function MainPage() {
             default:
                 return eventsCopy;
         }
-    }, [events, appliedFilters, sorting, searchQuery]);
+    };
+
+    const sortAndFilterEvents = useMemo(
+        () => filterAndSort(events),
+        [events, appliedFilters, sorting, searchQuery]
+    );
+
+    const sortAndFilterEventsBack = useMemo(
+        () => filterAndSort(eventsBack),
+        [eventsBack, appliedFilters, sorting, searchQuery]
+    );
 
     // const handleChange = (event: Event, newValue: number[]) => {
     //     setValue(newValue);
@@ -281,8 +280,8 @@ export default function MainPage() {
                             }
                         </div>
                         <div className="main-events-container" ref={typeOfEvents.pastContainer} >
-                            {eventsBack.length !== 0 ?
-                                eventsBack.map((event, index) => (
+                            {sortAndFilterEventsBack.length !== 0 ?
+                                sortAndFilterEventsBack.map((event, index) => (
                                     <Card event={event} key={index} categories={categories} />
                                 )) :
                                 (
