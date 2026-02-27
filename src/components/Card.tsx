@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import type { IEventReduced } from "../models/event.interface";
 
-export default function Card({ event }: { event: IEventReduced }) {
+export default function Card({ event, categories }: { event: IEventReduced, categories: []}) {
+    console.log(categories);
     return (
         <article className="event-item">
             <div className="event-left">
@@ -9,16 +10,16 @@ export default function Card({ event }: { event: IEventReduced }) {
                     <Link to={`/event/${event.event_id}`}>
                         <h3 className="event-name unbounded-bold">{event.name_event}</h3>
                     </Link>
-                  <div>
-  <p className="special unbounded-regular">
-    {new Date(event.date_event).toLocaleDateString("ru-RU")}
-  </p>
-  <p className="special unbounded-regular">{event.time_event}</p>
-  <p className="special unbounded-regular">{event.event_category}</p>
-  <p className="special unbounded-regular border-red">
-    Осталось мест: 8
-  </p>
-</div>
+                    <div>
+                        <p className="special unbounded-regular">
+                            {new Date(event.date_event).toLocaleDateString("ru-RU")}
+                        </p>
+                        <p className="special unbounded-regular">{event.time_event}</p>
+                        <p className="special unbounded-regular">{event.event_category}</p>
+                        <p className="special unbounded-regular border-red">
+                            Осталось мест: 8
+                        </p>
+                    </div>
                 </div>
                 <div className="event-left-down">
                     <h4 className="event-cost unbounded-regular">{event.price_event === 0 ? "Бесплатно" : `${event.price_event} руб`}</h4>

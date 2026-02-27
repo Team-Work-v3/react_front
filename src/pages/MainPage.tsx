@@ -18,7 +18,6 @@ export default function MainPage() {
 
     const [category, setCategory] = useState<Set<string>>(new Set());
     const [categories, setCategories] = useState<[]>([]);
-    console.log(categories);
 
     const dialogWindowFilterRef = useRef<HTMLDialogElement | null>(null);
 
@@ -110,8 +109,8 @@ export default function MainPage() {
 
             const dataCategories = await categories.json();
             setCategories(dataCategories.category);
-           console.log("1", dataCategories);
-           console.log(categories);
+            console.log("1", dataCategories);
+            console.log(categories);
         }
         fetchEvents();
     }, []);
@@ -265,7 +264,7 @@ export default function MainPage() {
                         <div className="main-events-container active" ref={typeOfEvents.presentContainer}>
                             {sortAndFilterEvents.length !== 0 ?
                                 sortAndFilterEvents.map((event, index) => (
-                                    <Card event={event} key={index} />
+                                    <Card event={event} key={index} categories={categories}/>
                                 )) :
                                 (
                                     <div className="event-none-container">
@@ -281,7 +280,7 @@ export default function MainPage() {
                         <div className="main-events-container" ref={typeOfEvents.pastContainer} >
                             {eventsBack.length !== 0 ?
                                 eventsBack.map((event, index) => (
-                                    <Card event={event} key={index} />
+                                    <Card event={event} key={index} categories={categories}/>
                                 )) :
                                 (
                                     <div className="event-none-container">
