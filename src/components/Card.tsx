@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import type { IEventReduced } from "../models/event.interface";
 
-export default function Card({ event, categories }: { event: IEventReduced, categories: []}) {
-    console.log(categories);
+export default function Card({ event, categories }: { event: IEventReduced, categories: [] }) {
+    document.addEventListener("DOMContentLoaded", () => console.log(categories));
     return (
         <article className="event-item">
             <div className="event-left">
