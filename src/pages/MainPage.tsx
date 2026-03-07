@@ -109,7 +109,7 @@ export default function MainPage() {
             setEventsBack(dataBack.events);
             setEvents(data.events);
 
-            const categories = await fetch("http://62.109.16.129:5000/api/getCategory");
+            const categories = await fetch("http://62.109.16.129:5000/api/getCategoryNew");
 
             const dataCategories = await categories.json();
             console.log(dataCategories);
