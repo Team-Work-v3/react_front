@@ -18,10 +18,13 @@ export default function Card({ event, categories }: { event: IEventReduced, cate
                         <p className="special unbounded-regular">{event.time_event}</p>
                         <p className="special unbounded-regular">{event.event_category}</p>
                         <p className="special unbounded-regular border-red">
-                            Осталось мест: {categories[1]}
+                            Осталось мест: {categories}
                             
                             {/* {event.remaining_seats} */}
                         </p>
+                        <script>
+                            console.log(categories)
+                        </script>
                     </div>
                 </div>
                 <div className="event-left-down">
