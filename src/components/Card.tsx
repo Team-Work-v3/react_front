@@ -16,10 +16,10 @@ export default function Card({ event, categories }: { event: IEventReduced, cate
                             {new Date(event.date_event).toLocaleDateString("ru-RU")}
                         </p>
                         <p className="special unbounded-regular">{event.time_event}</p>
-                        <p className="special unbounded-regular">{categories?.[String(event.event_category)] ?? "—"}</p>
+                        <p className="special unbounded-regular">{event.event_category}</p>
                         <p className="special unbounded-regular border-red">
+                            Осталось мест: {categories}
 
-                            
                             {/* {event.remaining_seats} */}
                         </p>
                     </div>
