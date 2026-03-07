@@ -5,7 +5,6 @@ export default function Card({ event, categories }: { event: IEventReduced, cate
     // document.addEventListener("DOMContentLoaded", () => console.log(categories));
     return (
         <article className="event-item">
-            {categories}
             <div className="event-left">
                 <div className="event-left-up">
                     <Link to={`/event/${event.event_id}`}>
