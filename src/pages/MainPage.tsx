@@ -17,7 +17,7 @@ export default function MainPage() {
     const [searchQuery, setSearchQuery] = useState<string>("");
 
     const [category, setCategory] = useState<Set<string>>(new Set());
-    const [categories, setCategories] = useState<[]>([]);
+    const [categories, setCategories] = useState<Record<string, string>>({});
 
     const dialogWindowFilterRef = useRef<HTMLDialogElement | null>(null);
 
@@ -113,7 +113,6 @@ export default function MainPage() {
 
             const dataCategories = await categories.json();
             console.log(dataCategories);
-            console.log(dataCategories[1]);
             setCategories(dataCategories);
         }
         fetchEvents();
@@ -458,7 +457,7 @@ export default function MainPage() {
                                                 });
                                             }}
                                         />
-                                        {value}
+                                        {categories[value]}
                                     </label>
                                 ))}
                             </div>
