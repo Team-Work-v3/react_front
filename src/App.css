@@ -916,7 +916,8 @@ h6.text-little {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
     transform: none;
     border: none;
     background-color: transparent;
