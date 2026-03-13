@@ -7,6 +7,7 @@ export interface IEventReduced {
     images_events: string;
     event_category: string;
     is_active: number;
+    remaining_seats: number;
 }
 
 export interface IEvent extends IEventReduced {
