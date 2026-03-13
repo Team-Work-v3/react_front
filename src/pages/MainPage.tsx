@@ -112,7 +112,7 @@ export default function MainPage() {
             const categories = await fetch("http://62.109.16.129:5000/api/getCategoryNew");
 
             const dataCategories = await categories.json();
-            console.log(dataCategories);
+            
             setCategories(dataCategories);
         }
         fetchEvents();
