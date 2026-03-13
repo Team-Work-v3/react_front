@@ -112,7 +112,7 @@ export default function MainPage() {
             const categories = await fetch("http://62.109.16.129:5000/api/getCategoryNew");
 
             const dataCategories = await categories.json();
-            
+
             setCategories(dataCategories);
         }
         fetchEvents();
@@ -464,7 +464,7 @@ export default function MainPage() {
                         </div>
                         <div className="dialog-window-filter-conteiner-buttons">
                             <button className="inter-medium dialog-window-filter-button red" onClick={handleApplyFilters}>Показать</button>
-                            <button className="inter-medium dialog-window-filter-button white" onClick={clearFilters}>Очистить</button>
+                            <button className="inter-medium dialog-window-filter-button white" onClick={clearFilters}>Отменить</button>
                         </div>
                     </div>
                 </div>
