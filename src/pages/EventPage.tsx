@@ -449,7 +449,7 @@ export default function EventPage() {
                                             // name="phone"
                                             maxLength={20}
                                             placeholder="1"
-                                            min-value = "1"
+                                            min = "1"
                                             ref={review.count}
                                             onFocus={() => {
                                                 review.count.current?.classList.remove("error");
