@@ -649,7 +649,7 @@ a {
     align-items: flex-start;
     justify-content: space-between;
     height: 100%;
-   
+    padding-top: 15px;
 }
 
 .registration-frame {
@@ -699,7 +699,7 @@ label {
     font-size: 14px;
      padding-bottom: 10px;
     padding-top: 25px;
-
+    padding-left: 7px;
    
 }
 
@@ -711,7 +711,7 @@ label {
 }
 
 .checkbox-group label {
-    margin-bottom: 0;form-registration
+    margin-bottom: 0;
     color: var(--color-text-label);
     cursor: pointer;
     

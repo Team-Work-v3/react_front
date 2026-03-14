@@ -605,8 +605,6 @@ export default function EventPage() {
                     </div>
                 </div>
 
-
-
                 
                 <a href="/" className="to-home-button inter-light">На главную</a>
             </Wrapper>
