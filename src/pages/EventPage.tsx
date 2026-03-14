@@ -140,6 +140,7 @@ useEffect(() => {
                 credentials: "include",
             });
 
+            //sds
             if (!response.ok) {
                 throw new Error('Ошибка при загрузке отзывов');
             }
