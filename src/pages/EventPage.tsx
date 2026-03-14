@@ -548,6 +548,10 @@ export default function EventPage() {
                         </div>
                     </div>
                 </div>
+
+
+
+
                 <div className="feedback-container">
                     <h1 id="review" className="text-max-big unbounded-bold">Отзывы</h1>
                     <div className="reviews-list inter-regular">
@@ -600,6 +604,10 @@ export default function EventPage() {
                         </div>
                     </div>
                 </div>
+
+
+
+                
                 <a href="/" className="to-home-button inter-light">На главную</a>
             </Wrapper>
             <dialog ref={dialogWindowRef} className="dialog-window">
