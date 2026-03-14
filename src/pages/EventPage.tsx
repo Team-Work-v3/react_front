@@ -152,7 +152,7 @@ useEffect(() => {
             
         } catch (err) {
             console.error('Ошибка загрузки отзывов:', err);
-            setError('На данный момент отзывы отстутвуют');
+            setError('Не удалось загрузить отзывы');
             setReviews([]); // Пустой массив в случае ошибки
         } finally {
             setLoading(false);
