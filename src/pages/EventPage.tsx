@@ -11,6 +11,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { useScrollLock } from "../hooks/useScrollLock";
 import type { ValidationResult } from "../models/validation-result.interface";
+import type { IReview } from "../models/review.interface"; // Создайте этот интерфейс
 
 export default function EventPage() {
     // const mail_api_key = import.meta.env.VITE_MAIL_API_KEY || "";
@@ -34,6 +35,10 @@ export default function EventPage() {
         phone: true, 
         count: true
     });
+
+    const [reviews, setReviews] = useState<IReview[]>([]); // Состояние для отзывов
+    const [loading, setLoading] = useState<boolean>(true); // Состояние загрузки
+    const [error, setError] = useState<string | null>(null); // Состояние ошибки
 
     const errorSpans = {
         fullname: useRef<HTMLSpanElement | null>(null),
@@ -116,6 +121,79 @@ export default function EventPage() {
             window.scrollTo(0, 0);
         }
     }, [location]);
+
+
+
+    // Загрузка отзывов для конкретного события
+useEffect(() => {
+    const fetchReviews = async (): Promise<void> => {
+        try {
+            setLoading(true);
+            setError(null);
+            
+            const eventId = parseInt(id!);
+            
+            // Замените URL на актуальный эндпоинт вашего API для получения отзывов
+            const response = await fetch(`http://62.109.16.129:5000/api/getReviews/${eventId}`, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+            });
+
+            if (!response.ok) {
+                throw new Error('Ошибка при загрузке отзывов');
+            }
+
+            const data = await response.json();
+            
+            // Проверяем структуру ответа и устанавливаем отзывы
+            // Предполагаем, что API возвращает массив отзывов
+            setReviews(Array.isArray(data) ? data : data.reviews || []);
+            
+        } catch (err) {
+            console.error('Ошибка загрузки отзывов:', err);
+            setError('Не удалось загрузить отзывы');
+            setReviews([]); // Пустой массив в случае ошибки
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (id) {
+        fetchReviews();
+    }
+}, [id]);
+
+
+
+// Функция для форматирования даты
+const formatDate = (dateString: string): string => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    
+    return `${day}.${month}, ${hours}:${minutes}`;
+};
+
+// Функция для разделения отзывов на две колонки
+const splitReviewsIntoColumns = (reviewsArray: IReview[]) => {
+    const columns: IReview[][] = [[], []];
+    
+    reviewsArray.forEach((review, index) => {
+        columns[index % 2].push(review);
+    });
+    
+    return columns;
+};
+
+const reviewColumns = splitReviewsIntoColumns(reviews);
+
+
+
+
+
 
     const validateFullname = (value: string | undefined): ValidationResult => {
         if (typeof value === "undefined") {
@@ -553,58 +631,60 @@ export default function EventPage() {
 
 
                 <div className="feedback-container">
-                    <h1 id="review" className="text-max-big unbounded-bold">Отзывы</h1>
-                    <div className="reviews-list inter-regular">
-                        {/* нечетный контейнер */}
-                        <div className="reviews-list-container odd">
-                            <div className="review-card">
-                                <h3 className="text-little-medium">Анатолий</h3>
-                                <h6 className="text-little">13 апреля, 12:54</h6>
-                                <p className="text-little">
-                                    Также как внедрение современных методик обеспечивает широкому кругу (специалистов) участие в
-                                    формировании позиций, занимаемых участниками в отношении поставленных задач. Являясь всего лишь
-                                    частью общей картины, тщательные исследования конкурентов набирают популярность среди
-                                    определенных слоев населения, а значит, должны быть своевременно верифицированы. Являясь всего
-                                    лишь частью общей картины, тщательные исследования
-                                </p>
-                            </div>
-                            <div className="review-card">
-                                <h3 className="text-little-medium">Анатолий</h3>
-                                <h6 className="text-little">13 апреля, 12:54</h6>
-                                <p className="text-little">
-                                    Также как внедрение современных методик обеспечивает широкому кругу (специалистов) участие в
-                                    формировании позиций, занимаемых участниками в отношении поставленных задач. Являясь всего лишь
-                                    частью общей картины, тщательные исследования конкурентов набирают популярность среди
-                                    определенных слоев населения, а значит, должны быть своевременно верифицированы. Являясь всего
-                                    лишь частью общей картины, тщательные исследования
-                                </p>
-                            </div>
-                        </div>
-                        {/* четный контейнер */}
-                        <div className="reviews-list-container even">
-                            <div className="review-card">
-                                <h3 className="text-little-medium">Анатолий</h3>
-                                <h6 className="text-little">13 апреля, 12:54</h6>
-                                <p className="text-little">
-                                    Также как внедрение современных методик обеспечивает широкому кругу (специалистов) участие в
-                                    формировании позиций, занимаемых участниками в отношении поставленных задач. Являясь всего лишь
-                                </p>
-                            </div>
-                            <div className="review-card">
-                                <h3 className="text-little-medium">Анатолий</h3>
-                                <h6 className="text-little">13 апреля, 12:54</h6>
-                                <p className="text-little">
-                                    Также как внедрение современных методик обеспечивает широкому кругу (специалистов) участие в
-                                    формировании позиций, занимаемых участниками в отношении поставленных задач. Являясь всего лишь
-                                    частью общей картины, тщательные исследования конкурентов набирают популярность среди
-                                    определенных слоев населения, а значит, должны быть своевременно верифицированы. Являясь всего
-                                    лишь частью общей картины, тщательные исследования
-                                </p>
-                            </div>
-                        </div>
+    <h1 id="review" className="text-max-big unbounded-bold">Отзывы</h1>
+    
+    {/* Состояние загрузки */}
+    {loading && (
+        <div className="reviews-loading inter-regular">
+            Загрузка отзывов...
+        </div>
+    )}
+    
+    {/* Состояние ошибки */}
+    {error && !loading && (
+        <div className="reviews-error inter-regular">
+            {error}
+        </div>
+    )}
+    
+    {/* Нет отзывов */}
+    {!loading && !error && reviews.length === 0 && (
+        <div className="reviews-empty inter-regular">
+            Пока нет отзывов. Будьте первым!
+        </div>
+    )}
+    
+    {/* Отображение отзывов */}
+    {!loading && !error && reviews.length > 0 && (
+        <div className="reviews-list inter-regular">
+            {/* Первая колонка (нечетные) */}
+            <div className="reviews-list-container odd">
+                {reviewColumns[0].map((review) => (
+                    <div key={review.id} className="review-card">
+                        <h3 className="text-little-medium">{review.author_name}</h3>
+                        <h6 className="text-little">{formatDate(review.created_at)}</h6>
+                        <p className="text-little">
+                            {review.text}
+                        </p>
                     </div>
-                </div>
-
+                ))}
+            </div>
+            
+            {/* Вторая колонка (четные) */}
+            <div className="reviews-list-container even">
+                {reviewColumns[1].map((review) => (
+                    <div key={review.id} className="review-card">
+                        <h3 className="text-little-medium">{review.author_name}</h3>
+                        <h6 className="text-little">{formatDate(review.created_at)}</h6>
+                        <p className="text-little">
+                            {review.text}
+                        </p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    )}
+</div>
                 
                 <a href="/" className="to-home-button inter-light">На главную</a>
             </Wrapper>

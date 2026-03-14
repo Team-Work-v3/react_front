@@ -1130,3 +1130,23 @@ h6.text-little {
         display: none;
     }
 }
+
+
+
+
+.reviews-loading,
+.reviews-error,
+.reviews-empty {
+    text-align: center;
+    padding: 40px;
+    font-size: 16px;
+    color: #666;
+    background: #f9f9f9;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.reviews-error {
+    color: #d32f2f;
+    background: #ffebee;
+}
