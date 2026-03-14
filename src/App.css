@@ -636,6 +636,7 @@ a {
 .form-group {
     /* margin-bottom: 25px; */
     width: 100%;
+    padding-top: 15px;
 }
 
 .form-group div {
