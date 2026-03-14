@@ -696,6 +696,8 @@ label {
     align-items: center;
     /* margin-bottom: 30px; */
     font-size: 14px;
+     padding-bottom: 10px;
+    padding-top: 25px;
    
 }
 
@@ -710,8 +712,7 @@ label {
     margin-bottom: 0;
     color: var(--color-text-label);
     cursor: pointer;
-     padding-bottom: 10px;
-    padding-top: 25px;
+    
 }
 
 .btm-buy {
