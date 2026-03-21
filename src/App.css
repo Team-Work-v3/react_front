@@ -489,6 +489,9 @@ a {
     flex-direction: column;
     justify-content: space-between;
 }
+.first-block>h1{
+    line-height: 90%;
+}
 
 .first-block>div {
     display: flex;
