@@ -661,10 +661,10 @@ const reviewColumns = splitReviewsIntoColumns(reviews);
             <div className="reviews-list-container odd">
                 {reviewColumns[0].map((review) => (
                     <div key={review.id} className="review-card">
-                        {/* <h3 className="text-little-medium">{review.author_name}</h3> */}
+                        <h3 className="text-little-medium">{review.author_name}</h3>
                         <h6 className="text-little">{formatDate(review.created_at)}</h6>
                         <p className="text-little">
-                            {review.review_text}
+                            {review.text}
                         </p>
                     </div>
                 ))}
@@ -674,10 +674,10 @@ const reviewColumns = splitReviewsIntoColumns(reviews);
             <div className="reviews-list-container even">
                 {reviewColumns[1].map((review) => (
                     <div key={review.id} className="review-card">
-                        {/* <h3 className="text-little-medium">{review.author_name}</h3> */}
+                        <h3 className="text-little-medium">{review.author_name}</h3>
                         <h6 className="text-little">{formatDate(review.created_at)}</h6>
                         <p className="text-little">
-                            {review.review_text}
+                            {review.text}
                         </p>
                     </div>
                 ))}
