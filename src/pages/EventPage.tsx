@@ -134,7 +134,7 @@ useEffect(() => {
             const eventId = parseInt(id!);
             
             // Замените URL на актуальный эндпоинт вашего API для получения отзывов
-            const response = await fetch(`http://62.109.16.129:5000/api/getAllReviews`, {
+            const response = await fetch(`http://62.109.16.129:5000/api/getReviews/${eventId}`, {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",
@@ -168,16 +168,13 @@ useEffect(() => {
 
 // Функция для форматирования даты
 const formatDate = (dateString: string): string => {
-    // const date = new Date(dateString);
-    // const day = date.getDate().toString().padStart(2, '0');
-    // const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    // const hours = date.getHours().toString().padStart(2, '0');
-    // const minutes = date.getMinutes().toString().padStart(2, '0');
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
     
-    // return `${day}.${month}, ${hours}:${minutes}`;
-
-    return `help`;
-};
+    return `${day}.${month}, ${hours}:${minutes}`;
 };
 
 // Функция для разделения отзывов на две колонки
@@ -664,10 +661,10 @@ const reviewColumns = splitReviewsIntoColumns(reviews);
             <div className="reviews-list-container odd">
                 {reviewColumns[0].map((review) => (
                     <div key={review.id} className="review-card">
-                        <h3 className="text-little-medium">{review.user_name}</h3>
+                        <h3 className="text-little-medium">{review.author_name}</h3>
                         <h6 className="text-little">{formatDate(review.created_at)}</h6>
                         <p className="text-little">
-                            {review.review_text}
+                            {review.text}
                         </p>
                     </div>
                 ))}
@@ -677,10 +674,10 @@ const reviewColumns = splitReviewsIntoColumns(reviews);
             <div className="reviews-list-container even">
                 {reviewColumns[1].map((review) => (
                     <div key={review.id} className="review-card">
-                        <h3 className="text-little-medium">{review.user_name}</h3>
+                        <h3 className="text-little-medium">{review.author_name}</h3>
                         <h6 className="text-little">{formatDate(review.created_at)}</h6>
                         <p className="text-little">
-                            {review.review_text}
+                            {review.text}
                         </p>
                     </div>
                 ))}
