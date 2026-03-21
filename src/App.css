@@ -578,6 +578,9 @@ a {
     font-size: 20px;
     border: none;
     align-self: start;
+
+    width: 175px;
+    height: 48px;
 }
 
 .btn:hover {
