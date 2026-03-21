@@ -540,7 +540,7 @@ a {
 .text-medium {
     font-size: 20px;
     margin: 0;
-       line-height: 90%;
+       line-height: 9
 }
 
 .text-little-medium {
@@ -572,13 +572,14 @@ a {
 .btn {
     display: inline-block;
     text-decoration: none;
-    padding: 12px 20px;
+    padding: 20px 22px;
     background-color: #982520;
     color: #FFFFFF;
     width: auto;
     font-size: 20px;
     border: none;
     align-self: start;
+    height: 48px;
 }
 
 .btn:hover {
