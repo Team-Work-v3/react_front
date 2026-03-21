@@ -134,7 +134,7 @@ useEffect(() => {
             const eventId = parseInt(id!);
             
             // Замените URL на актуальный эндпоинт вашего API для получения отзывов
-            const response = await fetch(`http://62.109.16.129:5000//api/getAllReviews`, {
+            const response = await fetch(`http://62.109.16.129:5000/api/getAllReviews`, {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",
