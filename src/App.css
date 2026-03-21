@@ -534,13 +534,12 @@ a {
 
 .text-medium-big {
     font-size: 32px;
-       line-height: 90%;
+    line-height: 90%;
 }
 
 .text-medium {
     font-size: 20px;
     margin: 0;
-       line-height: 9
 }
 
 .text-little-medium {
@@ -572,14 +571,13 @@ a {
 .btn {
     display: inline-block;
     text-decoration: none;
-    padding: 20px 22px;
+    padding: 12px 20px;
     background-color: #982520;
     color: #FFFFFF;
     width: auto;
     font-size: 20px;
     border: none;
     align-self: start;
-    height: 48px;
 }
 
 .btn:hover {
