@@ -529,6 +529,7 @@ a {
 .text-big {
     font-size: 48px;
     margin: 0;
+    line-height: 90%;
 }
 
 .text-medium-big {
