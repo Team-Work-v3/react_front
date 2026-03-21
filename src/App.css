@@ -6,7 +6,6 @@
     margin: 0;
     padding: 0;
 }
-
 body {
     background-color: #F2F2F2;
 }
@@ -540,6 +539,7 @@ a {
 .text-medium {
     font-size: 20px;
     margin: 0;
+    line-height: 100%;
 }
 
 .text-little-medium {
