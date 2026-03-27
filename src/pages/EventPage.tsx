@@ -820,7 +820,7 @@ export default function EventPage() {
                 
                 const eventId = parseInt(id!);
                 
-                const response = await fetch(`http://62.109.16.129:5000/api/getReviews/${eventId}`, {
+                const response = await fetch(`http://62.109.16.129:5000/api/getReviews`, {
                     method: "GET",
                     headers: { "Content-Type": "application/json" },
                     credentials: "include",
