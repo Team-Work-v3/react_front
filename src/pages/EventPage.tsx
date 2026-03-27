@@ -1183,7 +1183,7 @@ export default function EventPage() {
                     )}
                 </div>
                 
-                <a href="/" className="to-home-button inter-light">На главную</a>
+                <a href="/" className="to-home-button inter-light">На  </a>
             </Wrapper>
             <dialog ref={dialogWindowRef} className="dialog-window">
                 <div className="dialog-window-container">
