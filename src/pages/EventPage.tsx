@@ -712,7 +712,6 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import Footer from "../components/Footer";
 import Wrapper from "../components/Wrapper";
 import type { IEvent } from "../models/event.interface";
-import type { IReview } from "../models/review.interface";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 
@@ -721,17 +720,12 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { useScrollLock } from "../hooks/useScrollLock";
 import type { ValidationResult } from "../models/validation-result.interface";
+import type { IReview } from "../models/review.interface";
 
 export default function EventPage() {
-    // const mail_api_key = import.meta.env.VITE_MAIL_API_KEY || "";
-    // const mail_api_key = "34a03d0d-4573-4096-b24c-c56a65f4a0f8";
-
     const [event, setEvent] = useState<IEvent>();
     const { id } = useParams<{ id: string }>();
     const [gallery, setGallery] = useState<string[]>([]);
-    const [reviews, setReviews] = useState<IReview[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
 
     const review = {
         fullname: useRef<HTMLInputElement | null>(null),
@@ -744,83 +738,90 @@ export default function EventPage() {
     const [validationErrors, setValidationErrors] = useState({
         fullname: true,
         email: true,
-        phone: true, 
+        phone: true,
         count: true
     });
+
+    const [reviews, setReviews] = useState<IReview[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
 
     const errorSpans = {
         fullname: useRef<HTMLSpanElement | null>(null),
         email: useRef<HTMLSpanElement | null>(null),
         phone: useRef<HTMLSpanElement | null>(null),
         count: useRef<HTMLSpanElement | null>(null)
-    }
+    };
 
     const location = useLocation();
-
     const dialogWindowRef = useRef<HTMLDialogElement | null>(null);
     const buttonSubmitReviewRef = useRef<HTMLButtonElement | null>(null);
-    // const formRegistrationRef = useRef<HTMLFormElement | null>(null);
-    // const textareaMessageRef = useRef<HTMLTextAreaElement | null>(null);
-
     const { lockScroll, unlockScroll } = useScrollLock();
 
     const updateValidationStatus = (field: keyof typeof validationErrors, isValid: boolean) => {
-        setValidationErrors(prev => ({
-            ...prev,
-            [field]: isValid
-        }));
+        setValidationErrors(prev => ({ ...prev, [field]: isValid }));
     };
 
-    const isFormValid = () => {
-        return Object.values(validationErrors).every(error => error === true);
-    };
+    const isFormValid = () => Object.values(validationErrors).every(error => error === true);
 
+    // Загрузка мероприятия
     useEffect(() => {
-        const fetchEvents = async (): Promise<void> => {
+        const fetchEvent = async (): Promise<void> => {
             const eventId = parseInt(id!);
-
             const response = await fetch("http://62.109.16.129:5000/api/getEvent", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",
                 body: JSON.stringify({ id: eventId })
             });
-
             setEvent(await response.json());
-        }
-        fetchEvents();
+        };
+        fetchEvent();
     }, [id]);
 
+    // Загрузка галереи
     useEffect(() => {
         const fetchGallery = async (): Promise<void> => {
             const response = await fetch("http://62.109.16.129:5000/temp/getMentors");
             const data = await response.json();
             const links = data.links_images;
-
             const setRandomNumbers: Set<number> = new Set();
-
             while (setRandomNumbers.size < 6) {
                 const randomNumber: number = Math.floor(Math.random() * (222 - 0 + 1) + 0);
                 setRandomNumbers.add(randomNumber);
             }
-
             const arrayRandomNumbers: number[] = Array.from(setRandomNumbers);
             const randomData = arrayRandomNumbers.map(index => links[index]);
-
             setGallery(randomData);
-        }
+        };
         fetchGallery();
     }, []);
 
+    // Скролл по якорю
+    useEffect(() => {
+        if (location.hash) {
+            const element = document.querySelector(location.hash);
+            if (element) {
+                const offset = 120;
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+                window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+            }
+        } else {
+            window.scrollTo(0, 0);
+        }
+    }, [location]);
+
+    // ✅ Загрузка отзывов через обновлённое API с параметром id
     useEffect(() => {
         const fetchReviews = async (): Promise<void> => {
             try {
                 setLoading(true);
                 setError(null);
-                
                 const eventId = parseInt(id!);
-                
-                const response = await fetch(`http://62.109.16.129:5000/api/getReviews`, {
+
+                // Используем GET-запрос с параметром id
+                const response = await fetch(`http://62.109.16.129:5000/api/getAllReviews?id=${eventId}`, {
                     method: "GET",
                     headers: { "Content-Type": "application/json" },
                     credentials: "include",
@@ -831,13 +832,24 @@ export default function EventPage() {
                 }
 
                 const data = await response.json();
-                
-                let reviewsData: IReview[] = [];
-                if (data.reviews && Array.isArray(data.reviews)) {
-                    reviewsData = data.reviews.filter(review => review.is_approved === true);
+
+                // Обрабатываем разные возможные форматы ответа
+                let reviewsArray: IReview[] = [];
+                if (Array.isArray(data)) {
+                    reviewsArray = data;
+                } else if (data.reviews && Array.isArray(data.reviews)) {
+                    reviewsArray = data.reviews;
+                } else {
+                    reviewsArray = [];
                 }
-                setReviews(reviewsData);
-                
+
+                // Фильтруем только одобренные отзывы (на случай, если API вернёт неодобренные)
+                const approvedReviews = reviewsArray.filter(review => review.is_approved === true);
+
+                // Сортировка по дате (новые сверху)
+                approvedReviews.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+
+                setReviews(approvedReviews);
             } catch (err) {
                 console.error('Ошибка загрузки отзывов:', err);
                 setError('Не удалось загрузить отзывы');
@@ -852,139 +864,70 @@ export default function EventPage() {
         }
     }, [id]);
 
-    useEffect(() => {
-        if (location.hash) {
-            const element = document.querySelector(location.hash);
-            if (element) {
-                const offset = 120;
-                const elementPosition = element.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - offset;
+    // Форматирование даты
+    const formatDate = (dateString: string): string => {
+        const date = new Date(dateString);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        return `${day}.${month}, ${hours}:${minutes}`;
+    };
 
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
-            }
-        } else {
-            window.scrollTo(0, 0);
-        }
-    }, [location]);
+    // Разделение отзывов на две колонки
+    const splitReviewsIntoColumns = (reviewsArray: IReview[]) => {
+        const columns: IReview[][] = [[], []];
+        reviewsArray.forEach((review, index) => {
+            columns[index % 2].push(review);
+        });
+        return columns;
+    };
 
+    const reviewColumns = splitReviewsIntoColumns(reviews);
+
+    // Валидация полей формы (остаётся без изменений)
     const validateFullname = (value: string | undefined): ValidationResult => {
-        if (typeof value === "undefined") {
-            return { valid: false, error: "Поле обязательно для заполнения" };
-        }
-
+        if (typeof value === "undefined") return { valid: false, error: "Поле обязательно для заполнения" };
         const v = value.trim();
-
-        if (!v) {
-            return { valid: false, error: "Поле обязательно для заполнения" };
-        }
-
-        if (v.length < 5) {
-            return { valid: false, error: "Слишком короткое имя" };
-        }
-
-        if (v.length > 60) {
-            return { valid: false, error: "Слишком длинное имя" };
-        }
-
-        if (/[^A-Za-zА-Яа-яЁё\s'-]/.test(v)) {
-            return { valid: false, error: "Допустимы только буквы, пробел, дефис и апостроф" };
-        }
-
-        if (!v.includes(" ")) {
-            return { valid: false, error: "Введите минимум имя и фамилию" };
-        }
-
-        if (/\s{2,}/.test(v)) {
-            return { valid: false, error: "Лишние пробелы" };
-        }
-
+        if (!v) return { valid: false, error: "Поле обязательно для заполнения" };
+        if (v.length < 5) return { valid: false, error: "Слишком короткое имя" };
+        if (v.length > 60) return { valid: false, error: "Слишком длинное имя" };
+        if (/[^A-Za-zА-Яа-яЁё\s'-]/.test(v)) return { valid: false, error: "Допустимы только буквы, пробел, дефис и апостроф" };
+        if (!v.includes(" ")) return { valid: false, error: "Введите минимум имя и фамилию" };
+        if (/\s{2,}/.test(v)) return { valid: false, error: "Лишние пробелы" };
         const parts = v.split(/\s+/);
-
-        if (parts.some(p => p.length < 2)) {
-            return { valid: false, error: "Каждое слово должно быть минимум из двух букв" };
-        }
-
+        if (parts.some(p => p.length < 2)) return { valid: false, error: "Каждое слово должно быть минимум из двух букв" };
         return { valid: true };
     };
 
     const validateEmail = (value: string | undefined): ValidationResult => {
-        if (typeof value === "undefined") {
-            return { valid: false, error: "Поле обязательно для заполнения" };
-        }
-
+        if (typeof value === "undefined") return { valid: false, error: "Поле обязательно для заполнения" };
         const v = value.trim();
-
-        if (!v) {
-            return { valid: false, error: "Email обязателен" };
-        }
-
-        if (!v.includes("@")) {
-            return { valid: false, error: "Отсутствует символ @" };
-        }
-
-        if (/\.{2,}/.test(v)) {
-            return { valid: false, error: "Недопустимые двойные точки" };
-        }
-
+        if (!v) return { valid: false, error: "Email обязателен" };
+        if (!v.includes("@")) return { valid: false, error: "Отсутствует символ @" };
+        if (/\.{2,}/.test(v)) return { valid: false, error: "Недопустимые двойные точки" };
         const emailRegex = /^(?=.{1,254}$)(?=.{1,64}@)([A-Za-z0-9._%+-]+)@((?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z]{2,24})$/;
-
-        if (!emailRegex.test(v)) {
-            return { valid: false, error: "Некорректный формат email" };
-        }
-
+        if (!emailRegex.test(v)) return { valid: false, error: "Некорректный формат email" };
         return { valid: true };
     };
 
     const validatePhone = (value: string | undefined): ValidationResult => {
-        if (typeof value === "undefined") {
-            return { valid: false, error: "Поле обязательно для заполнения" };
-        }
-
+        if (typeof value === "undefined") return { valid: false, error: "Поле обязательно для заполнения" };
         const v = value.trim();
-
-        if (!v) {
-            return { valid: false, error: "Телефон обязателен" };
-        }
-
-        if (!/^[+\d]+$/.test(v)) {
-            return { valid: false, error: "Телефон должен содержать только цифры и опционально +" };
-        }
-
+        if (!v) return { valid: false, error: "Телефон обязателен" };
+        if (!/^[+\d]+$/.test(v)) return { valid: false, error: "Телефон должен содержать только цифры и опционально +" };
         const digits = v.startsWith("+") ? v.slice(1) : v;
-
-        if (!/^\d+$/.test(digits)) {
-            return { valid: false, error: "После + должны быть только цифры" };
-        }
-
-        if (digits.length < 10) {
-            return { valid: false, error: "Слишком мало цифр в номере" };
-        }
-
-        if (digits.length > 15) {
-            return { valid: false, error: "Слишком много цифр в номере" };
-        }
-
+        if (!/^\d+$/.test(digits)) return { valid: false, error: "После + должны быть только цифры" };
+        if (digits.length < 10) return { valid: false, error: "Слишком мало цифр в номере" };
+        if (digits.length > 15) return { valid: false, error: "Слишком много цифр в номере" };
         return { valid: true };
     };
 
     const validateCount = (value: string | undefined): ValidationResult => {
-        if (typeof value === "undefined") {
-            return { valid: false, error: "Поле обязательно для заполнения" };
-        }
-
+        if (typeof value === "undefined") return { valid: false, error: "Поле обязательно для заполнения" };
         const v = value.trim();
-
-        if (!v) {
-            return { valid: false, error: "Количество мест обязательно" };
-        }
-
-        if (!/^[\d]+$/.test(v)) {
-            return { valid: false, error: "Количество должно содержать только цифры" };
-        }
-
+        if (!v) return { valid: false, error: "Количество мест обязательно" };
+        if (!/^[\d]+$/.test(v)) return { valid: false, error: "Количество должно содержать только цифры" };
         return { valid: true };
     };
 
@@ -1002,31 +945,9 @@ export default function EventPage() {
                 agreement: review.agreement.current?.checked ? 1 : 0
             })
         });
-
         const data = await response.json();
-
-        if (data.message === "success") return true;
-        return false;
-    }
-
-    const formatDate = (dateString: string): string => {
-        const date = new Date(dateString);
-        const day = date.getDate().toString().padStart(2, '0');
-        const month = (date.getMonth() + 1).toString().padStart(2, '0');
-        const hours = date.getHours().toString().padStart(2, '0');
-        const minutes = date.getMinutes().toString().padStart(2, '0');
-        return `${day}.${month}, ${hours}:${minutes}`;
+        return data.message === "success";
     };
-
-    const splitReviewsIntoColumns = (reviewsArray: IReview[]) => {
-        const columns: IReview[][] = [[], []];
-        reviewsArray.forEach((review, index) => {
-            columns[index % 2].push(review);
-        });
-        return columns;
-    };
-
-    const reviewColumns = splitReviewsIntoColumns(reviews);
 
     return (
         <>
@@ -1047,7 +968,7 @@ export default function EventPage() {
                         <div>
                             <h1 className="text-big unbounded-regular" id="text-indentation">{event?.name_event}</h1>
                             <div className="block-frome">
-                                <a className="frome text-little unbounded-regular">{event?.date_event.split("-").reverse().join(".")}</a>
+                                <a className="frome text-little unbounded-regular">{event?.date_event?.split("-").reverse().join(".")}</a>
                                 <a className="frome text-little unbounded-regular">{event?.time_event}</a>
                                 <a className="frome text-little unbounded-regular">{event?.event_category}</a>
                             </div>
@@ -1061,6 +982,7 @@ export default function EventPage() {
                         </nav>
                     </div>
                 </div>
+
                 <div className="description-conteiner">
                     <div className="description">
                         <h2 className="text-medium-big unbounded-regular">Описание</h2>
@@ -1075,6 +997,7 @@ export default function EventPage() {
                         <p className="text-medium inter-regular">{event?.organizers_event}</p>
                     </div>
                 </div>
+
                 <div className="block-form" id="registration">
                     <div id="form-color">
                         <div className="registrstion-layout">
@@ -1093,26 +1016,17 @@ export default function EventPage() {
                                             name="name"
                                             placeholder="Иван Иванов"
                                             ref={review.fullname}
-                                            onFocus={() => {
-                                                review.fullname.current?.classList.remove("error");
-                                            }}
+                                            onFocus={() => { review.fullname.current?.classList.remove("error"); }}
                                             onBlur={() => {
                                                 const { valid, error } = validateFullname(review.fullname.current?.value);
-
                                                 updateValidationStatus("fullname", valid);
-
                                                 if (!valid) {
                                                     review.fullname.current?.classList.add("error");
-                                                    if (errorSpans.fullname.current) {
-                                                        errorSpans.fullname.current.textContent = error || "";
-                                                    }
+                                                    if (errorSpans.fullname.current) errorSpans.fullname.current.textContent = error || "";
                                                     return;
                                                 }
-
                                                 review.fullname.current?.classList.remove("error");
-                                                if (errorSpans.fullname.current) {
-                                                    errorSpans.fullname.current.textContent = "";
-                                                }
+                                                if (errorSpans.fullname.current) errorSpans.fullname.current.textContent = "";
                                             }}
                                         />
                                     </div>
@@ -1126,32 +1040,23 @@ export default function EventPage() {
                                             type="email"
                                             id="email"
                                             name="email"
-                                            maxLength={100} placeholder="ivanov2000@gmail.com"
+                                            maxLength={100}
+                                            placeholder="ivanov2000@gmail.com"
                                             ref={review.email}
-                                            onFocus={() => {
-                                                review.email.current?.classList.remove("error");
-                                            }}
+                                            onFocus={() => { review.email.current?.classList.remove("error"); }}
                                             onBlur={() => {
                                                 const { valid, error } = validateEmail(review.email.current?.value);
-
                                                 updateValidationStatus("email", valid);
-
                                                 if (!valid) {
                                                     review.email.current?.classList.add("error");
-                                                    if (errorSpans.email.current) {
-                                                        errorSpans.email.current.textContent = error || "";
-                                                    }
+                                                    if (errorSpans.email.current) errorSpans.email.current.textContent = error || "";
                                                     return;
                                                 }
-
                                                 review.email.current?.classList.remove("error");
-                                                if (errorSpans.email.current) {
-                                                    errorSpans.email.current.textContent = "";
-                                                }
+                                                if (errorSpans.email.current) errorSpans.email.current.textContent = "";
                                             }}
                                         />
                                     </div>
-
                                     <div className="form-group">
                                         <div>
                                             <label className="label-indent inter-light" htmlFor="phone"><span className="label-indent-red">*</span>Номер телефона</label>
@@ -1164,30 +1069,20 @@ export default function EventPage() {
                                             maxLength={20}
                                             placeholder="+375 (29) 222-22-22"
                                             ref={review.phone}
-                                            onFocus={() => {
-                                                review.phone.current?.classList.remove("error");
-                                            }}
+                                            onFocus={() => { review.phone.current?.classList.remove("error"); }}
                                             onBlur={() => {
                                                 const { valid, error } = validatePhone(review.phone.current?.value);
-
                                                 updateValidationStatus("phone", valid);
-
                                                 if (!valid) {
                                                     review.phone.current?.classList.add("error");
-                                                    if (errorSpans.phone.current) {
-                                                        errorSpans.phone.current.textContent = error || "";
-                                                    }
+                                                    if (errorSpans.phone.current) errorSpans.phone.current.textContent = error || "";
                                                     return;
                                                 }
-
                                                 review.phone.current?.classList.remove("error");
-                                                if (errorSpans.phone.current) {
-                                                    errorSpans.phone.current.textContent = "";
-                                                }
+                                                if (errorSpans.phone.current) errorSpans.phone.current.textContent = "";
                                             }}
                                         />
                                     </div>
-
                                     <div className="form-group">
                                         <div>
                                             <label className="label-indent inter-light" htmlFor="count"><span className="label-indent-red">*</span>Количество мест</label>
@@ -1201,26 +1096,17 @@ export default function EventPage() {
                                             placeholder="1"
                                             min="1"
                                             ref={review.count}
-                                            onFocus={() => {
-                                                review.count.current?.classList.remove("error");
-                                            }}
+                                            onFocus={() => { review.count.current?.classList.remove("error"); }}
                                             onBlur={() => {
                                                 const { valid, error } = validateCount(review.count.current?.value);
-
                                                 updateValidationStatus("count", valid);
-
                                                 if (!valid) {
                                                     review.count.current?.classList.add("error");
-                                                    if (errorSpans.count.current) {
-                                                        errorSpans.count.current.textContent = error || "";
-                                                    }
+                                                    if (errorSpans.count.current) errorSpans.count.current.textContent = error || "";
                                                     return;
                                                 }
-
                                                 review.count.current?.classList.remove("error");
-                                                if (errorSpans.count.current) {
-                                                    errorSpans.count.current.textContent = "";
-                                                }
+                                                if (errorSpans.count.current) errorSpans.count.current.textContent = "";
                                             }}
                                         />
                                     </div>
@@ -1231,13 +1117,13 @@ export default function EventPage() {
                                     <button type="button" className={`btm-buy inter-bold ${!isFormValid() ? 'error' : ''}`} ref={buttonSubmitReviewRef}
                                         onClick={async () => {
                                             if (!isFormValid()) return;
-
                                             if (await sendReview()) {
                                                 dialogWindowRef.current?.showModal();
                                                 lockScroll();
-                                                return;
                                             }
-                                        }}>Зарегистрироваться</button>
+                                        }}>
+                                        Зарегистрироваться
+                                    </button>
                                 </form>
                             </div>
                         </div>
@@ -1246,6 +1132,7 @@ export default function EventPage() {
                         </div>
                     </div>
                 </div>
+
                 <div className="gallery-container">
                     <h1 id="gallery-text" className="text-max-big unbounded-bold">Галерея</h1>
                     <div className="gallery">
@@ -1271,16 +1158,12 @@ export default function EventPage() {
                         <div className="arrow-button">
                             <button id="button-turn" className="all-button-arrow custom-swiper-button-left">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M15.833 9.99967L4.16634 9.99967M15.833 9.99967L12.4997 6.66634M15.833 9.99967L12.4997 13.333"
-                                        stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                    <path d="M15.833 9.99967L4.16634 9.99967M15.833 9.99967L12.4997 6.66634M15.833 9.99967L12.4997 13.333" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                             </button>
                             <button className="all-button-arrow custom-swiper-button-right">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M15.833 9.99967L4.16634 9.99967M15.833 9.99967L12.4997 6.66634M15.833 9.99967L12.4997 13.333"
-                                        stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                    <path d="M15.833 9.99967L4.16634 9.99967M15.833 9.99967L12.4997 6.66634M15.833 9.99967L12.4997 13.333" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                             </button>
                             <span className="gallery-more inter-regular">Посмотреть ещё</span>
@@ -1288,27 +1171,14 @@ export default function EventPage() {
                     </div>
                 </div>
 
+                {/* Блок отзывов */}
                 <div className="feedback-container">
                     <h1 id="review" className="text-max-big unbounded-bold">Отзывы</h1>
-                    
-                    {loading && (
-                        <div className="reviews-loading inter-regular">
-                            Загрузка отзывов...
-                        </div>
-                    )}
-                    
-                    {error && !loading && (
-                        <div className="reviews-error inter-regular">
-                            {error}
-                        </div>
-                    )}
-                    
+                    {loading && <div className="reviews-loading inter-regular">Загрузка отзывов...</div>}
+                    {error && !loading && <div className="reviews-error inter-regular">{error}</div>}
                     {!loading && !error && reviews.length === 0 && (
-                        <div className="reviews-empty inter-regular">
-                            Пока нет отзывов. Будьте первым!
-                        </div>
+                        <div className="reviews-empty inter-regular">Пока нет отзывов. Будьте первым!</div>
                     )}
-                    
                     {!loading && !error && reviews.length > 0 && (
                         <div className="reviews-list inter-regular">
                             <div className="reviews-list-container odd">
@@ -1341,11 +1211,7 @@ export default function EventPage() {
                         <img src="http://62.109.16.129:5000/index/registration.png" alt="image" className="dialog-image" />
                         <span className="unbounded-medium dialog-window-heading">Спасибо за регистрацию</span>
                         <span className="inter-regular dialog-window-text">Скоро вам придёт сообщение на почту</span>
-                        <button className="inter-medium dialog-window-button btn"
-                            onClick={() => {
-                                unlockScroll();
-                                window.location.href = "/";
-                            }}>Всё понятно</button>
+                        <button className="inter-medium dialog-window-button btn" onClick={() => { unlockScroll(); window.location.href = "/"; }}>Всё понятно</button>
                     </div>
                 </div>
             </dialog>
