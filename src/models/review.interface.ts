@@ -9,11 +9,20 @@
 //     updated_at?: string;
 // }
 
+// export interface IReview {
+//   review_id: number;
+//   event_id: number;
+//   user_name: string;
+//   review_text: string;
+//   created_at: string;
+//   is_approved: boolean;
+// }
+
 export interface IReview {
-  review_id: number;
-  event_id: number;
-  user_name: string;
-  review_text: string;
-  created_at: string;
-  is_approved: boolean;
+    review_id: number;
+    event_id: number;
+    user_name: string;
+    review_text: string;
+    created_at: string;
+    is_approved: boolean;
 }
