@@ -1209,7 +1209,7 @@ export default function EventPage() {
                                             <div className="review-header" >
                                                 <div className="review-avatar">
                                                     {review.image_link ? (
-                                                        <img 
+                                                        <img className="img-feedback" 
                                                             src={`http://62.109.16.129:5000${review.image_link}`} 
                                                             alt={review.user_name}
                                                             className="review-avatar-img"
