@@ -847,8 +847,14 @@ export default function EventPage() {
             }
 
             // Фильтруем только одобренные отзывы (is_approved === true)
-            const approvedReviews = reviewsArray.filter(review => review.is_approved === true);
+            // const approvedReviews = reviewsArray.filter(review => review.is_approved === true);
+            const approvedReviews = reviewsArray;
 
+
+
+
+
+            
             // Сортировка по дате (новые сверху)
             approvedReviews.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
 
