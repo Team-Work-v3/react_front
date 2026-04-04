@@ -1200,8 +1200,27 @@ export default function EventPage() {
                                 <div className="reviews-list-container odd">
                                     {reviewColumns[0].map((review) => (
                                         <div key={review.review_id} className="review-card">
-                                            <h3 className="text-little-medium">{review.user_name}</h3>
-                                            <h6 className="text-little">{formatDate(review.created_at)}</h6>
+
+                                            <div>
+                                                <div className="review-avatar">
+                                                    {review.image_link ? (
+                                                        <img 
+                                                            src={`http://62.109.16.129:5000${review.image_link}`} 
+                                                            alt={review.user_name}
+                                                            className="review-avatar-img"
+                                                        />
+                                                    ) : (
+                                                        <div className="review-avatar-placeholder">
+                                                            {review.user_name.charAt(0).toUpperCase()}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                                <div>
+                                                    <h3 className="text-little-medium">{review.user_name}</h3>
+                                                    <h6 className="text-little">{formatDate(review.created_at)}</h6>
+                                                </div>
+                                            </div>
+                                         
                                             <p className="text-little">{review.review_text}</p>
                                         </div>
                                     ))}
