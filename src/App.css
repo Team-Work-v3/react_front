@@ -540,12 +540,12 @@ a {
     font-size: 20px;
     margin: 0;
     line-height: 100%;
-    font-weight: 200;
+    font-weight: 100;
 }
 
 .text-little-medium {
     font-size: 24px;
-    font-weight: 200;
+    font-weight: 100;
 }
 
 .text-little {
