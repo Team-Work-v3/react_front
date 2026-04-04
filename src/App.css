@@ -1236,3 +1236,8 @@ h6.text-little {
 .text-padding{
     padding-top: 27px;
 }
+.text-padding-little{
+    padding-left: 20px;
+    padding-top: 13px;
+    padding-bottom: 22px;
+}

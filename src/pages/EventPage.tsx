@@ -1227,7 +1227,7 @@ export default function EventPage() {
                                             </div>
 
                                          
-                                            <p className="text-little">{review.review_text}</p>
+                                            <p className="text-little text-padding-little">{review.review_text}</p>
                                         </div>
                                     ))}
                                 </div>
