@@ -18,7 +18,7 @@ export default function Card({ event, categories }: { event: IEventReduced, cate
         : (event.is_active === 1 ? "Идет регистрация" : "Закрыто");
 
     const LabelSeats = isFuture 
-        ? "" 
+        ? "none" 
         :(event.remaining_seats > 10 ? "none" : "block");
     return (
         <article className="event-item">
