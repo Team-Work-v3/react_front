@@ -1210,6 +1210,7 @@ export default function EventPage() {
                                     {reviewColumns[1].map((review) => (
                                         <div key={review.review_id} className="review-card">
                                             <h3 className="text-little-medium">{review.user_name}</h3>
+                                            <img src='{review.image_link}'>
                                             <h6 className="text-little">{formatDate(review.created_at)}</h6>
                                             <p className="text-little">{review.review_text}</p>
                                         </div>
