@@ -877,7 +877,7 @@ export default function EventPage() {
     }, [id]);
 
     // Форматирование даты
-    const formatReviewDate = (dateString: string): string => {
+   
     const formatReviewDate = (dateString: string): string => {
     const date = new Date(dateString);
     const day = date.getDate();
@@ -1222,7 +1222,7 @@ export default function EventPage() {
                                                 </div>
                                                 <div>
                                                     <h3 className="text-little-medium">{review.user_name}</h3>
-                                                    <h6 className="text-little">{formatDate (review.created_at)}</h6>
+                                                    <h6 className="text-little">{formatReviewDate (review.created_at)}</h6>
                                                 </div>
                                             </div>
 
@@ -1251,7 +1251,7 @@ export default function EventPage() {
                                                 </div>
                                                 <div>
                                                     <h3 className="text-little-medium">{review.user_name}</h3>
-                                                    <h6 className="text-little">{formatDate(review.created_at)}</h6>
+                                                    <h6 className="text-little">{formatReviewDate(review.created_at)}</h6>
                                                 </div>
                                             </div>
                                          
