@@ -877,14 +877,18 @@ export default function EventPage() {
     }, [id]);
 
     // Форматирование даты
-    const formatDate = (dateString: string): string => {
-        const date = new Date(dateString);
-        const day = date.getDate().toString().padStart(2, '0');
-        const month = (date.getMonth() + 1).toString().padStart(2, '0');
-        const hours = date.getHours().toString().padStart(2, '0');
-        const minutes = date.getMinutes().toString().padStart(2, '0');
-        return `${day}.${month}, ${hours}:${minutes}`;
-    };
+    const formatReviewDate = (dateString: string): string => {
+    const formatReviewDate = (dateString: string): string => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const monthNames = [
+        'января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
+        'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'
+    ];
+    const month = monthNames[date.getMonth()];
+    const year = date.getFullYear();
+    return `${day} ${month}, ${year} года`;
+};
 
     // Разделение отзывов на две колонки
     const splitReviewsIntoColumns = (reviewsArray: IReview[]) => {
@@ -1218,9 +1222,10 @@ export default function EventPage() {
                                                 </div>
                                                 <div>
                                                     <h3 className="text-little-medium">{review.user_name}</h3>
-                                                    <h6 className="text-little">{formatDate(review.created_at)}</h6>
+                                                    <h6 className="text-little">{formatDate (review.created_at)}</h6>
                                                 </div>
                                             </div>
+
                                          
                                             <p className="text-little">{review.review_text}</p>
                                         </div>
