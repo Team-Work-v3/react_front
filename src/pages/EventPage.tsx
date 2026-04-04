@@ -1201,7 +1201,7 @@ export default function EventPage() {
                                     {reviewColumns[0].map((review) => (
                                         <div key={review.review_id} className="review-card">
 
-                                            <div>
+                                            <div className="review-header" >
                                                 <div className="review-avatar">
                                                     {review.image_link ? (
                                                         <img 
