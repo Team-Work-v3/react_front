@@ -5,7 +5,7 @@ export default function Card({ event, categories }: { event: IEventReduced, cate
     // document.addEventListener("DOMContentLoaded", () => console.log(categories));
 
     // Определяем, является ли дата мероприятия будущей
-    const isFuture = new Date(event.date_event) > new Date();
+    const isFuture = new Date(event.date_event) < new Date();
     
     // Текст кнопки: для будущих событий всегда "Подробнее",
     // для прошлых/текущих – оставляем исходную логику
