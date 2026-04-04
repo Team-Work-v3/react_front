@@ -1179,6 +1179,8 @@ h6.text-little {
     height: 48px;
     border-radius: 50%;
     object-fit: cover;
+     padding-left: 20px;
+    padding-top: 20px;
 }
 
 .review-avatar-placeholder {
@@ -1224,8 +1226,4 @@ h6.text-little {
     line-height: 1.5;
     margin: 0;
     color: #333;
-}
-.review-avatar-img{
-    padding-left: 20px;
-    padding-top: 20px;
 }
