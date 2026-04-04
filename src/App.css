@@ -1160,69 +1160,68 @@ h6.text-little {
 }
 
 
-
 .review-card {
-  display: flex;
-  gap: 16px;
-  background: #f9f9f9;
-  border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    gap: 16px;
+    background: #f9f9f9;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .review-avatar {
-  flex-shrink: 0;
+    flex-shrink: 0;
 }
 
 .review-avatar-img {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  object-fit: cover;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .review-avatar-placeholder {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background-color: #ccc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 1.2rem;
-  color: #fff;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: white;
 }
 
 .review-content {
-  flex: 1;
+    flex: 1;
 }
 
 .review-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  flex-wrap: wrap;
-  margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
 }
 
 .review-author {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin: 0;
-  color: #1a1a1a;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+    color: #1a1a1a;
 }
 
 .review-date {
-  font-size: 0.8rem;
-  color: #6c757d;
+    font-size: 0.85rem;
+    color: #6c757d;
+    white-space: nowrap;
 }
 
 .review-text {
-  font-size: 0.95rem;
-  line-height: 1.5;
-  margin: 0;
-  color: #333;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+    color: #333;
 }
