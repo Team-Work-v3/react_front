@@ -1220,7 +1220,7 @@ export default function EventPage() {
                                                         </div>
                                                     )}
                                                 </div>
-                                                <div>
+                                                <div className="text-padding">
                                                     <h3 className="text-medium">{review.user_name}</h3>
                                                     <h6 className="text-little">{formatReviewDate (review.created_at)}</h6>
                                                 </div>
