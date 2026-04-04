@@ -749,6 +749,9 @@ export default function EventPage() {
     const [reviews, setReviews] = useState<IReview[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const [categories, setCategories] = useState<Map<number, string>>(new Map());
+
+
 
     const errorSpans = {
         fullname: useRef<HTMLSpanElement | null>(null),
@@ -822,6 +825,29 @@ export default function EventPage() {
             window.scrollTo(0, 0);
         }
     }, [location]);
+
+    useEffect(() => {
+    const fetchCategories = async () => {
+            try {
+                const response = await fetch("http://62.109.16.129:5000/api/getCategory", {
+                    method: "GET",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                });
+                const data = await response.json();
+                if (data.category && Array.isArray(data.category)) {
+                    const map = new Map<number, string>();
+                    data.category.forEach((cat: { category_id: number; category_name: string }) => {
+                        map.set(cat.category_id, cat.category_name);
+                    });
+                    setCategories(map);
+                }
+            } catch (err) {
+                console.error("Ошибка загрузки категорий:", err);
+            }
+        };
+        fetchCategories();
+    }, []);
 
     // Загрузка отзывов (всегда, но отображаем только для прошедших)
     useEffect(() => {
@@ -986,7 +1012,11 @@ export default function EventPage() {
                             <div className="block-frome">
                                 <a className="frome text-little unbounded-regular">{event?.date_event?.split("-").reverse().join(".")}</a>
                                 <a className="frome text-little unbounded-regular">{event?.time_event}</a>
-                                <a className="frome text-little unbounded-regular">{event?.event_category}</a>
+                                <a className="frome text-little unbounded-regular">
+                                    {event?.event_category !== undefined && categories.get(Number(event.event_category)) 
+                                        ? categories.get(Number(event.event_category)) 
+                                        : event?.event_category}
+                                </a>
                             </div>
                             <p className="text-medium inter-regular" id="indent">{event?.description_event}</p>
                         </div>
