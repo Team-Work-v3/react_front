@@ -1186,6 +1186,7 @@ export default function EventPage() {
                     </div>
                 </div>
 
+               
                 {/* Блок отзывов – показываем только для прошедших мероприятий */}
                 {isPastEvent && (
                     <div className="feedback-container">
@@ -1196,64 +1197,28 @@ export default function EventPage() {
                             <div className="reviews-empty inter-regular">Пока нет отзывов. Будьте первым!</div>
                         )}
                         {!loading && !error && reviews.length > 0 && (
-                           <div className="reviews-list inter-regular">
-        {/* Левая колонка */}
-        <div className="reviews-list-container odd">
-            {reviewColumns[0].map((review) => (
-                <div key={review.review_id} className="review-card">
-                    <div className="review-avatar">
-                        {review.image_link ? (
-                            <img 
-                                src={`http://62.109.16.129:5000${review.image_link}`} 
-                                alt={review.user_name}
-                                className="review-avatar-img"
-                            />
-                        ) : (
-                            <div className="review-avatar-placeholder">
-                                {review.user_name.charAt(0).toUpperCase()}
+                            <div className="reviews-list inter-regular">
+                                <div className="reviews-list-container odd">
+                                    {reviewColumns[0].map((review) => (
+                                        <div key={review.review_id} className="review-card">
+                                            <h3 className="text-little-medium">{review.user_name}</h3>
+                                            <h6 className="text-little">{formatDate(review.created_at)}</h6>
+                                            <p className="text-little">{review.review_text}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="reviews-list-container even">
+                                    {reviewColumns[1].map((review) => (
+                                        <div key={review.review_id} className="review-card">
+                                            <h3 className="text-little-medium">{review.user_name}</h3>
+                                            <img src= http://62.109.16.129:5000{review.image_link} >
+                                            <h6 className="text-little">{formatDate(review.created_at)}</h6>
+                                            <p className="text-little">{review.review_text}</p>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         )}
-                    </div>
-                    <div className="review-content">
-                        <div className="review-header">
-                            <h3 className="review-author">{review.user_name}</h3>
-                            <span className="review-date">{formatReviewDate(review.created_at)}</span>
-                        </div>
-                        <p className="review-text">{review.review_text}</p>
-                    </div>
-                </div>
-            ))}
-        </div>
-
-        {/* Правая колонка */}
-        <div className="reviews-list-container even">
-            {reviewColumns[1].map((review) => (
-                <div key={review.review_id} className="review-card">
-                    <div className="review-avatar">
-                        {review.image_link ? (
-                            <img 
-                                src={`http://62.109.16.129:5000${review.image_link}`} 
-                                alt={review.user_name}
-                                className="review-avatar-img"
-                            />
-                        ) : (
-                            <div className="review-avatar-placeholder">
-                                {review.user_name.charAt(0).toUpperCase()}
-                            </div>
-                        )}
-                    </div>
-                    <div className="review-content">
-                        <div className="review-header">
-                            <h3 className="review-author">{review.user_name}</h3>
-                            <span className="review-date">{formatReviewDate(review.created_at)}</span>
-                        </div>
-                        <p className="review-text">{review.review_text}</p>
-                    </div>
-                </div>
-            ))}
-        </div>
-    </div>
-)}
                     </div>
                 )}
 
