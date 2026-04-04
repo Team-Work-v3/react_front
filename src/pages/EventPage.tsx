@@ -1109,6 +1109,7 @@ export default function EventPage() {
                                                 maxLength={20}
                                                 placeholder="1"
                                                 min="1"
+                                                max = {event?.seats_event}
                                                 ref={review.count}
                                                 onFocus={() => { review.count.current?.classList.remove("error"); }}
                                                 onBlur={() => {
@@ -1201,7 +1202,7 @@ export default function EventPage() {
                                     {reviewColumns[0].map((review) => (
                                         <div key={review.review_id} className="review-card">
 
-                                            <div className="review-header" >
+                                            <div className="rreview-header" >
                                                 <div className="review-avatar">
                                                     {review.image_link ? (
                                                         <img 
@@ -1227,10 +1228,28 @@ export default function EventPage() {
                                 </div>
                                 <div className="reviews-list-container even">
                                     {reviewColumns[1].map((review) => (
-                                        <div key={review.review_id} className="review-card">
-                                            <h3 className="text-little-medium">{review.user_name}</h3>
-                                            http://62.109.16.129:5000{review.image_link}
-                                            <h6 className="text-little">{formatDate(review.created_at)}</h6>
+                                         <div key={review.review_id} className="review-card">
+
+                                            <div className="rreview-header" >
+                                                <div className="review-avatar">
+                                                    {review.image_link ? (
+                                                        <img 
+                                                            src={`http://62.109.16.129:5000${review.image_link}`} 
+                                                            alt={review.user_name}
+                                                            className="review-avatar-img"
+                                                        />
+                                                    ) : (
+                                                        <div className="review-avatar-placeholder">
+                                                            {review.user_name.charAt(0).toUpperCase()}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                                <div>
+                                                    <h3 className="text-little-medium">{review.user_name}</h3>
+                                                    <h6 className="text-little">{formatDate(review.created_at)}</h6>
+                                                </div>
+                                            </div>
+                                         
                                             <p className="text-little">{review.review_text}</p>
                                         </div>
                                     ))}
