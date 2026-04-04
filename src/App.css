@@ -1200,8 +1200,8 @@ h6.text-little {
 
 .review-header {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+    justify-content: flex-start;
+    align-items: center;
     flex-wrap: wrap;
     margin-bottom: 8px;
 }
