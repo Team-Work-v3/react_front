@@ -1007,27 +1007,38 @@ export default function EventPage() {
 //                         </svg>   
                     </Link>
                     <div className="first-block">
-                        <div>
-                            <h1 className="text-big unbounded-regular" id="text-indentation">{event?.name_event}</h1>
-                            <div className="block-frome">
-                                <a className="frome text-little unbounded-regular">{event?.date_event?.split("-").reverse().join(".")}</a>
-                                <a className="frome text-little unbounded-regular">{event?.time_event}</a>
-                                <a className="frome text-little unbounded-regular">
-                                    {event?.event_category !== undefined && categories.get(Number(event.event_category)) 
-                                        ? categories.get(Number(event.event_category)) 
-                                        : event?.event_category}
-                                </a>
-                            </div>
-                            <p className="text-medium inter-regular" id="indent">{event?.description_event}</p>
-                        </div>
-                        <nav>
-                            <span className="unbounded-regular text-medium">{event?.price_event === 0 ? "Бесплатно" : `${event?.price_event}руб`}</span>
-                            <Link to="#registration">
-                                <button className="btn text-medium inter-medium">Записаться</button>
-                            </Link>
-                        </nav>
-                    </div>
-                </div>
+    <div>
+        <h1 className="text-big unbounded-regular" id="text-indentation">
+            {event?.name_event}
+        </h1>
+        <div className="block-frome">
+            <a className="frome text-little unbounded-regular">
+                {event?.date_event?.split("-").reverse().join(".")}
+            </a>
+            <a className="frome text-little unbounded-regular">
+                {event?.time_event}
+            </a>
+            <a className="frome text-little unbounded-regular">
+                {event?.event_category !== undefined && categories.get(Number(event.event_category)) 
+                    ? categories.get(Number(event.event_category)) 
+                    : event?.event_category}
+            </a>
+        </div>
+        <p className="text-medium inter-regular" id="indent">
+            {event?.description_event}
+        </p>
+    </div>
+    <nav>
+        <span className="unbounded-regular text-medium">
+            {event?.price_event === 0 ? "Бесплатно" : `${event?.price_event}руб`}
+        </span>
+        {!isPastEvent && (
+            <Link to="#registration">
+                <button className="btn text-medium inter-medium">Записаться</button>
+            </Link>
+        )}
+    </nav>
+</div>
 
                 <div className="description-conteiner">
                     <div className="description">
