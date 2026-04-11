@@ -6,7 +6,9 @@ export default function Footer() {
             <Wrapper>
                 <div className="footer-container">
                     <div className="footer-top-block">
-                        <span className="unbounded-regular footer-top-block-text">ITeen-Academy</span>
+                        <img src="http://62.109.16.129:5000/index/puaccher-second.png" width="100%" height="620px" />
+                            <Link to="/">    <span className="unbounded-regular footer-top-block-text">ITeen Academy</span> </Link>
+                     
                         <div className="footer-icons-block">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none" className="footer-icon">
                                 <path d="M22.3333 7.33333V7.35M1.5 8.16667C1.5 6.39856 2.20238 4.70286 3.45262 3.45262C4.70286 2.20238 6.39856 1.5 8.16667 1.5H21.5C23.2681 1.5 24.9638 2.20238 26.214 3.45262C27.4643 4.70286 28.1667 6.39856 28.1667 8.16667V21.5C28.1667 23.2681 27.4643 24.9638 26.214 26.214C24.9638 27.4643 23.2681 28.1667 21.5 28.1667H8.16667C6.39856 28.1667 4.70286 27.4643 3.45262 26.214C2.20238 24.9638 1.5 23.2681 1.5 21.5V8.16667ZM9.83333 14.8333C9.83333 16.1594 10.3601 17.4312 11.2978 18.3689C12.2355 19.3066 13.5073 19.8333 14.8333 19.8333C16.1594 19.8333 17.4312 19.3066 18.3689 18.3689C19.3066 17.4312 19.8333 16.1594 19.8333 14.8333C19.8333 13.5073 19.3066 12.2355 18.3689 11.2978C17.4312 10.3601 16.1594 9.83333 14.8333 9.83333C13.5073 9.83333 12.2355 10.3601 11.2978 11.2978C10.3601 12.2355 9.83333 13.5073 9.83333 14.8333Z" stroke="black" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />

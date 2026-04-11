@@ -1021,7 +1021,7 @@ export default function EventPage() {
                             <p className="text-medium inter-regular" id="indent">{event?.description_event}</p>
                         </div>
                         <nav>
-                            <span className="unbounded-regular text-medium">{event?.price_event === 0 ? "Бесплатно" : `${event?.price_event}руб`}</span>
+                            <span className="unbounded-regular text-medium">{event?.price_event === 0 ? "Бесплатно" : `${event?.price_event} руб`}</span>
                              {!isPastEvent && (
                             <Link to="#registration">
                              
