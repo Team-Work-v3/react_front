@@ -6,8 +6,7 @@ export default function Footer() {
             <Wrapper>
                 <div className="footer-container">
                     <div className="footer-top-block">
-                        
-                            <Link to="/">    <span className="unbounded-regular footer-top-block-text">ITeen Academy</span> </Link>
+                        <span className="unbounded-regular footer-top-block-text">ITeen Academy</span>
                      
                         <div className="footer-icons-block">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none" className="footer-icon">
