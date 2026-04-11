@@ -1022,7 +1022,7 @@ export default function EventPage() {
                         </div>
                         <nav>
                             <span className="unbounded-regular text-medium">{event?.price_event === 0 ? "Бесплатно" : `${event?.price_event}руб`}</span>
-                             {isPastEvent && (
+                             {!isPastEvent && (
                             <Link to="#registration">
                              
                                 <button className="btn text-medium inter-medium">Записаться</button>
