@@ -446,6 +446,10 @@ a {
 .event-none>.unbounded-regular {
     font-size: 20px;
 }
+.unbounded-regular {
+    font-weight: 400!important;
+
+}
 .border-red{
     border-color:#982520;
 }
@@ -539,7 +543,7 @@ a {
 .text-medium {
     font-size: 20px;
     margin: 0;
-    line-height: 100%;
+    line-height: 125%;
     font-weight: 100;
 }
 
@@ -566,7 +570,7 @@ a {
     align-items: center;
     justify-content: center;
     padding: 6px 10px;
-    border: 1px solid #C7C7C7;
+    border: 1px solid rgba(0, 0, 0, 0.21);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
@@ -598,7 +602,7 @@ a {
 }
 
 #registration-text {
-    padding-bottom: 40px;
+    padding-bottom: 25px;
 }
 
 
@@ -730,7 +734,7 @@ label {
 
 .btm-buy {
     width: 460px;
-    padding: 16px 20px;
+    padding: 16px 24px;
     height: 65px;
     background-color: #982520;
     color: white;

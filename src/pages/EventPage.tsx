@@ -1217,7 +1217,7 @@ export default function EventPage() {
                                     <path d="M15.833 9.99967L4.16634 9.99967M15.833 9.99967L12.4997 6.66634M15.833 9.99967L12.4997 13.333" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                             </button>
-                            <span className="gallery-more inter-regular">Посмотреть ещё</span>
+                            <span className="gallery-more inter-regular"> </span>
                         </div>
                     </div>
                 </div>
