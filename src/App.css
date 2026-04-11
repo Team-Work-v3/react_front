@@ -525,6 +525,9 @@ a {
     flex-direction: column;
     gap: 15px;
 }
+.description:nth-last-of-type(2){
+    width: 564px;
+}
 
 .text-max-big {
     font-size: 64px;
