@@ -6,7 +6,7 @@ export default function Footer() {
             <Wrapper>
                 <div className="footer-container">
                     <div className="footer-top-block">
-                        <img src="http://62.109.16.129:5000/index/puaccher-second.png" width="100%" height="620px" />
+                        
                             <Link to="/">    <span className="unbounded-regular footer-top-block-text">ITeen Academy</span> </Link>
                      
                         <div className="footer-icons-block">
