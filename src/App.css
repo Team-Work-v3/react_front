@@ -306,8 +306,8 @@ a {
 
 /* === Кнопка "Записаться" === */
 .event-btn {
-    width: 174px;
-    height: 48px;
+    /* width: 174px;
+    height: 48px; */
     font-size: 20px;
     background-color: #982520;
     color: #fff;
@@ -316,7 +316,7 @@ a {
     line-height: 100%;
     letter-spacing: 0%;
     outline: none;
-    padding: 30px 12px;
+    padding:12px  30px;
 }
 
 /* === Правая колонка карточки: изображение мероприятия === */
