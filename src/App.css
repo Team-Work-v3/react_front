@@ -316,6 +316,7 @@ a {
     line-height: 100%;
     letter-spacing: 0%;
     outline: none;
+    padding: 30px 12px;
 }
 
 /* === Правая колонка карточки: изображение мероприятия === */
