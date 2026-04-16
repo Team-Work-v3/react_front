@@ -1152,6 +1152,18 @@ h6.text-little {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 .reviews-loading,
 .reviews-error,
 .reviews-empty {
@@ -1260,80 +1272,114 @@ h6.text-little {
 
 
 
-/* Базовый контейнер */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 📱 MOBILE 395px — как на макете */
 @media (max-width: 395px) {
-  body {
-    overflow-x: hidden;
-  }
 
   .wrapper {
     max-width: 395px;
     margin: 0 auto;
-    padding: 0 16px;
+    padding: 0 12px;
   }
 
-  /* ===== Первый экран ===== */
-  .first-section {
-    position: relative;
-  }
-
+  /* ===== HEADER ===== */
   #big-stork {
-    height: 320px !important;
+    height: 180px !important;
     object-fit: cover;
+    border-radius: 12px;
   }
 
   .first-block {
-    padding: 16px 0;
+    margin-top: 10px;
   }
 
   .text-big {
-    font-size: 20px;
-    line-height: 1.3;
+    font-size: 18px;
+    line-height: 1.2;
   }
 
   .block-frome {
     display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin: 8px 0;
+    flex-direction: column;
+    gap: 4px;
+    margin: 6px 0;
   }
 
   .frome {
     font-size: 12px;
-    padding: 4px 8px;
+    opacity: 0.8;
   }
 
-  .text-medium {
-    font-size: 14px;
+  #indent {
+    font-size: 13px;
+    line-height: 1.4;
+    margin-top: 8px;
   }
 
   nav {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 12px;
+    gap: 8px;
+    margin-top: 10px;
   }
 
   .btn {
     width: 100%;
+    font-size: 14px;
+    padding: 10px;
   }
 
-  /* ===== Описание ===== */
+  /* ===== БЛОКИ ОПИСАНИЯ ===== */
   .description-conteiner {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding: 16px 0;
+    gap: 14px;
+    margin-top: 16px;
+  }
+
+  .description {
+    background: #f5f5f5;
+    padding: 12px;
+    border-radius: 12px;
   }
 
   .description h2 {
-    font-size: 16px;
-    margin-bottom: 8px;
+    font-size: 14px;
+    margin-bottom: 6px;
   }
 
-  /* ===== Форма ===== */
+  .description p {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  /* ===== РЕГИСТРАЦИЯ ===== */
   .registrstion-layout {
-    display: flex;
     flex-direction: column;
   }
 
@@ -1345,39 +1391,58 @@ h6.text-little {
     width: 100%;
   }
 
+  #registration-text {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .form-registration {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
   .registration-frame {
     width: 100%;
+    font-size: 13px;
+    padding: 8px;
   }
 
   .btm-buy {
     width: 100%;
+    padding: 10px;
+    font-size: 14px;
   }
 
-  /* ===== Галерея ===== */
-  .gallery-container {
-    padding: 24px 0;
+  .checkbox-group {
+    font-size: 12px;
   }
 
+  /* ===== ГАЛЕРЕЯ ===== */
   #gallery-text {
-    font-size: 20px;
-    margin-bottom: 12px;
+    font-size: 16px;
+    margin-bottom: 8px;
   }
 
   .gallery-img {
-    height: 120px;
-    object-fit: cover;
-    border-radius: 10px;
+    height: 90px;
+    border-radius: 8px;
   }
 
   .arrow-button {
     display: none;
   }
 
-  /* ===== Отзывы ===== */
+  /* ===== ОТЗЫВЫ ===== */
+  #review {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
   .reviews-list {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
 
   .reviews-list-container {
@@ -1385,37 +1450,54 @@ h6.text-little {
   }
 
   .review-card {
-    padding: 12px;
-    border-radius: 12px;
+    padding: 10px;
+    border-radius: 10px;
+    background: #f7f7f7;
   }
 
   .review-header {
     display: flex;
-    gap: 10px;
+    gap: 8px;
+    align-items: center;
   }
 
   .review-avatar-img,
   .review-avatar-placeholder {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
   }
 
-  /* ===== Кнопка назад ===== */
+  .text-padding {
+    font-size: 13px;
+  }
+
+  .text-padding-little {
+    font-size: 12px;
+  }
+
+  /* ===== КНОПКА ===== */
   .to-home-button {
-    display: block;
     width: 100%;
     text-align: center;
-    margin: 20px 0;
+    margin: 16px 0;
+    font-size: 13px;
   }
 
-  /* ===== Диалог ===== */
+  /* ===== DIALOG ===== */
   .dialog-window-content {
-    padding: 16px;
-    text-align: center;
+    padding: 12px;
   }
 
-  .dialog-image {
+  .dialog-window-heading {
+    font-size: 14px;
+  }
+
+  .dialog-window-text {
+    font-size: 12px;
+  }
+
+  .dialog-window-button {
     width: 100%;
-    height: auto;
   }
 }
