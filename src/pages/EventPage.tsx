@@ -1192,27 +1192,17 @@ export default function EventPage() {
                     <h1 id="gallery-text" className="text-max-big unbounded-bold">Галерея</h1>
                     <div className="gallery">
                         <div className="gallery-content">
-                         <Swiper
-  spaceBetween={12}
-  loop={true}
-  navigation={{
-    nextEl: '.custom-swiper-button-right',
-    prevEl: '.custom-swiper-button-left',
-  }}
-  modules={[Navigation]}
-  breakpoints={{
-    0: {
-      slidesPerView: 1.2,
-    },
-    768: {
-      slidesPerView: 2,
-    },
-    1024: {
-      slidesPerView: 4,
-    }
-  }}
-  className="mySwiper"
->
+<Swiper
+                                slidesPerView={4}
+                                spaceBetween={20}
+                                loop={true}
+                                navigation={{
+                                    nextEl: '.custom-swiper-button-right',
+                                    prevEl: '.custom-swiper-button-left',
+                                }}
+                                modules={[Navigation]}
+                                className="mySwiper"
+                            >
    
                                 {gallery.map((link, index) => (
                                     <SwiperSlide key={index}>
