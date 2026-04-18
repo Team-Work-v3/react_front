@@ -1,1322 +1,439 @@
-:root {
-    --width: calc(1920px - 370px * 2);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-}
-body {
-    background-color: #F2F2F2;
-}
-
-.main {
-    width: 100%;
-    height: 100%;
-}
-
-.greeting {
-    width: 100%;
-    height: 110vh;
-    position: relative;
-}
-
-.greeting::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("http://62.109.16.129:5000/index/23737a474197f58916e11b3ccefa38b0e48b4c93.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    pointer-events: none;
-    z-index: -1000;
-}
-
-.greeting::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(0deg, rgba(242, 242, 242, 1) 0%, rgba(255, 255, 255, 0) 20%);
-    pointer-events: none;
-    z-index: -999;
-}
-
-.alignment {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-}
-
-.wrapper {
-    width: var(--width);
-    height: 100%;
-}
-
-.greeting-iteen {
-    margin-top: 30px;
-}
-
-.greeting-texts {
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    margin-top: 161px;
-}
-
-.greeting-heading {
-    font-size: 64px;
-}
-
-.greeting-text {
-    font-size: 32px;
-    margin-top: 15px;
-}
-
-
-body {
-    background-color: #f5f5f5;
-    z-index: -1000;
-}
-
-a {
-    text-decoration: none;
-}
-
-/* === Основной контейнер верхней панели (заголовок слева, кнопки справа) === */
-.main-head-name {
-    padding-top: 100px;
-}
-
-.main-text-block {
-    display: flex;
-    justify-content: space-between;
-}
-
-/* === Левая часть: большой заголовок "Мероприятия" === */
-.main-text-event {
-    font-weight: 700;
-    font-size: 64px;
-    line-height: 100%;
-    margin: 0 0 20px 0;
-    letter-spacing: 0%;
-}
-
-/* === Обёртка поля поиска (иконка внутри позиционируется относительно этого блока) === */
-.search-block {
-    position: relative;
-}
-
-/* === Поле поиска === */
-.search {
-    width: 541px;
-    height: 36px;
-    border: none;
-    padding-left: 37px;
-    font-size: 16px;
-    background-color: #fff;
-    box-shadow: none;
-    outline: none;
-}
-
-/* === Иконка поиска, позиционируется внутри .search-block слева === */
-.search-icon {
-    position: absolute;
-    top: 50%;
-    left: 12px;
-    transform: translateY(-50%);
-    width: 15px;
-    height: 15px;
-}
-
-.clear-search {
-    position: absolute;
-    top: 50%;
-    right: 15px;
-    transform: translateY(-50%);
-    cursor: pointer;
-    display: none;
-}
-
-
-/* === Правая часть верхней панели: блок с кнопками (Фильтр, Сортировка) === */
-.buttons-block {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    /* margin-top: 84px;
-    margin-right: 19px; */
-}
-
-/* === Общие стили для кнопок "Фильтр" и "Сортировка" === */
-
-.sorting-conteiner {
-    position: relative;
-    margin-left: 2px;
-}
-
-.main-filter,
-.main-sorting {
-    height: 38px;
-    background-color: #fff;
-    border: none;
-    font-size: 16px;
-    padding: 8px 12px;
-    cursor: pointer;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    width: 100%;
-    outline: none;
-}
-
-.sorting-choice {
-    position: absolute;
-    width: 100%;
-    height: auto;
-    display: none;
-    flex-direction: column;
-    z-index: 1000;
-}
-
-.sorting-choice-button {
-    font-size: 16px;
-    padding: 8px 12px;
-    border: 1px solid #C7C7C7;
-    background-color: #fff;
-    height: 38px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    outline: none;
-}
-
-/* === Секция с карточками мероприятий: сетка 2 колонки === */
-.main-events {
-    padding: 20px 0;
-}
-
-.main-events-container {
-    gap: 20px;
-    display: none;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto;
-    position: relative;
-
-    &.active {
-        display: grid;
-    }
-}
-
-/* === Одна карточка мероприятия: горизонтальный флекс с левой и правой частями === */
-.event-item {
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column-reverse;
-    /* align-items: flex-end; */
-    /* width: 380px; */
-    background: #fff;
-    padding: 20px;
-    box-sizing: border-box;
-    gap: 15px;
-}
-
-/* === Левая колонка карточки (текстовая) === */
-.event-left {
-    width: 290px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    box-sizing: border-box;
-    padding: 0;
-}
-
-/* === Верхняя часть левой колонки: название, дата, статус (вертикально переносимые элементы) === */
-.event-left-up {
-    display: flex;
-    /* flex-wrap: wrap; */
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 12px;
-}
-
-.event-left-up>div {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-/* === Название мероприятия === */
-.event-name {
-    width: 240px;
-    height: auto;
-    font-size: 24px;
-    line-height: 98%;
-    letter-spacing: -0.5px;
-    margin: 0 0 8px 0;
-    padding: 0;
-    color: black;
-    /* overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical; */
-}
-
-/* === Небольшие "плашки" — дата, время, статус === */
-.special {
-    font-size: 16px;
-    line-height: 1;
-    padding: 4px 10px;
-    border: 1px solid #C7C7C7;
-    border-radius: 1px;
-    box-sizing: border-box;
-}
-
-/* === Специальный статус (поднимается вверх в ряду) === */
-.special-status {
-    order: -1;
-    width: 100%;
-    margin-bottom: 4px;
-}
-
-/* === Нижняя часть левой колонки: стоимость и кнопка записи === */
-.event-left-down {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-top: auto;
-}
-
-.event-cost {
-    font-size: 20px;
-    margin: 0;
-}
-
-/* === Кнопка "Записаться" === */
-.event-btn {
-    /* width: 174px;
-    height: 48px; */
-    font-size: 20px;
-    background-color: #982520;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    line-height: 100%;
-    letter-spacing: 0%;
-    outline: none;
-    padding:12px  30px;
-}
-
-/* === Правая колонка карточки: изображение мероприятия === */
-.event-img {
-    width: 350px;
-    height: 250px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    box-sizing: border-box;
-    padding: 0;
-    display: flex;
-    position: relative;
-}
-
-/* === Само изображение: занимает весь контейнер, обрезается при необходимости === */
-.event-img-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.event-img-gradient {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(360deg, rgba(0, 0, 0, 0.5) 5%, rgba(252, 247, 248, 0) 30%);
-}
-
-.event-img-text {
-    position: absolute;
-    bottom: 5px;
-    right: 10px;
-    color: #FFFFFF;
-    font-size: 16px;
-}
-
-.footer {
-    width: 100%;
-    position: relative;
-    margin-top: 45px;
-    height: 350px;
-}
-
-.footer::before {
-    content: "";
-    position: absolute;
-    background-image: url("http://62.109.16.129:5000/index/footer.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    pointer-events: none;
-    z-index: -1000;
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.footer-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.footer-top-block {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding-top: 30px;
-}
-
-.footer-top-block-text {
-    font-size: 20px;
-}
-
-.footer-icons-block {
-    display: flex;
-    align-items: center;
-    gap: 50px;
-}
-
-.footer-icon {
-    cursor: pointer;
-}
-
-.footer-bottom-block {
-    display: flex;
-    gap: 50px;
-    padding-bottom: 10px;
-}
-
-.footer-bottom-block-text {
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.footer-telephone {
-    margin-top: 20px;
-}
-
-.event-none {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-
-.event-none-container {
-    margin-top: 90px;
-    margin-bottom: 170px;
-}
-
-.event-none>.unbounded-bold {
-    font-size: 30px;
-}
-
-.event-none>.unbounded-regular {
-    font-size: 20px;
-}
-.unbounded-regular {
-    font-weight: 400!important;
-
-}
-.border-red{
-    border-color:#982520;
-}
-
-.event-none>button {
-    padding: 12px 30px;
-    border: none;
-    background-color: #E5E5E5;
-    font-size: 20px;
-    cursor: pointer;
-    margin-top: 5px;
-}
-
-/* Event Page */
-
-
-.first-section {
-    margin-top: 25px;
-    position: relative;
-}
-
-#iteen-img {
-    position: absolute;
-    top: 34px;
-    left: 34px;
-    filter: invert(100%);
-}
-
-.first-block {
-    background-color: rgba(255, 255, 255, 0.67);
-    backdrop-filter: blur(8px);
-    color: black;
-    position: absolute;
-    bottom: 28px;
-    right: 25px;
-    width: 564px;
-    height: calc(100% - 45px * 2);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.first-block>h1{
-    line-height: 90%;
-}
-
-.first-block>div {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 20px;
-}
-
-.first-block>nav {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 5px;
-}
-
-.description-conteiner {
-    margin-top: 47px;
-    margin-bottom: 100px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 60px;
-    row-gap: 30px;
-}
-
-.description {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-.description:nth-last-of-type(2){
-    width: 628px;
-}
-
-.text-max-big {
-    font-size: 64px;
-}
-
-.text-big {
-    font-size: 44px;
-    margin: 0;
-    line-height: 90%;
-}
-
-.text-medium-big {
-    font-size: 32px;
-    line-height: 90%;
-}
-
-.text-medium {
-    font-size: 20px;
-    margin: 0;
-    line-height: 125%;
-    font-weight: 100;
-}
-
-.text-little-medium {
-    font-size: 24px;
-    font-weight: 100;
-}
-
-.text-little {
-    font-size: 16px;
-}
-
-#indent {
-    padding-top: 7, 0px;
-}
-
-.block-frome {
-    display: flex;
-    gap: 8px;
-}
-
-.frome {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6px 10px;
-    border: 1px solid rgba(0, 0, 0, 0.21);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-}
-
-.btn {
-    display: inline-block;
-    text-decoration: none;
-    padding: 12px 20px;
-    background-color: #982520;
-    color: #FFFFFF;
-    width: auto;
-    font-size: 20px;
-    border: none;
-    align-self: start;
-
-    width: 175px;
-    height: 48px;
-}
-
-.btn:hover {
-    background-color: #7f1e19;
-    cursor: pointer;
-}
-
-.two-column {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 30px;
-}
-
-#registration-text {
-    padding-bottom: 25px;
-}
-
-
-.registration-layout {
-    display: flex;
-    justify-content: center;
-    margin: 0 auto;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-}
-
-.label-indent {
-    display: flex;
-    padding: 5px 0px;
-    /* width: 460px; */
-}
-
-.label-indent-red {
-    color: #982520;
-    font-size: 15px;
-    margin-right: 2px;
-}
-
-.block-form {
-    width: 100%;
-    height: auto;
-    height: 100%;
-}
-
-.form-container {
-    /* flex: 0 0 50%; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.form-box {
-    height: calc(100% - 60px * 2);
-    padding: 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.form-group {
-    /* margin-bottom: 25px; */
-    width: 100%;
-    padding-top: 15px;
-}
-
-.form-group div {
-    display: flex;
-    justify-content: space-between;
-}
-
-.form-registration {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-    height: 100%;
-    padding-top: 15px;
-}
-
-.registration-frame {
-    width: calc(100% - 25px * 2);
-    height: calc(65px - 6px * 2);
-    padding: 6px 25px;
-    font-size: 20px;
-    /* border: 1px solid #C7C7C7; */
-    background-color: #F2F2F2;
-    border: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-
-    &.error {
-        border: 1px solid #982520;
-    }
-}
-
-label {
-    display: block;
-    font-size: 14px;
-    /* margin-bottom: 8px; */
-}
-
-.error-message {
-    width: 50%;
-    /* padding: 5px; */
-    font-size: 15px;
-    color: #982520;
-    text-align: right;
-}
-
-/* .form-group>input[type="text"],
-.form-group>input[type="email"],
-.form-group>input[type="tel"] {
-    width: 100%;
-    height: 60px;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    box-sizing: border-box;
-} */
-
-.checkbox-group {
-    display: flex;
-    align-items: center;
-    /* margin-bottom: 30px; */
-    font-size: 14px;
-     padding-bottom: 10px;
-    padding-top: 25px;
-    padding-left: 7px;
-   
-}
-
-.checkbox-group input[type="checkbox"] {
-    margin-right: 10px;
-    width: 16px;
-    height: 16px;
-    /* outline: 1px solid black; */
-}
-
-.checkbox-group label {
-    margin-bottom: 0;
-    color: var(--color-text-label);
-    cursor: pointer;
-    
-}
-
-.btm-buy {
-    width: 460px;
-    padding: 16px 24px;
-    height: 65px;
-    background-color: #982520;
-    color: white;
-    border: none;
-   /* border-radius: 4px;*/
-    font-size: 24px;
-    cursor: pointer;
-    /* transition: background-color 0.2s ease; */
-
-    &.error {
-        background-color: #8E8E8E;
-    }
-}
-
-.reviews-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-}
-
-.reviews-list-container{
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-}
-
-
-.review-card {
-    padding: 20px;
-    /* border: 1px solid rgba(0, 0, 0, 0.04); */
-    background-color: white;
-    /* min-height: 120px; */
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 5px;
-}
-
-.review-card>p {
-    margin-top: 5px;
-}
-
-.review-card * {
-    margin: 0;
-}
-
-#form-color {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    height: 100%;
-}
-
-.registrstion-layout {
-    background-color: #FFFFFF;
-    width: 100%;
-}
-
-.gallery-container {
-    margin-top: 100px;
-}
-
-.gallery {
-    margin-top: 20px;
-}
-
-.gallery-content {
-    /* display: flex;
-    justify-content: space-between;
-    align-items: center; */
-    width: 100%;
-    height: auto;
-    background-color: transparent;
-}
-
-.gallery-img {
-    width: 280px;
-    height: 498px;
-    object-fit: cover;
-    object-position: center;
-}
-
-.arrow-button {
-    padding-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    position: relative;
-}
-
-.all-button-arrow {
-    background-color: #982520;
-    border-radius: 100%;
-    border: none;
-    width: 30px;
-    height: 30px;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.gallery-more {
-    position: absolute;
-    right: 0;
-    font-size: 16px;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-#button-turn {
-    transform: rotate(180deg);
-}
-
-.feedback-container {
-    padding-bottom: 45px;
-}
-
-#review {
-    padding-bottom: 20px;
-    padding-top: 100px;
-}
-
-/* .review-card {
-    padding-top: 5px;
-} */
-
-h3.review-card {
-    padding-top: 10px;
-}
-
-h6.text-little {
-    color: #8E8E8E;
-}
-
-.submit-img {
-    object-fit: cover;
-    object-position: center;
-}
-
-.dialog-window {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: none;
-    width: 100%;
-    height: 100vh;
-    background-color: transparent;
-}
-
-.dialog-window::backdrop {
-    background: rgba(0, 0, 0, 0.3);
-}
-
-.dialog-window-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.dialog-window-content {
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-    padding: 50px;
-}
-
-.dialog-window-heading {
-    font-size: 32px;
-}
-
-.dialog-window-text {
-    font-size: 20px;
-}
-
-.dialog-image {
-    width: 670px;
-    height: 280px;
-    object-fit: cover;
-    object-position: center;
-}
-
-.to-home-button {
-    cursor: pointer;
-    text-decoration: underline;
-    font-size: 15px;
-    user-select: none;
-    color: black;
-}
-
-.dialog-window-filter {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: auto;
-    min-height: 100vh;
-    transform: none;
-    border: none;
-    background-color: transparent;
-    margin: 0;
-    padding: 0;
-    max-width: none;
-    max-height: none;
-}
-
-.dialog-window-filter-conteiner {
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-
-.dialog-window-filter-content {
-    position: absolute;
-    right: 0;
-    background-color: #FFFFFF;
-    height: 100%;
-    width: 325px;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
-
-.dialog-window-filter-main-text {
-    font-size: 30px;
-    color: black;
-}
-
-.dialog-window-filter-subtext {
-    font-size: 20px;
-    color: black;
-}
-
-.dialog-window-filter-minitext {
-    font-size: 15px;
-    color: black;
-}
-
-.dialog-window-filter-conteiner-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.dialog-window-filter-button {
-    width: 100%;
-    height: 43px;
-    cursor: pointer;
-    border: none;
-    font-size: 16px;
-
-    &.red {
-        color: white;
-        background-color: #982520;
-    }
-
-    &.white {
-        color: gray;
-        background-color: #e5e5e5;
-    }
-}
-
-.dialog-window-filter-conteiner-for {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-
-    &.row {
-        flex-direction: row;
-        align-items: center;
-    }
-
-    &.spans {
-        align-items: flex-start;
-    }
-}
-
-.dialog-window-filter-conteiner-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 0.1fr);
-    column-gap: 20px;
-}
-
-.dialog-window-filter-checkbox-free {
-    position: relative;
-    display: inline-block;
-    width: 30px;
-    height: 16.88px;
-}
-
-.dialog-window-filter-checkbox-input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.dialog-window-filter-checkbox-slider {
-    position: absolute;
-    cursor: pointer;
-    inset: 0;
-    background-color: black;
-    border-radius: 26px;
-    transition: 0.3s;
-}
-
-.dialog-window-filter-checkbox-slider::before {
-    content: "";
-    position: absolute;
-    height: 11.3px;
-    width: 11.3px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    border-radius: 50%;
-    transition: 0.3s;
-}
-
-.dialog-window-filter-checkbox-input:checked+.dialog-window-filter-checkbox-slider {
-    background-color: #b71c1c;
-}
-
-.dialog-window-filter-checkbox-input:checked+.dialog-window-filter-checkbox-slider::before {
-    transform: translateX(13px);
-}
-
-.dialog-window-filter-input {
-    border: none;
-    background-color: #f2f2f2;
-    color: black;
-    width: 90%;
-    height: 45px;
-    padding: 8px 10px;
-    font-size: 14px;
-    border-radius: 4px;
-    outline: none;
-}
-
-.dialog-window-filter-input[type="date"] {
-    width: 135px;
-}
-
-.dialog-window-filter-input::placeholder {
-    color: #8E8E8E;
-    opacity: 1;
-}
-
-.dialog-window-filter-input::-webkit-outer-spin-button,
-.dialog-window-filter-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    -moz-appearance: textfield;
-}
-
-
-.dialog-window-filter-checkbox-category {
-    border: 2px solid gray;
-    padding: 5px 10px;
-    font-size: 16px;
-    cursor: pointer;
-    user-select: none;
-    color: gray;
-    transition: all 0.2s ease;
-
-    &.active {
-        border-color: gray; 
-        color: black;      
-    }
-}
-
-.dialog-window-filter-checkbox-category input {
-    display: none;
-}
-
-
-.type-of-events-container {
-    font-size: 20px;
-    display: flex;
-    gap: 60px;
-    margin-bottom: 25px;
-}
-
-.type-of-events-button {
-    cursor: pointer;
-
-    &.active {
-        border-bottom: 4px solid #982520;
-        padding-bottom: 10px;
-        color: #982520;
-    }
-}
-
-.type-of-event-content {
-    display: block;
-    width: 100%;
-    height: auto;
-
-    &.active {
-        display: none;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.reviews-loading,
-.reviews-error,
-.reviews-empty {
-    text-align: center;
-    padding: 40px;
-    font-size: 16px;
-    color: #666;
-    background: #f9f9f9;
-    border-radius: 10px;
-    margin: 20px 0;
-}
-
-.reviews-error {
-    color: #d32f2f;
-    background: #ffebee;
-}
-
-
-.review-card {
-    display: flex;
-    gap: 16px;
-    background: #f9f9f9;
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.review-avatar {
-    flex-shrink: 0;
-}
-
-.review-avatar-img {
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    object-fit: cover;
-     padding-left: 20px;
-    padding-top: 20px;
-    padding-right: 10px;
-    padding-bottom: 13px;
-
-}
-
-.review-avatar-placeholder {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: white;
-}
-
-.review-content {
-    flex: 1;
-}
-
-.review-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 8px;
-}
-
-.review-author {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin: 0;
-    color: #1a1a1a;
-}
-
-.review-date {
-    font-size: 0.85rem;
-    color: #6c757d;
-    white-space: nowrap;
-}
-
-.review-text {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    margin: 0;
-    color: #333;
-}
-
-.text-padding{
-    padding-bottom: 5px;
-}
-    
-.text-padding-little{
-    padding-left: 20px;
-    padding-top: 13px;
-    padding-bottom: 22px;
-} 
-/* Адаптив для мобильных устройств — одна колонка */
-/* Принудительно одна колонка на любых экранах уже 768px и меньше */
+/* ===== Адаптив для мобильных устройств (максимум 768px) ===== */
 @media (max-width: 768px) {
-    .main-events-container {
-        display: grid !important;
-        grid-template-columns: 1fr !important;
-        gap: 20px;
-    }
-    
-    /* Дополнительно — чтобы карточка занимала всю ширину */
-    .event-item {
-        width: 100% !important;
+    /* Глобальные настройки */
+    .wrapper {
+        width: 100%;
+        padding: 0 16px;
         box-sizing: border-box;
     }
-}
-.main-events-container {
-    display: grid !important;
-}
-@media (max-width: 768px) {
+
+    /* Секция с изображением и информацией о мероприятии */
+    .first-section {
+        margin-top: 0;
+        position: relative;
+    }
+
+    #big-stork {
+        height: auto !important;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    #iteen-img {
+        top: 16px;
+        left: 16px;
+        width: 60px;
+        height: auto;
+    }
+
+    .first-block {
+        position: relative;
+        bottom: auto;
+        right: auto;
+        width: 100%;
+        height: auto;
+        padding: 20px 16px;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(8px);
+        margin-top: -4px;
+        box-sizing: border-box;
+    }
+
+    .text-big {
+        font-size: 28px;
+        line-height: 1.2;
+    }
+
+    .text-medium {
+        font-size: 16px;
+    }
+
+    .block-frome {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .frome {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    /* Блок описания (3 секции) */
+    .description-conteiner {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin: 30px 0 50px;
+    }
+
+    .description:nth-last-of-type(2) {
+        width: auto;
+    }
+
+    .text-medium-big {
+        font-size: 24px;
+    }
+
+    /* Форма регистрации */
+    .block-form {
+        margin: 20px 0;
+    }
+
+    #form-color {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .registrstion-layout {
+        width: 100%;
+        padding: 0;
+    }
+
+    .form-box {
+        padding: 20px;
+        height: auto;
+    }
+
+    #registration-text {
+        font-size: 28px;
+        text-align: center;
+        padding-bottom: 16px;
+    }
+
+    .form-group div {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .error-message {
+        width: 100%;
+        text-align: left;
+        font-size: 12px;
+    }
+
+    .registration-frame {
+        padding: 12px 16px;
+        font-size: 16px;
+        width: calc(100% - 32px);
+    }
+
+    .checkbox-group {
+        padding-left: 0;
+        padding-top: 16px;
+    }
+
+    .btm-buy {
+        width: 100%;
+        font-size: 18px;
+        padding: 14px;
+        height: auto;
+    }
+
+    .submit-img {
+        display: none;
+    }
+
+    /* Галерея */
+    .gallery-container {
+        margin-top: 50px;
+    }
+
+    #gallery-text {
+        font-size: 32px;
+    }
+
+    .gallery-img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 280 / 498;
+        object-fit: cover;
+    }
+
+    .swiper-slide {
+        width: 70% !important; /* Показываем один слайд с частичным предпросмотром */
+        margin-right: 16px;
+    }
+
+    .arrow-button {
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .gallery-more {
+        position: static;
+        margin-left: auto;
+    }
+
+    /* Отзывы */
+    .feedback-container {
+        padding-bottom: 30px;
+    }
+
+    #review {
+        font-size: 32px;
+        padding-top: 50px;
+        padding-bottom: 16px;
+    }
+
+    .reviews-list {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .reviews-list-container {
+        gap: 16px;
+    }
+
+    .review-card {
+        flex-direction: column;
+        padding: 16px;
+    }
+
+    .review-header {
+        flex-wrap: nowrap;
+        gap: 12px;
+    }
+
+    .review-avatar-img {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+    }
+
+    .review-avatar-placeholder {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .text-padding {
+        font-size: 16px;
+    }
+
+    .text-padding-little {
+        padding-left: 0;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        font-size: 14px;
+    }
+
+    /* Кнопка "На главную" */
+    .to-home-button {
+        display: block;
+        text-align: center;
+        margin: 30px 0 20px;
+        font-size: 14px;
+    }
+
+    /* Футер */
+    .footer {
+        height: auto;
+        margin-top: 30px;
+    }
+
+    .footer-container {
+        padding: 0 16px;
+        box-sizing: border-box;
+    }
+
+    .footer-top-block {
+        padding-top: 20px;
+        gap: 16px;
+    }
+
+    .footer-top-block-text {
+        font-size: 16px;
+    }
+
+    .footer-icons-block {
+        gap: 24px;
+        flex-wrap: wrap;
+    }
+
+    .footer-icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .footer-bottom-block {
+        flex-direction: column;
+        gap: 12px;
+        padding-bottom: 20px;
+    }
+
+    .footer-bottom-block-text {
+        font-size: 14px;
+    }
+
+    /* Диалоговое окно (спасибо за регистрацию) */
+    .dialog-window-content {
+        padding: 20px;
+        width: 90%;
+        box-sizing: border-box;
+        align-items: center;
+        text-align: center;
+    }
+
+    .dialog-image {
+        width: 100%;
+        height: auto;
+        max-height: 180px;
+        object-fit: cover;
+    }
+
+    .dialog-window-heading {
+        font-size: 24px;
+    }
+
+    .dialog-window-text {
+        font-size: 16px;
+    }
+
+    /* Адаптив для главной страницы (список мероприятий) */
     .main-events-container {
-        display: grid !important;      /* принудительно показываем, даже если нет .active (для теста), но лучше сначала исправить JS */
         grid-template-columns: 1fr !important;
+        gap: 16px;
+    }
+
+    .event-item {
+        flex-direction: column;
+        padding: 16px;
+    }
+
+    .event-left {
+        width: 100%;
+        order: 2;
+    }
+
+    .event-name {
+        font-size: 20px;
+        width: 100%;
+    }
+
+    .special {
+        font-size: 12px;
+        padding: 2px 8px;
+    }
+
+    .event-cost {
+        font-size: 18px;
+    }
+
+    .event-btn {
+        width: 100%;
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .event-img {
+        width: 100%;
+        height: auto;
+        order: 1;
+        margin-bottom: 12px;
+    }
+
+    .event-img-img {
+        height: auto;
+        max-height: 200px;
+    }
+
+    /* Поиск и кнопки на главной */
+    .main-text-event {
+        font-size: 36px;
+    }
+
+    .main-text-block {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .buttons-block {
+        justify-content: space-between;
+        margin-top: 0;
+    }
+
+    .search {
+        width: 100%;
+        padding-left: 32px;
+    }
+
+    .search-block {
+        width: 100%;
+    }
+
+    .main-filter, .main-sorting {
+        font-size: 14px;
+        padding: 6px 12px;
+        white-space: nowrap;
+    }
+
+    /* Типы событий (вкладки) */
+    .type-of-events-container {
+        gap: 20px;
+        font-size: 16px;
+        flex-wrap: wrap;
+    }
+
+    .type-of-events-button {
+        font-size: 16px;
+    }
+
+    /* Фильтр-диалог на мобилке */
+    .dialog-window-filter-content {
+        width: 100%;
+        right: 0;
+        padding: 20px;
     }
 }
 
+/* ===== Дополнительная адаптация для очень маленьких экранов (до 480px) ===== */
+@media (max-width: 480px) {
+    .text-big {
+        font-size: 24px;
+    }
 
+    .text-medium {
+        font-size: 14px;
+    }
 
+    .first-block {
+        padding: 16px;
+    }
 
+    .block-frome {
+        gap: 4px;
+    }
 
+    .frome {
+        font-size: 10px;
+    }
 
+    .form-box {
+        padding: 16px;
+    }
 
+    .registration-frame {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
 
+    .btm-buy {
+        font-size: 16px;
+        padding: 12px;
+    }
 
+    .review-card {
+        padding: 12px;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    .review-header {
+        gap: 8px;
+    }
+}
