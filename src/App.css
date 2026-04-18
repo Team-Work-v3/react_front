@@ -1263,14 +1263,18 @@ h6.text-little {
     padding-bottom: 22px;
 } 
 /* Адаптив для мобильных устройств — одна колонка */
+/* Принудительно одна колонка на любых экранах уже 768px и меньше */
 @media (max-width: 768px) {
-    .wrapper {
-        width: 100%;
-        padding: 0 15px;
-        box-sizing: border-box;
+    .main-events-container {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 20px;
     }
+    
+    /* Дополнительно — чтобы карточка занимала всю ширину */
     .event-item {
-        width: 100%;
+        width: 100% !important;
+        box-sizing: border-box;
     }
 }
 
