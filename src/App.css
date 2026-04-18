@@ -1264,10 +1264,15 @@ h6.text-little {
 } 
 /* Адаптив для мобильных устройств — одна колонка */
 @media (max-width: 768px) {
-    .main-events-container {
-        grid-template-columns: 1fr !important;
+    .wrapper {
+        width: 100%;
+        padding: 0 15px;
+        box-sizing: border-box;
     }
-}      
+    .event-item {
+        width: 100%;
+    }
+}
 
 
 
