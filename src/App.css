@@ -1273,6 +1273,455 @@ h6.text-little {
 
 
 
+/* ===== Адаптив для мобильных устройств (максимум 768px) ===== */
+@media (max-width: 768px) {
+    /* Глобальные настройки */
+    .wrapper {
+        width: 100%;
+        padding: 0 16px;
+        box-sizing: border-box;
+    }
+
+    /* Секция с изображением и информацией о мероприятии */
+    .first-section {
+        margin-top: 0;
+        position: relative;
+    }
+
+    #big-stork {
+        height: auto !important;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    #iteen-img {
+        top: 16px;
+        left: 16px;
+        width: 60px;
+        height: auto;
+    }
+
+    .first-block {
+        position: relative;
+        bottom: auto;
+        right: auto;
+        width: 100%;
+        height: auto;
+        padding: 20px 16px;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(8px);
+        margin-top: -4px;
+        box-sizing: border-box;
+    }
+
+    .text-big {
+        font-size: 28px;
+        line-height: 1.2;
+    }
+
+    .text-medium {
+        font-size: 16px;
+    }
+
+    .block-frome {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .frome {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    /* Блок описания (3 секции) */
+    .description-conteiner {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin: 30px 0 50px;
+    }
+
+    .description:nth-last-of-type(2) {
+        width: auto;
+    }
+
+    .text-medium-big {
+        font-size: 24px;
+    }
+
+    /* Форма регистрации */
+    .block-form {
+        margin: 20px 0;
+    }
+
+    #form-color {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .registrstion-layout {
+        width: 100%;
+        padding: 0;
+    }
+
+    .form-box {
+        padding: 20px;
+        height: auto;
+    }
+
+    #registration-text {
+        font-size: 28px;
+        text-align: center;
+        padding-bottom: 16px;
+    }
+
+    .form-group div {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .error-message {
+        width: 100%;
+        text-align: left;
+        font-size: 12px;
+    }
+
+    .registration-frame {
+        padding: 12px 16px;
+        font-size: 16px;
+        width: calc(100% - 32px);
+    }
+
+    .checkbox-group {
+        padding-left: 0;
+        padding-top: 16px;
+    }
+
+    .btm-buy {
+        width: 100%;
+        font-size: 18px;
+        padding: 14px;
+        height: auto;
+    }
+
+    .submit-img {
+        display: none;
+    }
+
+    /* Галерея */
+    .gallery-container {
+        margin-top: 50px;
+    }
+
+    #gallery-text {
+        font-size: 32px;
+    }
+
+    .gallery-img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 280 / 498;
+        object-fit: cover;
+    }
+
+    .swiper-slide {
+        width: 70% !important; /* Показываем один слайд с частичным предпросмотром */
+        margin-right: 16px;
+    }
+
+    .arrow-button {
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .gallery-more {
+        position: static;
+        margin-left: auto;
+    }
+
+    /* Отзывы */
+    .feedback-container {
+        padding-bottom: 30px;
+    }
+
+    #review {
+        font-size: 32px;
+        padding-top: 50px;
+        padding-bottom: 16px;
+    }
+
+    .reviews-list {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .reviews-list-container {
+        gap: 16px;
+    }
+
+    .review-card {
+        flex-direction: column;
+        padding: 16px;
+    }
+
+    .review-header {
+        flex-wrap: nowrap;
+        gap: 12px;
+    }
+
+    .review-avatar-img {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+    }
+
+    .review-avatar-placeholder {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .text-padding {
+        font-size: 16px;
+    }
+
+    .text-padding-little {
+        padding-left: 0;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        font-size: 14px;
+    }
+
+    /* Кнопка "На главную" */
+    .to-home-button {
+        display: block;
+        text-align: center;
+        margin: 30px 0 20px;
+        font-size: 14px;
+    }
+
+    /* Футер */
+    .footer {
+        height: auto;
+        margin-top: 30px;
+    }
+
+    .footer-container {
+        padding: 0 16px;
+        box-sizing: border-box;
+    }
+
+    .footer-top-block {
+        padding-top: 20px;
+        gap: 16px;
+    }
+
+    .footer-top-block-text {
+        font-size: 16px;
+    }
+
+    .footer-icons-block {
+        gap: 24px;
+        flex-wrap: wrap;
+    }
+
+    .footer-icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .footer-bottom-block {
+        flex-direction: column;
+        gap: 12px;
+        padding-bottom: 20px;
+    }
+
+    .footer-bottom-block-text {
+        font-size: 14px;
+    }
+
+    /* Диалоговое окно (спасибо за регистрацию) */
+    .dialog-window-content {
+        padding: 20px;
+        width: 90%;
+        box-sizing: border-box;
+        align-items: center;
+        text-align: center;
+    }
+
+    .dialog-image {
+        width: 100%;
+        height: auto;
+        max-height: 180px;
+        object-fit: cover;
+    }
+
+    .dialog-window-heading {
+        font-size: 24px;
+    }
+
+    .dialog-window-text {
+        font-size: 16px;
+    }
+
+    /* Адаптив для главной страницы (список мероприятий) */
+    .main-events-container {
+        grid-template-columns: 1fr !important;
+        gap: 16px;
+    }
+
+    .event-item {
+        flex-direction: column;
+        padding: 16px;
+    }
+
+    .event-left {
+        width: 100%;
+        order: 2;
+    }
+
+    .event-name {
+        font-size: 20px;
+        width: 100%;
+    }
+
+    .special {
+        font-size: 12px;
+        padding: 2px 8px;
+    }
+
+    .event-cost {
+        font-size: 18px;
+    }
+
+    .event-btn {
+        width: 100%;
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .event-img {
+        width: 100%;
+        height: auto;
+        order: 1;
+        margin-bottom: 12px;
+    }
+
+    .event-img-img {
+        height: auto;
+        max-height: 200px;
+    }
+
+    /* Поиск и кнопки на главной */
+    .main-text-event {
+        font-size: 36px;
+    }
+
+    .main-text-block {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .buttons-block {
+        justify-content: space-between;
+        margin-top: 0;
+    }
+
+    .search {
+        width: 100%;
+        padding-left: 32px;
+    }
+
+    .search-block {
+        width: 100%;
+    }
+
+    .main-filter, .main-sorting {
+        font-size: 14px;
+        padding: 6px 12px;
+        white-space: nowrap;
+    }
+
+    /* Типы событий (вкладки) */
+    .type-of-events-container {
+        gap: 20px;
+        font-size: 16px;
+        flex-wrap: wrap;
+    }
+
+    .type-of-events-button {
+        font-size: 16px;
+    }
+
+    /* Фильтр-диалог на мобилке */
+    .dialog-window-filter-content {
+        width: 100%;
+        right: 0;
+        padding: 20px;
+    }
+}
+
+/* ===== Дополнительная адаптация для очень маленьких экранов (до 480px) ===== */
+@media (max-width: 480px) {
+    .text-big {
+        font-size: 24px;
+    }
+
+    .text-medium {
+        font-size: 14px;
+    }
+
+    .first-block {
+        padding: 16px;
+    }
+
+    .block-frome {
+        gap: 4px;
+    }
+
+    .frome {
+        font-size: 10px;
+    }
+
+    .form-box {
+        padding: 16px;
+    }
+
+    .registration-frame {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .btm-buy {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    .review-card {
+        padding: 12px;
+    }
+
+    .review-header {
+        gap: 8px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
