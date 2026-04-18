@@ -1262,13 +1262,8 @@ h6.text-little {
     padding-top: 13px;
     padding-bottom: 22px;
 } 
-/* По умолчанию (десктоп) показываем SVG, скрываем мобильный блок */
-.mobile-stork {
-    display: none;
-}
-
-.desktop-stork {
-    display: block;
+.mobile-img {
+  display: none;
 }
 
 
@@ -1303,18 +1298,17 @@ h6.text-little {
   line-height: 1.3;
 }
 
-.desktop-stork {
-        display: none;
-    }
-    .mobile-stork {
-        display: block;
-        height: 100%;
-  width: 100%;
-        background-image: url('http://62.109.16.129:5000/index/stork-adp.png');
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
+/* По умолчанию показываем десктопную картинку, мобильную скрываем */
+
+
+/* При ширине экрана ≤385px скрываем десктопную и показываем мобильную */
+
+  .desktop-img {
+    display: none;
+  }
+  .mobile-img {
+    display: block;
+  }
 }
     /* Секция с изображением и информацией о мероприятии */
     .first-section {
