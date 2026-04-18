@@ -1308,8 +1308,7 @@ h6.text-little {
     }
     .mobile-stork {
         display: block;
-        width: 60px;          /* задайте нужный размер */
-        height: 50px;
+        width: 380px;
         background-image: url('http://62.109.16.129:5000/index/stork-adp.png');
         background-size: contain;
         background-repeat: no-repeat;
