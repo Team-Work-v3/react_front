@@ -1103,17 +1103,17 @@ h6.text-little {
 
 
 .dialog-window-filter-checkbox-category {
-    border: 2px solid grey dark;
+    border: 2px solid gray;
     padding: 5px 10px;
     font-size: 16px;
     cursor: pointer;
     user-select: none;
-    color: grey dark;
+    color: gray;
     transition: all 0.2s ease;
 
     &.active {
-        border-color: gray dark;
-        color: black;
+        border-color: gray; 
+        color: black;      
     }
 }
 
