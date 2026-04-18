@@ -1192,7 +1192,7 @@ export default function EventPage() {
                     <h1 id="gallery-text" className="text-max-big unbounded-bold">Галерея</h1>
                     <div className="gallery">
                         <div className="gallery-content">
-<Swiper
+                           <Swiper
                                 slidesPerView={4}
                                 spaceBetween={20}
                                 loop={true}
@@ -1203,7 +1203,6 @@ export default function EventPage() {
                                 modules={[Navigation]}
                                 className="mySwiper"
                             >
-   
                                 {gallery.map((link, index) => (
                                     <SwiperSlide key={index}>
                                         <img src={`http://62.109.16.129:5000${link}`} alt="image" className="gallery-img" />
