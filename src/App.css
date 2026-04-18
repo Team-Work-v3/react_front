@@ -973,17 +973,17 @@ h6.text-little {
 
 .dialog-window-filter-main-text {
     font-size: 30px;
-    color: gray;
+    color: black;
 }
 
 .dialog-window-filter-subtext {
     font-size: 20px;
-    color: gray;
+    color: black;
 }
 
 .dialog-window-filter-minitext {
     font-size: 15px;
-    color: grey;
+    color: black;
 }
 
 .dialog-window-filter-conteiner-buttons {
