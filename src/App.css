@@ -1277,7 +1277,15 @@ h6.text-little {
         box-sizing: border-box;
     }
 }
-
+.main-events-container {
+    display: grid !important;
+}
+@media (max-width: 768px) {
+    .main-events-container {
+        display: grid !important;      /* принудительно показываем, даже если нет .active (для теста), но лучше сначала исправить JS */
+        grid-template-columns: 1fr !important;
+    }
+}
 
 
 
