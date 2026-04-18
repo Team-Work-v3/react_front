@@ -1274,6 +1274,9 @@ h6.text-little {
 
 
 /* ===== Адаптив для мобильных устройств (максимум 768px) ===== */
+
+
+/* ===== Адаптив для мобильных устройств (максимум 768px) ===== */
 @media (max-width: 375px) {
     /* Глобальные настройки */
     .wrapper {
@@ -1667,81 +1670,4 @@ h6.text-little {
         padding: 20px;
     }
 }
-
-/* ===== Дополнительная адаптация для очень маленьких экранов (до 480px) ===== */
-@media (max-width: 480px) {
-    .text-big {
-        font-size: 24px;
-    }
-
-    .text-medium {
-        font-size: 14px;
-    }
-
-    .first-block {
-        padding: 16px;
-    }
-
-    .block-frome {
-        gap: 4px;
-    }
-
-    .frome {
-        font-size: 10px;
-    }
-
-    .form-box {
-        padding: 16px;
-    }
-
-    .registration-frame {
-        padding: 10px 12px;
-        font-size: 14px;
-    }
-
-    .btm-buy {
-        font-size: 16px;
-        padding: 12px;
-    }
-
-    .review-card {
-        padding: 12px;
-    }
-
-    .review-header {
-        gap: 8px;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
