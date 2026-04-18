@@ -1284,6 +1284,15 @@ h6.text-little {
         padding: 0 16px;
         box-sizing: border-box;
     }
+    .greeting-heading {
+  font-size: 32px;
+  line-height: 1.2; /* для комфортного межстрочного интервала */
+}
+
+.greeting-text {
+  font-size: 20px;
+  line-height: 1.3;
+}
 
     /* Секция с изображением и информацией о мероприятии */
     .first-section {
