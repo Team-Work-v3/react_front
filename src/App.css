@@ -1299,7 +1299,7 @@ h6.text-little {
 
 
 /* Базовые сбросы для мобильных */
- @media (max-width: 385px) {
+ @media (max-width: 400px) {
   /* Контейнер-обертка */
   .wrapper {
     padding-left: 12px;
