@@ -1307,7 +1307,7 @@ h6.text-little {
         display: block;
         width: 60px;      /* подберите нужный размер */
         height: 60px;
-        background-image: url('/stork-adp.png');
+        background-image: url('public/stork-adp.png');
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
