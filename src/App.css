@@ -1268,6 +1268,9 @@ h6.text-little {
 .main-filter {
     color: #000000 !important;  /* чёрный цвет */
 }
+.main-sorting {
+    color: #000000 !important;  /* чёрный цвет */
+}
 
 /* Блок сортировки — если внутри используется button или span */
 .main-sorting button,
