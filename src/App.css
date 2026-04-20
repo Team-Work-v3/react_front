@@ -1261,23 +1261,13 @@ h6.text-little {
     padding-left: 20px;
     padding-top: 13px;
     padding-bottom: 22px;
-} 
-/* По умолчанию (десктоп) показываем SVG, скрываем мобильный блок */
+}   
+
+
 .mobile-stork {
     display: none;
 }
 
-.desktop-stork {
-    display: block;
-}
-.stork {
-  width: 95px;
-  height: auto;
-}
-.mobile-stork {
-  display: none;
-}
-
 
 
 
@@ -1292,7 +1282,7 @@ h6.text-little {
 
 
 /* ===== Адаптив для мобильных устройств (максимум 768px) ===== */
-@media (max-width: 480px) {
+@media (max-width: 385px) {
     /* Глобальные настройки */
     .wrapper {
         width: 100%;
@@ -1310,20 +1300,18 @@ h6.text-little {
   line-height: 1.3;
 }
 
-/* По умолчанию показываем десктопную картинку, мобильную скрываем */
-.mobile-img {
-  display: none;
-}
-
-/* При ширине экрана ≤385px скрываем десктопную и показываем мобильную */
-
-  .desktop-img {
-    display: none;
-  }
-  .mobile-img {
-    display: block;
-  }
-}
+    .desktop-stork {
+        display: none;
+    }
+    .mobile-stork {
+        display: block;
+        width: 60px;      /* подберите нужный размер */
+        height: 60px;
+        background-image: url('/путь/к/вашей/мобильной/картинке.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
     /* Секция с изображением и информацией о мероприятии */
     .first-section {
         margin-top: 0;
@@ -1710,3 +1698,4 @@ h6.text-little {
     }
 
 
+}
