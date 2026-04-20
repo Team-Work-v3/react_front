@@ -1270,21 +1270,13 @@ h6.text-little {
 }
 
 /* Блок сортировки — если внутри используется button или span */
-.sort-list button,
-.sort-list span,
-.sort-list div {
+.main-sorting button,
+.main-sorting span,
+.main-sorting div {
     color: #000000 !important;
 }
 
-/* Дополнительно — для табов "Предстоящие" и "Прошедшие", если они тоже синие */
-.type-of-events-button {
-    color: #000000 !important;
-}
 
-/* Если активный таб имеет другой цвет — тоже сделаем чёрным */
-.type-of-events-button.active {
-    color: #000000 !important;
-}
 
 
 
