@@ -1272,12 +1272,12 @@ h6.text-little {
     color: #000000 !important;  /* чёрный цвет */
 }
 
-/* Блок сортировки — если внутри используется button или span */
+/* Блок сортировки — если внутри используется button или span 
 .main-sorting button,
 .main-sorting span,
 .main-sorting div {
     color: #000000 !important;
-}
+}*/
 
 
 
