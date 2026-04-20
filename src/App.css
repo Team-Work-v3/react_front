@@ -1318,13 +1318,13 @@ h6.text-little {
 
  /* Адаптив для формы регистрации (ширина ≤ 480px) */
 
-  /* Основной контейнер формы */
+  /* Основной контейнер формы 
   .block-form #form-color {
     display: flex;
     flex-direction: column;
 
     box-sizing: border-box;
-  }
+  }*/
 
   /* Убираем картинку справа на мобильных */
   .submit-img {
@@ -1345,12 +1345,13 @@ h6.text-little {
   #registration-text {
     font-size: 32px;
     text-align: center;
-    margin-bottom: 19px;
+  
+
   }
 
   /* Каждая группа полей */
   .form-group {
-    margin-bottom: 5px;
+
     width: 100%;
   }
 
@@ -1358,7 +1359,7 @@ h6.text-little {
   .label-indent {
     display: block;
     font-size: 14px;
-    margin-bottom: 1px;
+
   }
 
   /* Поля ввода (текст, email, телефон, number) */
@@ -1367,7 +1368,7 @@ h6.text-little {
  
     font-size: 16px; /* предотвращает масштабирование на iOS */
     border: 1px solid #ccc;
-    border-radius: 12px;
+
     box-sizing: border-box;
     background: #fff;
   }
@@ -1378,7 +1379,7 @@ h6.text-little {
     align-items: flex-start;
     gap: 10px;
     margin:  0;
-    padding-bottom: 5px;
+
   }
 
   .checkbox-group input[type="checkbox"] {
@@ -1397,7 +1398,7 @@ h6.text-little {
     width: 100%;
 
     font-size: 20px;
-    font-weight: 600;
+
     background-color: #000;
     color: #fff;
     border: none;
