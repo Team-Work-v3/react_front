@@ -1268,7 +1268,7 @@ h6.text-little {
 .main-filter {
     color: #000000 !important;  /* чёрный цвет */
 }
-.main-sorting {
+.main-sorting button,span,div {
     color: #000000 !important;  /* чёрный цвет */
 }
 
