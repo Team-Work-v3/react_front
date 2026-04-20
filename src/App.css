@@ -1264,10 +1264,27 @@ h6.text-little {
 }   
 
 
-.mobile-stork {
-    display: none;
+/* Кнопка фильтра */
+.main-filter {
+    color: #000000 !important;  /* чёрный цвет */
 }
 
+/* Блок сортировки — если внутри используется button или span */
+.sort-list button,
+.sort-list span,
+.sort-list div {
+    color: #000000 !important;
+}
+
+/* Дополнительно — для табов "Предстоящие" и "Прошедшие", если они тоже синие */
+.type-of-events-button {
+    color: #000000 !important;
+}
+
+/* Если активный таб имеет другой цвет — тоже сделаем чёрным */
+.type-of-events-button.active {
+    color: #000000 !important;
+}
 
 
 
