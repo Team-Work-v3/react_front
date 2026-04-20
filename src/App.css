@@ -1268,8 +1268,21 @@ h6.text-little {
 .main-filter {
     color: #000000 !important;  /* чёрный цвет */
 }
-.main-sorting button,span,div {
-    color: #000000 !important;  /* чёрный цвет */
+/* Если кнопка сортировки — это button внутри .sort-list */
+.sort-list button {
+    color: #000000 !important;
+}
+
+/* Если это span или div */
+.sort-list span,
+.sort-list .sort-trigger {
+    color: #000000 !important;
+}
+
+/* Также переопределите опции выпадающего списка (если они есть) */
+.sort-list .dropdown-menu,
+.sort-list .sort-option {
+    color: #000000 !important;
 }
 
 /* Блок сортировки — если внутри используется button или span 
