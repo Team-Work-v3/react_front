@@ -1301,16 +1301,12 @@ h6.text-little {
 }
 
     .desktop-stork {
-        display: none;
-    }
-    .mobile-stork {
-        display: block;
-       
-        background-image: url('public/stork-adp.png');
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
+    display: none !important;
+  }
+  .mobile-stork {
+    display: block !important;
+  }
+}
     /* Секция с изображением и информацией о мероприятии */
     .first-section {
         margin-top: 0;
