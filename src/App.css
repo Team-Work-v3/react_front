@@ -1262,7 +1262,19 @@ h6.text-little {
     padding-top: 13px;
     padding-bottom: 22px;
 } 
-.mobile-img {
+/* По умолчанию (десктоп) показываем SVG, скрываем мобильный блок */
+.mobile-stork {
+    display: none;
+}
+
+.desktop-stork {
+    display: block;
+}
+.stork {
+  width: 95px;
+  height: auto;
+}
+.mobile-stork {
   display: none;
 }
 
@@ -1299,7 +1311,9 @@ h6.text-little {
 }
 
 /* По умолчанию показываем десктопную картинку, мобильную скрываем */
-
+.mobile-img {
+  display: none;
+}
 
 /* При ширине экрана ≤385px скрываем десктопную и показываем мобильную */
 
