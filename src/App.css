@@ -1518,7 +1518,7 @@ h6.text-little {
     .dialog-window-filter-content,
     .dialog-window-filter-content * {
         max-width: 100% !important;
-        overflow-x: hidden !important;
+        /* overflow-x: hidden !important; */
     }
 }
 
@@ -1925,6 +1925,7 @@ h6.text-little {
      .dialog-window-filter-content > * {
        
         padding-left: 20px;
+        height: 100%;
     }
 
 
