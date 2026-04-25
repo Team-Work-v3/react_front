@@ -1918,8 +1918,14 @@ h6.text-little {
     .dialog-window-filter-content {
         width: 100%;
         right: 0;
-        padding: 20px;
+        padding: 0px;
     }
+
+     .dialog-window-filter-content > * {
+       
+        padding-left: 20px;
+    }
+
 
 
 }
