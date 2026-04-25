@@ -1309,11 +1309,30 @@ h6.text-little {
         padding: bottom 71px; ;
   font-size: 32px;
   line-height: 1.2; /* для комфортного межстрочного интервала */
+
+
+
+
+  
+}
+
+#big-stork {
+    width: 100% !important;
+    height: 250px !important;      /* задайте удобную высоту для мобилки */
+    object-fit: cover !important;  /* изображение заполнит область, обрезая лишнее */
+    object-position: center !important; /* фокус на центр (можно top, bottom и т.д.) */
 }
 
 .greeting-text {
   font-size: 20px;
   line-height: 1.3;
+}
+
+#big-stork {
+    width: 100% !important;
+    height: 250px !important;      /* задайте удобную высоту для мобилки */
+    object-fit: cover !important;  /* изображение заполнит область, обрезая лишнее */
+    object-position: center !important; /* фокус на центр (можно top, bottom и т.д.) */
 }
 
  /* Адаптив для формы регистрации (ширина ≤ 480px) */
