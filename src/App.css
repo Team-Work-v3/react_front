@@ -1424,6 +1424,31 @@ h6.text-little {
   }
 
 
+
+
+   .dialog-window-filter-content {
+        padding: 16px !important;
+    }
+
+    /* Увеличиваем область касания для чекбоксов категорий */
+    .dialog-window-filter-checkbox-category {
+        padding: 8px 12px !important;
+        font-size: 14px !important;
+        text-align: center;
+    }
+
+    /* Убираем лишние отступы у строки "Стоимость от – до" */
+    .dialog-window-filter-conteiner-for.row {
+        width: 100%;
+    }
+       /* Инпуты цены и даты */
+    .dialog-window-filter-input {
+        width: 100% !important;
+        font-size: 16px; /* чтобы не масштабировалось на iOS */
+    }
+
+
+
   
 
   
